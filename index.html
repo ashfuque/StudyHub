@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>StudyHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- NAVIGATION -->
+    <!-- ========================= -->
+
+    <nav>
+        <h2>StudyHub 📚</h2>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#subjects">Subjects</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#flashcards">Flashcards</a>
+            <a href="#timer-section">Timer</a>
+        </div>
+    </nav>
+
+
+    <!-- ========================= -->
+    <!-- WELCOME SECTION -->
+    <!-- ========================= -->
+
+    <section id="home" class="hero">
+
+        <h1>Welcome to StudyHub 📚</h1>
+
+        <p>
+            Your personal place to learn, practice and improve.
+        </p>
+
+        <button onclick="document.getElementById('subjects').scrollIntoView()">
+            Start Studying
+        </button>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- SUBJECTS SECTION -->
+    <!-- ========================= -->
+
+    <section id="subjects">
+
+        <h2>📚 My Subjects</h2>
+
+        <div class="subjects">
+
+            <!-- MATH -->
+
+            <div class="card">
+
+                <h3>📐 Math</h3>
+
+                <p>
+                    Formulas, examples and practice questions.
+                </p>
+
+                <h4>Materials</h4>
+
+                <ul>
+                    <li>Algebra</li>
+                    <li>Ratio and proportion</li>
+                    <li>Percentage</li>
+                    <li>Profit and loss</li>
+                    <li>Practice questions</li>
+                </ul>
+
+                <button onclick="showMaterial('Math')">
+                    Study Math
+                </button>
+
+            </div>
+
+
+            <!-- SCIENCE -->
+
+            <div class="card">
+
+                <h3>🔬 Science</h3>
+
+                <p>
+                    Chapter notes, definitions and revision.
+                </p>
+
+                <h4>Materials</h4>
+
+                <ul>
+                    <li>Heat and temperature</li>
+                    <li>Respiration</li>
+                    <li>Digestion</li>
+                    <li>Circulation</li>
+                    <li>Chapter revision</li>
+                </ul>
+
+                <button onclick="showMaterial('Science')">
+                    Study Science
+                </button>
+
+            </div>
+
+
+            <!-- ENGLISH -->
+
+            <div class="card">
+
+                <h3>📖 English</h3>
+
+                <p>
+                    Grammar, vocabulary and writing practice.
+                </p>
+
+                <h4>Materials</h4>
+
+                <ul>
+                    <li>Grammar</li>
+                    <li>Vocabulary</li>
+                    <li>Transformation</li>
+                    <li>Completing stories</li>
+                    <li>Dialogue writing</li>
+                </ul>
+
+                <button onclick="showMaterial('English')">
+                    Study English
+                </button>
+
+            </div>
+
+
+            <!-- BGS -->
+
+            <div class="card">
+
+                <h3>🌍 BGS</h3>
+
+                <p>
+                    Important concepts and revision materials.
+                </p>
+
+                <h4>Materials</h4>
+
+                <ul>
+                    <li>Population</li>
+                    <li>Economy</li>
+                    <li>Renewable energy</li>
+                    <li>Liberation struggle</li>
+                    <li>Important definitions</li>
+                </ul>
+
+                <button onclick="showMaterial('BGS')">
+                    Study BGS
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Extra material display -->
+
+        <div id="materialDisplay" class="material-display">
+
+            <h3>Choose a subject</h3>
+
+            <p>
+                Your selected subject's materials will appear here.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- QUIZ SECTION -->
+    <!-- ========================= -->
+
+    <section id="quiz">
+
+        <h2>🧠 Quiz</h2>
+
+        <div class="tool">
+
+            <h3>Test Your Knowledge</h3>
+
+            <p>
+                Challenge yourself with questions from your subjects.
+            </p>
+
+            <button onclick="startQuiz()">
+                Start Quiz
+            </button>
+
+            <div id="quizArea"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- FLASHCARDS -->
+    <!-- ========================= -->
+
+    <section id="flashcards">
+
+        <h2>📝 Flashcards</h2>
+
+        <div class="flashcard-container">
+
+            <div
+                id="flashcard"
+                class="flashcard"
+                onclick="flipCard()"
+            >
+
+                <div id="cardQuestion">
+                    What is the capital of Bangladesh?
+                </div>
+
+                <div id="cardAnswer">
+                    Dhaka
+                </div>
+
+            </div>
+
+
+            <div class="flashcard-buttons">
+
+                <button onclick="previousCard()">
+                    ← Previous
+                </button>
+
+                <button onclick="nextCard()">
+                    Next →
+                </button>
+
+            </div>
+
+            <p id="cardNumber">
+                Card 1 of 5
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- STUDY TIMER -->
+    <!-- ========================= -->
+
+    <section id="timer-section">
+
+        <h2>⏱️ Study Timer</h2>
+
+        <div class="tool">
+
+            <h3>Focus Timer</h3>
+
+            <div id="timer">
+                25:00
+            </div>
+
+            <br>
+
+            <button onclick="startTimer()">
+                Start
+            </button>
+
+            <button onclick="pauseTimer()">
+                Pause
+            </button>
+
+            <button onclick="resetTimer()">
+                Reset
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- TODAY'S GOAL -->
+    <!-- ========================= -->
+
+    <section class="goal">
+
+        <h2>🎯 Today's Goal</h2>
+
+        <p>
+            Study for at least 60 minutes today.
+        </p>
+
+        <button onclick="completeGoal()">
+            Mark Goal Complete
+        </button>
+
+        <p id="goalMessage"></p>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <p>
+            StudyHub • My personal study website
+        </p>
+
+    </footer>
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

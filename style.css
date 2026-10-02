@@ -1,0 +1,237 @@
+/* Basic page */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f7fb;
+    color: #222;
+}
+
+
+/* Navigation */
+
+nav {
+    background: #2563eb;
+    color: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h2 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+
+/* Welcome section */
+
+.hero {
+    text-align: center;
+    padding: 90px 20px;
+    background: white;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #666;
+}
+
+
+/* Buttons */
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+/* Sections */
+
+section {
+    padding: 60px 8%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+
+/* Subject cards */
+
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    font-size: 22px;
+}
+
+.card p {
+    color: #666;
+    min-height: 60px;
+}
+
+
+/* Study tools */
+
+.tools {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.tool {
+    background: white;
+    padding: 25px;
+    width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    font-size: 30px;
+}
+
+.tool h3 {
+    font-size: 20px;
+}
+
+.tool p {
+    font-size: 15px;
+    color: #666;
+}
+
+
+/* Goal */
+
+.goal {
+    background: #e8f0ff;
+}
+
+.goal p {
+    font-size: 18px;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #172554;
+    color: white;
+}
+
+/* Material display */
+
+.material-display {
+    background: white;
+    max-width: 800px;
+    margin: 35px auto 0;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Flashcards */
+
+.flashcard-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.flashcard {
+    background: white;
+    min-height: 220px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 30px;
+    cursor: pointer;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#cardAnswer {
+    display: none;
+    margin-top: 25px;
+    color: #2563eb;
+}
+
+.flashcard-buttons {
+    margin-top: 20px;
+}
+
+.flashcard-buttons button {
+    margin: 5px;
+}
+
+#cardNumber {
+    color: #666;
+}
+
+/* =========================
+   QUIZ
+   ========================= */
+
+#quizArea {
+    max-width: 600px;
+    margin: 25px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.quiz-option {
+    width: 100%;
+}
+/* Center Quiz and Study Timer */
+#quiz .tool,
+#timer-section .tool {
+    max-width: 600px;
+    margin: 0 auto;
+}
