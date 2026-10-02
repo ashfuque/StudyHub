@@ -235,3 +235,179 @@ footer {
     max-width: 600px;
     margin: 0 auto;
 }
+
+@media (max-width: 600px) {
+
+    /* ===== MOBILE BASE ===== */
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* ===== NAVIGATION ===== */
+
+    nav {
+        padding: 14px 18px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    nav h2 {
+        font-size: 22px;
+    }
+
+    nav a {
+        margin: 0 7px;
+        font-size: 14px;
+    }
+
+
+    /* ===== HERO ===== */
+
+    .hero {
+        padding: 55px 18px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+
+    /* ===== SECTIONS ===== */
+
+    section {
+        padding: 45px 18px;
+    }
+
+    section h2 {
+        font-size: 27px;
+        margin-bottom: 25px;
+    }
+
+
+    /* ===== SUBJECT CARDS ===== */
+
+    .subjects {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .card h3 {
+        font-size: 20px;
+    }
+
+    .card p {
+        min-height: auto;
+        line-height: 1.5;
+    }
+
+
+    /* ===== STUDY TOOLS ===== */
+
+    .tools {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .tool {
+        width: auto;
+        padding: 22px;
+        font-size: 28px;
+        box-sizing: border-box;
+    }
+
+    .tool h3 {
+        font-size: 20px;
+    }
+
+
+    /* ===== TIMER + QUIZ ===== */
+
+    #quiz .tool,
+    #timer-section .tool {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    #quizArea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .quiz-options {
+        gap: 12px;
+    }
+
+    .quiz-option {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+
+    /* ===== FLASHCARDS ===== */
+
+    .flashcard-container {
+        width: 100%;
+    }
+
+    .flashcard {
+        min-height: 190px;
+        padding: 22px;
+        font-size: 21px;
+        box-sizing: border-box;
+    }
+
+    .flashcard-buttons button {
+        margin: 4px 2px;
+    }
+
+
+    /* ===== MATERIAL ===== */
+
+    .material-display {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+        margin-top: 25px;
+    }
+
+
+    /* ===== GOAL ===== */
+
+    .goal p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+
+    /* ===== BUTTONS ===== */
+
+    button {
+        min-height: 46px;
+        padding: 12px 18px;
+        font-size: 16px;
+    }
+
+
+    /* ===== FOOTER ===== */
+
+    footer {
+        padding: 22px 15px;
+        font-size: 14px;
+    }
+}
