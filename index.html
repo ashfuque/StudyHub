@@ -633,6 +633,104 @@
             if (!materialsList) {
                 return;
             }
+```javascript
+// =================================================
+// MATERIAL SEARCH
+// =================================================
+
+function searchMaterials() {
+
+    const searchInput =
+        document.getElementById("materialSearch");
+
+    const materialsList =
+        document.getElementById("materialsList");
+
+    const searchText =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+    const materials =
+        materialsList.querySelectorAll(
+            ".material-item"
+        );
+
+
+    let visibleCount = 0;
+
+
+    materials.forEach(material => {
+
+        const fileName =
+            material
+                .textContent
+                .toLowerCase();
+
+
+        if (
+            fileName.includes(searchText)
+        ) {
+
+            material.style.display =
+                "flex";
+
+            visibleCount++;
+
+        } else {
+
+            material.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    // Show message if nothing matches
+
+    let noResults =
+        document.getElementById(
+            "noSearchResults"
+        );
+
+
+    if (
+        searchText !== "" &&
+        visibleCount === 0
+    ) {
+
+        if (!noResults) {
+
+            noResults =
+                document.createElement("p");
+
+            noResults.id =
+                "noSearchResults";
+
+            materialsList.appendChild(
+                noResults
+            );
+
+        }
+
+
+        noResults.textContent =
+            `🔎 No materials found for "${searchInput.value}"`;
+
+    } else {
+
+        if (noResults) {
+
+            noResults.remove();
+
+        }
+
+    }
+
+}
+```
 
 
             materialsList.innerHTML =
