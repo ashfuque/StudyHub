@@ -525,3 +525,41 @@ function completeGoal() {
 // Show first flashcard
 
 showCard();
+
+// =========================
+// FILE UPLOAD
+// =========================
+
+function handleFiles() {
+
+    let input = document.getElementById("fileInput");
+    let fileList = document.getElementById("fileList");
+
+    if (input.files.length === 0) {
+        return;
+    }
+
+    fileList.innerHTML = "";
+
+    for (let i = 0; i < input.files.length; i++) {
+
+        let file = input.files[i];
+
+        let fileItem = document.createElement("div");
+        fileItem.className = "uploaded-file";
+
+        fileItem.innerHTML = `
+            <div>
+                <div class="file-name">
+                    📄 ${file.name}
+                </div>
+
+                <div class="file-type">
+                    ${(file.size / 1024 / 1024).toFixed(2)} MB
+                </div>
+            </div>
+        `;
+
+        fileList.appendChild(fileItem);
+    }
+}
