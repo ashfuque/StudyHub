@@ -411,3 +411,69 @@ footer {
         font-size: 14px;
     }
 }
+
+/* ========================= */
+/* FILE UPLOAD */
+/* ========================= */
+
+.upload-box {
+    max-width: 700px;
+    margin: 50px auto 0;
+    padding: 30px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.upload-box h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.upload-box p {
+    color: #666;
+}
+
+#fileInput {
+    display: none;
+}
+
+.upload-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.upload-button:hover {
+    background: #1d4ed8;
+}
+
+#fileList {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.uploaded-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-top: 10px;
+    background: #f4f7fb;
+    border-radius: 10px;
+}
+
+.file-name {
+    font-weight: bold;
+}
+
+.file-type {
+    color: #666;
+    font-size: 14px;
+}
