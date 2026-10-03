@@ -1,11 +1,32 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyHub</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudyHub 📚</title>
+
+    <!-- ========================= -->
+    <!-- SUPABASE -->
+    <!-- ========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- ========================= -->
+    <!-- CSS -->
+    <!-- ========================= -->
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
@@ -14,20 +35,30 @@
     <!-- ========================= -->
 
     <nav>
+
         <h2>StudyHub 📚</h2>
 
-        <div>
+        <div class="nav-links">
+
             <a href="#home">Home</a>
+
             <a href="#subjects">Subjects</a>
+
+            <a href="#materials">Materials</a>
+
             <a href="#quiz">Quiz</a>
+
             <a href="#flashcards">Flashcards</a>
-            <a href="#timer-section">Timer</a>
+
+            <a href="#timer">Timer</a>
+
         </div>
+
     </nav>
 
 
     <!-- ========================= -->
-    <!-- WELCOME SECTION -->
+    <!-- HOME -->
     <!-- ========================= -->
 
     <section id="home" class="hero">
@@ -35,128 +66,90 @@
         <h1>Welcome to StudyHub 📚</h1>
 
         <p>
-            Your personal place to learn, practice and improve.
+            Your personal place to study, practice,
+            revise and improve.
         </p>
 
-        <button onclick="document.getElementById('subjects').scrollIntoView()">
-            Start Studying
-        </button>
+        <a href="#subjects">
+            <button>Start Studying 🚀</button>
+        </a>
 
     </section>
 
 
     <!-- ========================= -->
-    <!-- SUBJECTS SECTION -->
+    <!-- SUBJECTS -->
     <!-- ========================= -->
 
     <section id="subjects">
 
-        <h2>📚 My Subjects</h2>
+        <h2>📚 Subjects</h2>
 
-        <div class="subjects">
+        <p>
+            Choose a subject and start learning.
+        </p>
 
-            <!-- MATH -->
 
-            <div class="card">
+        <div class="subject-container">
 
-                <h3>📐 Math</h3>
+            <div class="subject-card">
+
+                <h3>📐 Mathematics</h3>
 
                 <p>
-                    Formulas, examples and practice questions.
+                    Algebra, geometry, equations,
+                    ratios and more.
                 </p>
 
-                <h4>Materials</h4>
-
-                <ul>
-                    <li>Algebra</li>
-                    <li>Ratio and proportion</li>
-                    <li>Percentage</li>
-                    <li>Profit and loss</li>
-                    <li>Practice questions</li>
-                </ul>
-
-                <button onclick="showMaterial('Math')">
+                <button onclick="selectSubject('Mathematics')">
                     Study Math
                 </button>
 
             </div>
 
 
-            <!-- SCIENCE -->
-
-            <div class="card">
+            <div class="subject-card">
 
                 <h3>🔬 Science</h3>
 
                 <p>
-                    Chapter notes, definitions and revision.
+                    Physics, chemistry, biology
+                    and general science.
                 </p>
 
-                <h4>Materials</h4>
-
-                <ul>
-                    <li>Heat and temperature</li>
-                    <li>Respiration</li>
-                    <li>Digestion</li>
-                    <li>Circulation</li>
-                    <li>Chapter revision</li>
-                </ul>
-
-                <button onclick="showMaterial('Science')">
+                <button onclick="selectSubject('Science')">
                     Study Science
                 </button>
 
             </div>
 
 
-            <!-- ENGLISH -->
-
-            <div class="card">
+            <div class="subject-card">
 
                 <h3>📖 English</h3>
 
                 <p>
-                    Grammar, vocabulary and writing practice.
+                    Grammar, vocabulary,
+                    writing and literature.
                 </p>
 
-                <h4>Materials</h4>
-
-                <ul>
-                    <li>Grammar</li>
-                    <li>Vocabulary</li>
-                    <li>Transformation</li>
-                    <li>Completing stories</li>
-                    <li>Dialogue writing</li>
-                </ul>
-
-                <button onclick="showMaterial('English')">
+                <button onclick="selectSubject('English')">
                     Study English
                 </button>
 
             </div>
 
 
-            <!-- BGS -->
-
-            <div class="card">
+            <div class="subject-card">
 
                 <h3>🌍 BGS</h3>
 
                 <p>
-                    Important concepts and revision materials.
+                    Bangladesh and Global Studies,
+                    society, history and geography.
                 </p>
 
-                <h4>Materials</h4>
-
-                <ul>
-                    <li>Population</li>
-                    <li>Economy</li>
-                    <li>Renewable energy</li>
-                    <li>Liberation struggle</li>
-                    <li>Important definitions</li>
-                </ul>
-
-                <button onclick="showMaterial('BGS')">
+                <button onclick="selectSubject('BGS')">
                     Study BGS
                 </button>
 
@@ -165,91 +158,132 @@
         </div>
 
 
-        <!-- Extra material display -->
+        <div id="selectedSubject"></div>
 
-        <div id="materialDisplay" class="material-display">
-
-            <h3>Choose a subject</h3>
-
-            <p>
-                Your selected subject's materials will appear here.
-            </p>
-
-        </div>
-
-<!-- UPLOAD STUDY MATERIALS -->
-
-<div class="upload-box">
-<div class="materials-library">
-
-    <h3>📚 Study Materials Library</h3>
-
-    <div id="materialsList">
-        <p>Loading materials...</p>
-    </div>
-
-</div>
-    <h3>📤 Upload Study Materials</h3>
-
-    <p>
-        Upload your notes, chapters or study files.
-    </p>
-
-   <label for="fileInput" class="upload-button">
-    Choose Files
-</label>
-
-<input
-    type="file"
-    id="fileInput"
-    multiple
-    accept=".pdf,.doc,.docx,.txt"
-    onchange="handleFiles()"
->
-
-<button onclick="uploadFile()">
-    📤 Upload to StudyHub
-</button>
-
-<div id="fileList">
-    <p>No files uploaded yet.</p>
-</div>
-    <div class="materials-library">
-
-    <h3>📚 Study Materials Library</h3>
-
-    <div id="materialsList">
-        <p>Loading materials...</p>
-    </div>
-
-</div>
-
-</div>
-        
     </section>
 
 
     <!-- ========================= -->
-    <!-- QUIZ SECTION -->
+    <!-- MATERIALS -->
+    <!-- ========================= -->
+
+    <section id="materials">
+
+        <h2>📚 Study Materials</h2>
+
+        <p>
+            Upload and access your study materials
+            from StudyHub.
+        </p>
+
+
+        <!-- ========================= -->
+        <!-- UPLOAD BOX -->
+        <!-- ========================= -->
+
+        <div class="upload-box">
+
+            <h3>📤 Upload Study Materials</h3>
+
+            <p>
+                Upload notes, chapters, PDFs,
+                documents or text files.
+            </p>
+
+
+            <label
+                for="fileInput"
+                class="upload-button"
+            >
+                Choose Files
+            </label>
+
+
+            <input
+                type="file"
+                id="fileInput"
+                multiple
+                accept=".pdf,.doc,.docx,.txt"
+                onchange="handleFiles()"
+            >
+
+
+            <button
+                type="button"
+                onclick="uploadFile()"
+            >
+                📤 Upload to StudyHub
+            </button>
+
+
+            <!-- SELECTED FILES -->
+
+            <div id="fileList">
+
+                <p>
+                    No files selected yet.
+                </p>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- MATERIALS LIBRARY -->
+            <!-- ========================= -->
+
+            <div class="materials-library">
+
+                <h3>
+                    📚 Study Materials Library
+                </h3>
+
+
+                <div id="materialsList">
+
+                    <p>
+                        Loading materials...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- QUIZ -->
     <!-- ========================= -->
 
     <section id="quiz">
 
         <h2>🧠 Quiz</h2>
 
-        <div class="tool">
+        <p>
+            Test your knowledge.
+        </p>
 
-            <h3>Test Your Knowledge</h3>
 
-            <p>
-                Challenge yourself with questions from your subjects.
-            </p>
+        <div class="quiz-box">
 
-            <button onclick="startQuiz()">
-                Start Quiz
+            <h3 id="quizQuestion">
+                Ready for a quiz?
+            </h3>
+
+
+            <div id="quizOptions"></div>
+
+
+            <p id="quizResult"></p>
+
+
+            <button
+                onclick="startQuiz()"
+            >
+                Start Quiz 🚀
             </button>
-
-            <div id="quizArea"></div>
 
         </div>
 
@@ -262,42 +296,39 @@
 
     <section id="flashcards">
 
-        <h2>📝 Flashcards</h2>
+        <h2>🃏 Flashcards</h2>
 
-        <div class="flashcard-container">
+        <p>
+            Use flashcards for quick revision.
+        </p>
+
+
+        <div class="flashcard-box">
 
             <div
                 id="flashcard"
                 class="flashcard"
-                onclick="flipCard()"
+                onclick="flipFlashcard()"
             >
 
-                <div id="cardQuestion">
-                    What is the capital of Bangladesh?
-                </div>
-
-                <div id="cardAnswer">
-                    Dhaka
+                <div id="flashcardText">
+                    Click to start
                 </div>
 
             </div>
 
 
-            <div class="flashcard-buttons">
+            <div class="flashcard-controls">
 
                 <button onclick="previousCard()">
-                    ← Previous
+                    ◀ Previous
                 </button>
 
                 <button onclick="nextCard()">
-                    Next →
+                    Next ▶
                 </button>
 
             </div>
-
-            <p id="cardNumber">
-                Card 1 of 5
-            </p>
 
         </div>
 
@@ -305,34 +336,40 @@
 
 
     <!-- ========================= -->
-    <!-- STUDY TIMER -->
+    <!-- TIMER -->
     <!-- ========================= -->
 
-    <section id="timer-section">
+    <section id="timer">
 
         <h2>⏱️ Study Timer</h2>
 
-        <div class="tool">
+        <p>
+            Focus on your studies without distractions.
+        </p>
 
-            <h3>Focus Timer</h3>
 
-            <div id="timer">
+        <div class="timer-box">
+
+            <div id="timerDisplay">
                 25:00
             </div>
 
-            <br>
 
-            <button onclick="startTimer()">
-                Start
-            </button>
+            <div class="timer-controls">
 
-            <button onclick="pauseTimer()">
-                Pause
-            </button>
+                <button onclick="startTimer()">
+                    ▶ Start
+                </button>
 
-            <button onclick="resetTimer()">
-                Reset
-            </button>
+                <button onclick="pauseTimer()">
+                    ⏸ Pause
+                </button>
+
+                <button onclick="resetTimer()">
+                    🔄 Reset
+                </button>
+
+            </div>
 
         </div>
 
@@ -343,19 +380,32 @@
     <!-- TODAY'S GOAL -->
     <!-- ========================= -->
 
-    <section class="goal">
+    <section id="goal">
 
         <h2>🎯 Today's Goal</h2>
 
         <p>
-            Study for at least 60 minutes today.
+            Set a simple goal for today's study session.
         </p>
 
-        <button onclick="completeGoal()">
-            Mark Goal Complete
-        </button>
 
-        <p id="goalMessage"></p>
+        <div class="goal-box">
+
+            <input
+                type="text"
+                id="goalInput"
+                placeholder="Example: Finish Science Chapter 5"
+            >
+
+
+            <button onclick="saveGoal()">
+                Save Goal
+            </button>
+
+
+            <div id="goalDisplay"></div>
+
+        </div>
 
     </section>
 
@@ -366,107 +416,879 @@
 
     <footer>
 
+        <h3>StudyHub 📚</h3>
+
         <p>
-            StudyHub • My personal study website
+            Study smarter. Practice harder. Improve every day.
+        </p>
+
+        <p>
+            © 2026 StudyHub
         </p>
 
     </footer>
 
 
-    <!-- ========================= -->
+
+    <!-- ================================================= -->
     <!-- JAVASCRIPT -->
-    <!-- ========================= -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-    const SUPABASE_URL = "https://pjytoktykbaokkuhaera.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
+    <!-- ================================================= -->
 
-    const supabaseClient = supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-</script>
     <script>
-    async function uploadFile() {
-        const fileInput = document.getElementById("fileInput");
-        const file = fileInput.files[0];
 
-        if (!file) {
-            alert("Please select a file first.");
-            return;
+        // =================================================
+        // SUPABASE CONNECTION
+        // =================================================
+
+        const SUPABASE_URL =
+            "https://pjytoktykbaokkuhaera.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
+
+
+        const supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        // =================================================
+        // SUBJECTS
+        // =================================================
+
+        function selectSubject(subject) {
+
+            const box =
+                document.getElementById("selectedSubject");
+
+            box.innerHTML = `
+                <div class="selected-subject">
+                    <h3>📖 ${subject}</h3>
+                    <p>
+                        You selected ${subject}.
+                        Your study materials and practice
+                        resources can be added here.
+                    </p>
+                </div>
+            `;
+
         }
 
-        const fileName = Date.now() + "-" + file.name;
 
-        const { data, error } = await supabaseClient
-            .storage
-            .from("study-materials")
-            .upload(fileName, file);
 
-        if (error) {
-            console.error(error);
-            alert("Upload failed: " + error.message);
-            return;
+        // =================================================
+        // FILE SELECTION
+        // =================================================
+
+        function handleFiles() {
+
+            const fileInput =
+                document.getElementById("fileInput");
+
+            const fileList =
+                document.getElementById("fileList");
+
+
+            if (!fileInput.files.length) {
+
+                fileList.innerHTML =
+                    "<p>No files selected yet.</p>";
+
+                return;
+            }
+
+
+            fileList.innerHTML =
+                "<h4>Selected Files:</h4>";
+
+
+            Array.from(fileInput.files).forEach(file => {
+
+                const item =
+                    document.createElement("p");
+
+                item.textContent =
+                    "📄 " + file.name;
+
+                fileList.appendChild(item);
+
+            });
+
         }
 
-        alert("File uploaded successfully! 📚");
-        console.log(data);
-    }
-</script>
-    <script>
-async function loadMaterials() {
 
-    const materialsList = document.getElementById("materialsList");
 
-    materialsList.innerHTML = "<p>Loading materials...</p>";
+        // =================================================
+        // UPLOAD FILES
+        // =================================================
 
-    const { data, error } = await supabaseClient
-        .storage
-        .from("study-materials")
-        .list();
+        async function uploadFile() {
 
-    if (error) {
-        console.error(error);
-        materialsList.innerHTML =
-            "<p>Could not load materials.</p>";
-        return;
-    }
+            const fileInput =
+                document.getElementById("fileInput");
 
-    if (!data || data.length === 0) {
-        materialsList.innerHTML =
-            "<p>No study materials uploaded yet.</p>";
-        return;
-    }
+            const files =
+                fileInput.files;
 
-    materialsList.innerHTML = "";
 
-    data.forEach(file => {
+            if (!files || files.length === 0) {
 
-        const fileDiv = document.createElement("div");
+                alert(
+                    "Please choose at least one file first."
+                );
 
-        fileDiv.className = "material-item";
+                return;
+            }
 
-        const { data: urlData } = supabaseClient
-            .storage
-            .from("study-materials")
-            .getPublicUrl(file.name);
 
-        fileDiv.innerHTML = `
-            <span>📄 ${file.name}</span>
-            <a href="${urlData.publicUrl}" target="_blank">
-                📥 Open
-            </a>
-        `;
+            for (const file of files) {
 
-        materialsList.appendChild(fileDiv);
+                const safeName =
+                    file.name.replace(
+                        /[^a-zA-Z0-9._-]/g,
+                        "_"
+                    );
 
-    });
-}
 
-loadMaterials();
-</script>
-    <script src="script.js"></script>
+                const fileName =
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2, 8) +
+                    "-" +
+                    safeName;
+
+
+                const { error } =
+                    await supabaseClient
+                        .storage
+                        .from("study-materials")
+                        .upload(
+                            fileName,
+                            file
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Upload error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Upload failed:\n" +
+                        error.message
+                    );
+
+                    return;
+                }
+
+            }
+
+
+            alert(
+                "All files uploaded successfully! 📚"
+            );
+
+
+            fileInput.value = "";
+
+
+            document.getElementById(
+                "fileList"
+            ).innerHTML =
+                "<p>No files selected yet.</p>";
+
+
+            loadMaterials();
+
+        }
+
+
+
+        // =================================================
+        // LOAD MATERIALS
+        // =================================================
+
+        async function loadMaterials() {
+
+            const materialsList =
+                document.getElementById(
+                    "materialsList"
+                );
+
+
+            if (!materialsList) {
+                return;
+            }
+
+
+            materialsList.innerHTML =
+                "<p>Loading materials...</p>";
+
+
+            const { data, error } =
+                await supabaseClient
+                    .storage
+                    .from("study-materials")
+                    .list(
+                        "",
+                        {
+                            limit: 100,
+                            sortBy: {
+                                column: "created_at",
+                                order: "desc"
+                            }
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Library error:",
+                    error
+                );
+
+
+                materialsList.innerHTML = `
+                    <div class="error-message">
+                        <p>
+                            ❌ Could not load materials.
+                        </p>
+
+                        <p>
+                            ${error.message}
+                        </p>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            if (!data || data.length === 0) {
+
+                materialsList.innerHTML =
+                    "<p>No study materials uploaded yet.</p>";
+
+                return;
+            }
+
+
+            materialsList.innerHTML = "";
+
+
+            data.forEach(file => {
+
+                if (!file.name) {
+                    return;
+                }
+
+
+                const fileDiv =
+                    document.createElement("div");
+
+
+                fileDiv.className =
+                    "material-item";
+
+
+                const fileName =
+                    file.name;
+
+
+                const publicUrl =
+                    supabaseClient
+                        .storage
+                        .from("study-materials")
+                        .getPublicUrl(
+                            fileName
+                        )
+                        .data
+                        .publicUrl;
+
+
+                fileDiv.innerHTML = `
+
+                    <div class="material-name">
+
+                        📄
+
+                        <span>
+                            ${escapeHTML(fileName)}
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="${publicUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        📥 Open
+                    </a>
+
+                `;
+
+
+                materialsList.appendChild(
+                    fileDiv
+                );
+
+            });
+
+        }
+
+
+
+        // =================================================
+        // SECURITY HELPER
+        // =================================================
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+
+        // =================================================
+        // QUIZ
+        // =================================================
+
+        const quizQuestions = [
+
+            {
+                question:
+                    "What is 25% of 200?",
+
+                options:
+                    [
+                        "25",
+                        "40",
+                        "50",
+                        "75"
+                    ],
+
+                answer:
+                    "50"
+            },
+
+
+            {
+                question:
+                    "Which gas do humans need for respiration?",
+
+                options:
+                    [
+                        "Carbon dioxide",
+                        "Oxygen",
+                        "Nitrogen",
+                        "Hydrogen"
+                    ],
+
+                answer:
+                    "Oxygen"
+            },
+
+
+            {
+                question:
+                    "What is the opposite of 'early'?",
+
+                options:
+                    [
+                        "Fast",
+                        "Late",
+                        "Quick",
+                        "Soon"
+                    ],
+
+                answer:
+                    "Late"
+            }
+
+        ];
+
+
+        let currentQuiz =
+            0;
+
+        let quizScore =
+            0;
+
+
+        function startQuiz() {
+
+            currentQuiz = 0;
+
+            quizScore = 0;
+
+            showQuizQuestion();
+
+        }
+
+
+        function showQuizQuestion() {
+
+            const question =
+                quizQuestions[currentQuiz];
+
+
+            if (!question) {
+
+                document.getElementById(
+                    "quizQuestion"
+                ).textContent =
+                    "Quiz finished! 🎉";
+
+
+                document.getElementById(
+                    "quizOptions"
+                ).innerHTML = `
+                    <h3>
+                        Score:
+                        ${quizScore}/${quizQuestions.length}
+                    </h3>
+                `;
+
+                return;
+            }
+
+
+            document.getElementById(
+                "quizQuestion"
+            ).textContent =
+                question.question;
+
+
+            const options =
+                document.getElementById(
+                    "quizOptions"
+                );
+
+
+            options.innerHTML = "";
+
+
+            question.options.forEach(option => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.textContent =
+                    option;
+
+
+                button.onclick =
+                    function () {
+
+                        if (
+                            option ===
+                            question.answer
+                        ) {
+
+                            quizScore++;
+
+                            document.getElementById(
+                                "quizResult"
+                            ).textContent =
+                                "✅ Correct!";
+
+                        } else {
+
+                            document.getElementById(
+                                "quizResult"
+                            ).textContent =
+                                "❌ Incorrect.";
+
+                        }
+
+
+                        currentQuiz++;
+
+
+                        setTimeout(
+                            showQuizQuestion,
+                            700
+                        );
+
+                    };
+
+
+                options.appendChild(
+                    button
+                );
+
+            });
+
+        }
+
+
+
+        // =================================================
+        // FLASHCARDS
+        // =================================================
+
+        const flashcards = [
+
+            {
+                question:
+                    "What is photosynthesis?",
+
+                answer:
+                    "The process by which green plants make food using sunlight, carbon dioxide and water."
+            },
+
+
+            {
+                question:
+                    "What is an irrational number?",
+
+                answer:
+                    "A number that cannot be expressed as a ratio of two integers."
+            },
+
+
+            {
+                question:
+                    "What is an NGO?",
+
+                answer:
+                    "A non-governmental organization that works independently of direct government control."
+            }
+
+        ];
+
+
+        let currentCard =
+            0;
+
+        let cardFlipped =
+            false;
+
+
+        function displayFlashcard() {
+
+            const text =
+                document.getElementById(
+                    "flashcardText"
+                );
+
+
+            if (cardFlipped) {
+
+                text.textContent =
+                    flashcards[currentCard].answer;
+
+            } else {
+
+                text.textContent =
+                    flashcards[currentCard].question;
+
+            }
+
+        }
+
+
+        function flipFlashcard() {
+
+            cardFlipped =
+                !cardFlipped;
+
+            displayFlashcard();
+
+        }
+
+
+        function nextCard() {
+
+            currentCard++;
+
+            if (
+                currentCard >=
+                flashcards.length
+            ) {
+
+                currentCard = 0;
+
+            }
+
+
+            cardFlipped = false;
+
+            displayFlashcard();
+
+        }
+
+
+        function previousCard() {
+
+            currentCard--;
+
+            if (currentCard < 0) {
+
+                currentCard =
+                    flashcards.length - 1;
+
+            }
+
+
+            cardFlipped = false;
+
+            displayFlashcard();
+
+        }
+
+
+
+        // =================================================
+        // STUDY TIMER
+        // =================================================
+
+        let timerSeconds =
+            25 * 60;
+
+        let timerInterval =
+            null;
+
+
+        function updateTimerDisplay() {
+
+            const minutes =
+                Math.floor(
+                    timerSeconds / 60
+                );
+
+
+            const seconds =
+                timerSeconds % 60;
+
+
+            document.getElementById(
+                "timerDisplay"
+            ).textContent =
+
+                String(minutes)
+                    .padStart(2, "0")
+
+                + ":" +
+
+                String(seconds)
+                    .padStart(2, "0");
+
+        }
+
+
+        function startTimer() {
+
+            if (timerInterval) {
+                return;
+            }
+
+
+            timerInterval =
+                setInterval(
+                    function () {
+
+                        if (
+                            timerSeconds <= 0
+                        ) {
+
+                            clearInterval(
+                                timerInterval
+                            );
+
+                            timerInterval =
+                                null;
+
+
+                            alert(
+                                "Study session complete! 🎉"
+                            );
+
+                            return;
+                        }
+
+
+                        timerSeconds--;
+
+                        updateTimerDisplay();
+
+                    },
+                    1000
+                );
+
+        }
+
+
+        function pauseTimer() {
+
+            clearInterval(
+                timerInterval
+            );
+
+            timerInterval =
+                null;
+
+        }
+
+
+        function resetTimer() {
+
+            clearInterval(
+                timerInterval
+            );
+
+            timerInterval =
+                null;
+
+
+            timerSeconds =
+                25 * 60;
+
+
+            updateTimerDisplay();
+
+        }
+
+
+
+        // =================================================
+        // TODAY'S GOAL
+        // =================================================
+
+        function saveGoal() {
+
+            const input =
+                document.getElementById(
+                    "goalInput"
+                );
+
+
+            const display =
+                document.getElementById(
+                    "goalDisplay"
+                );
+
+
+            const goal =
+                input.value.trim();
+
+
+            if (!goal) {
+
+                alert(
+                    "Please enter a goal."
+                );
+
+                return;
+            }
+
+
+            localStorage.setItem(
+                "studyhubGoal",
+                goal
+            );
+
+
+            display.innerHTML = `
+                <div class="saved-goal">
+
+                    🎯
+
+                    <strong>
+                        Today's Goal
+                    </strong>
+
+                    <p>
+                        ${escapeHTML(goal)}
+                    </p>
+
+                </div>
+            `;
+
+
+            input.value = "";
+
+        }
+
+
+        function loadGoal() {
+
+            const goal =
+                localStorage.getItem(
+                    "studyhubGoal"
+                );
+
+
+            if (!goal) {
+                return;
+            }
+
+
+            document.getElementById(
+                "goalDisplay"
+            ).innerHTML = `
+
+                <div class="saved-goal">
+
+                    🎯
+
+                    <strong>
+                        Today's Goal
+                    </strong>
+
+                    <p>
+                        ${escapeHTML(goal)}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        // =================================================
+        // PAGE STARTUP
+        // =================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadMaterials();
+
+                loadGoal();
+
+                displayFlashcard();
+
+                updateTimerDisplay();
+
+            }
+        );
+
+    </script>
 
 </body>
 
 </html>
+```
