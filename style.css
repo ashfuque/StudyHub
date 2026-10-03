@@ -1,4 +1,4 @@
-
+```css
 /* =========================================================
    STUDYHUB — MODERN UI
    ========================================================= */
@@ -40,7 +40,6 @@ nav {
     -webkit-backdrop-filter: blur(14px);
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -101,10 +100,14 @@ section h3 {
    ========================================================= */
 
 #home {
+    position: relative;
+    overflow: hidden;
+
     max-width: none;
     min-height: 75vh;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -113,9 +116,22 @@ section h3 {
     padding: 100px 7%;
 
     background:
-        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18), transparent 30%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.16), transparent 30%),
-        linear-gradient(135deg, #eef2ff, #f8fafc 55%, #f5f3ff);
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(99, 102, 241, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(139, 92, 246, 0.16),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f8fafc 55%,
+            #f5f3ff
+        );
 }
 
 #home h1 {
@@ -147,6 +163,11 @@ button,
     align-items: center;
     justify-content: center;
 
+    width: auto;
+    min-width: 120px;
+
+    margin: 5px;
+
     border: none;
     border-radius: 12px;
 
@@ -158,7 +179,12 @@ button,
 
     cursor: pointer;
 
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #6366f1
+    );
+
     color: white;
 
     box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
@@ -175,6 +201,76 @@ button:hover,
 button:active,
 .upload-button:active {
     transform: translateY(0);
+}
+
+button + button,
+.upload-button + button {
+    margin-left: 8px;
+}
+
+/* =========================================================
+   FLOATING STUDY CARDS
+   ========================================================= */
+
+.floating-cards {
+    position: relative;
+
+    width: 100%;
+    max-width: 650px;
+    height: 130px;
+
+    margin: 45px auto 0;
+}
+
+.study-card {
+    position: absolute;
+
+    padding: 14px 22px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.1);
+
+    font-weight: 700;
+    color: #374151;
+
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.card-1 {
+    left: 5%;
+    top: 20px;
+    animation-delay: 0s;
+}
+
+.card-2 {
+    left: 42%;
+    top: 0;
+    animation-delay: 1s;
+}
+
+.card-3 {
+    right: 5%;
+    top: 25px;
+    animation-delay: 2s;
+}
+
+@keyframes floatCard {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* =========================================================
@@ -208,7 +304,8 @@ button:active,
     border: 1px solid #e5e7eb;
     border-radius: 18px;
 
-    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.06);
 
     transition: all 0.3s ease;
 
@@ -217,6 +314,7 @@ button:active,
 
 .subject-card::before {
     content: "";
+
     position: absolute;
     top: 0;
     left: 0;
@@ -224,13 +322,21 @@ button:active,
     width: 100%;
     height: 4px;
 
-    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+    background:
+        linear-gradient(
+            90deg,
+            #4f46e5,
+            #8b5cf6
+        );
 }
 
 .subject-card:hover {
     transform: translateY(-7px);
+
     border-color: #c7d2fe;
-    box-shadow: 0 18px 35px rgba(79, 70, 229, 0.12);
+
+    box-shadow:
+        0 18px 35px rgba(79, 70, 229, 0.12);
 }
 
 .subject-card h3 {
@@ -249,12 +355,18 @@ button:active,
 
 #materials {
     background:
-        linear-gradient(180deg, #f8fafc, #eef2ff);
+        linear-gradient(
+            180deg,
+            #f8fafc,
+            #eef2ff
+        );
+
     max-width: none;
 }
 
 #materials > * {
     max-width: 1100px;
+
     margin-left: auto;
     margin-right: auto;
 }
@@ -267,7 +379,8 @@ button:active,
     border-radius: 20px;
     border: 1px solid #e5e7eb;
 
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
 
     margin-top: 25px;
 }
@@ -299,7 +412,8 @@ button:active,
     border-radius: 20px;
     border: 1px solid #e5e7eb;
 
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .materials-library h3 {
@@ -307,7 +421,9 @@ button:active,
     margin-bottom: 18px;
 }
 
-/* SEARCH */
+/* =========================================================
+   MATERIAL SEARCH
+   ========================================================= */
 
 #materialSearch {
     width: 100%;
@@ -331,15 +447,18 @@ button:active,
 
 #materialSearch:focus {
     background: white;
+
     border-color: #6366f1;
 
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .material-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 15px;
 
     padding: 16px 18px;
@@ -355,7 +474,9 @@ button:active,
 
 .material-item:hover {
     background: #eef2ff;
+
     border-color: #c7d2fe;
+
     transform: translateX(3px);
 }
 
@@ -380,6 +501,7 @@ button:active,
 .quiz-container,
 .quiz-box {
     max-width: 800px;
+
     margin: 30px auto 0;
 
     padding: 30px;
@@ -389,7 +511,8 @@ button:active,
     border: 1px solid #e5e7eb;
     border-radius: 20px;
 
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .quiz-container button,
@@ -420,12 +543,18 @@ button:active,
 
     text-align: center;
 
-    background: linear-gradient(135deg, #ffffff, #eef2ff);
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eef2ff
+        );
 
     border: 1px solid #dbe3ff;
     border-radius: 22px;
 
-    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.1);
+    box-shadow:
+        0 15px 40px rgba(79, 70, 229, 0.1);
 
     font-size: 1.25rem;
     font-weight: 700;
@@ -454,13 +583,19 @@ button:active,
 
     padding: 35px;
 
-    background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
 
     border-radius: 24px;
 
     border: 1px solid #ddd6fe;
 
-    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.1);
+    box-shadow:
+        0 15px 40px rgba(79, 70, 229, 0.1);
 }
 
 #timerDisplay {
@@ -497,7 +632,8 @@ button:active,
 
     border: 1px solid #e5e7eb;
 
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .goal-container input,
@@ -521,11 +657,12 @@ button:active,
 .goal-box input:focus {
     border-color: #6366f1;
 
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 /* =========================================================
-   INPUTS — GENERAL
+   INPUTS
    ========================================================= */
 
 input,
@@ -549,6 +686,7 @@ footer {
     text-align: center;
 
     background: #111827;
+
     color: #9ca3af;
 
     font-size: 0.9rem;
@@ -605,7 +743,7 @@ section {
 }
 
 /* =========================================================
-   MOBILE
+   TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -639,6 +777,10 @@ section {
     }
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 600px) {
 
     nav {
@@ -649,6 +791,7 @@ section {
     nav div {
         width: 100%;
         justify-content: flex-start;
+
         padding-bottom: 2px;
     }
 
@@ -695,6 +838,7 @@ section {
     .flashcard-container {
         min-height: 190px;
         padding: 25px;
+
         font-size: 1.05rem;
     }
 
@@ -702,18 +846,40 @@ section {
         font-size: 3.5rem;
     }
 
- button,
-.upload-button {
-    width: auto;
-    min-width: 120px;
-    margin: 5px;
-   button + button {
-    margin-left: 8px;
+    /* MOBILE BUTTONS */
+
+    button,
+    .upload-button {
+        min-width: 110px;
+        padding: 11px 16px;
+    }
+
+    /* MOBILE FLOATING CARDS */
+
+    .floating-cards {
+        height: 170px;
+        margin-top: 40px;
+    }
+
+    .study-card {
+        padding: 11px 15px;
+        font-size: 0.85rem;
+    }
+
+    .card-1 {
+        left: 0;
+        top: 35px;
+    }
+
+    .card-2 {
+        left: 50%;
+        margin-left: -45px;
+        top: 0;
+    }
+
+    .card-3 {
+        right: 0;
+        top: 70px;
+    }
 }
-
-.upload-button + button {
-    margin-left: 8px;
-}
-
-
-
+```
