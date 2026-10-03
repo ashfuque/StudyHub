@@ -177,6 +177,34 @@
 
         </div>
 
+<!-- UPLOAD STUDY MATERIALS -->
+
+<div class="upload-box">
+
+    <h3>📤 Upload Study Materials</h3>
+
+    <p>
+        Upload your notes, chapters or study files.
+    </p>
+
+    <label for="fileInput" class="upload-button">
+        Choose Files
+    </label>
+
+    <input
+        type="file"
+        id="fileInput"
+        multiple
+        accept=".pdf,.doc,.docx,.txt"
+        onchange="handleFiles()"
+    >
+
+    <div id="fileList">
+        <p>No files uploaded yet.</p>
+    </div>
+
+</div>
+        
     </section>
 
 
