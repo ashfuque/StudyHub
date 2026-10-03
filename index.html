@@ -187,21 +187,25 @@
         Upload your notes, chapters or study files.
     </p>
 
-    <label for="fileInput" class="upload-button">
-        Choose Files
-    </label>
+   <label for="fileInput" class="upload-button">
+    Choose Files
+</label>
 
-    <input
-        type="file"
-        id="fileInput"
-        multiple
-        accept=".pdf,.doc,.docx,.txt"
-        onchange="handleFiles()"
-    >
+<input
+    type="file"
+    id="fileInput"
+    multiple
+    accept=".pdf,.doc,.docx,.txt"
+    onchange="handleFiles()"
+>
 
-    <div id="fileList">
-        <p>No files uploaded yet.</p>
-    </div>
+<button onclick="uploadFile()">
+    📤 Upload to StudyHub
+</button>
+
+<div id="fileList">
+    <p>No files uploaded yet.</p>
+</div>
 
 </div>
         
@@ -364,6 +368,33 @@
         SUPABASE_URL,
         SUPABASE_KEY
     );
+</script>
+    <script>
+    async function uploadFile() {
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        const fileName = Date.now() + "-" + file.name;
+
+        const { data, error } = await supabaseClient
+            .storage
+            .from("study-materials")
+            .upload(fileName, file);
+
+        if (error) {
+            console.error(error);
+            alert("Upload failed: " + error.message);
+            return;
+        }
+
+        alert("File uploaded successfully! 📚");
+        console.log(data);
+    }
 </script>
     <script src="script.js"></script>
 
