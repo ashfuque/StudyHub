@@ -1,479 +1,710 @@
-/* Basic page */
 
-body {
-    font-family: Arial, sans-serif;
+/* =========================================================
+   STUDYHUB — MODERN UI
+   ========================================================= */
+
+* {
     margin: 0;
-    background: #f4f7fb;
-    color: #222;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
-/* Navigation */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 nav {
-    background: #2563eb;
-    color: white;
-    padding: 18px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 7%;
+
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 nav h2 {
-    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #4f46e5;
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 nav a {
-    color: white;
     text-decoration: none;
-    margin-left: 25px;
+    color: #4b5563;
+
+    padding: 9px 13px;
+    border-radius: 10px;
+
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
 }
 
-
-/* Welcome section */
-
-.hero {
-    text-align: center;
-    padding: 90px 20px;
-    background: white;
+nav a:hover {
+    color: #4f46e5;
+    background: #eef2ff;
+    transform: translateY(-1px);
 }
 
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 20px;
-    color: #666;
-}
-
-
-/* Buttons */
-
-button {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 12px 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-
-/* Sections */
+/* =========================================================
+   GENERAL SECTION
+   ========================================================= */
 
 section {
-    padding: 60px 8%;
-    text-align: center;
-}
-
-section h2 {
-    font-size: 32px;
-    margin-bottom: 35px;
-}
-
-
-/* Subject cards */
-
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.card h3 {
-    font-size: 22px;
-}
-
-.card p {
-    color: #666;
-    min-height: 60px;
-}
-
-
-/* Study tools */
-
-.tools {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-}
-
-.tool {
-    background: white;
-    padding: 25px;
-    width: 200px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    font-size: 30px;
-}
-
-.tool h3 {
-    font-size: 20px;
-}
-
-.tool p {
-    font-size: 15px;
-    color: #666;
-}
-
-
-/* Goal */
-
-.goal {
-    background: #e8f0ff;
-}
-
-.goal p {
-    font-size: 18px;
-}
-
-
-/* Footer */
-
-footer {
-    text-align: center;
-    padding: 25px;
-    background: #172554;
-    color: white;
-}
-
-/* Material display */
-
-.material-display {
-    background: white;
-    max-width: 800px;
-    margin: 35px auto 0;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-
-/* Flashcards */
-
-.flashcard-container {
-    max-width: 600px;
+    padding: 80px 7%;
+    max-width: 1250px;
     margin: auto;
 }
 
-.flashcard {
-    background: white;
-    min-height: 220px;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: #111827;
+}
+
+section h3 {
+    color: #111827;
+}
+
+/* =========================================================
+   HOME / HERO
+   ========================================================= */
+
+#home {
+    max-width: none;
+    min-height: 75vh;
 
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
 
-    padding: 30px;
+    text-align: center;
+
+    padding: 100px 7%;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.16), transparent 30%),
+        linear-gradient(135deg, #eef2ff, #f8fafc 55%, #f5f3ff);
+}
+
+#home h1 {
+    font-size: clamp(2.7rem, 7vw, 5rem);
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -2px;
+
+    color: #111827;
+
+    margin-bottom: 20px;
+}
+
+#home p {
+    max-width: 650px;
+    margin: 0 auto 30px;
+
+    font-size: 1.15rem;
+    color: #6b7280;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button,
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 12px 20px;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+
     cursor: pointer;
 
-    font-size: 25px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+
+    transition: all 0.25s ease;
 }
 
-#cardAnswer {
-    display: none;
-    margin-top: 25px;
-    color: #2563eb;
+button:hover,
+.upload-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.28);
 }
 
-.flashcard-buttons {
-    margin-top: 20px;
+button:active,
+.upload-button:active {
+    transform: translateY(0);
 }
 
-.flashcard-buttons button {
-    margin: 5px;
+/* =========================================================
+   SUBJECTS
+   ========================================================= */
+
+#subjects {
+    background: #ffffff;
 }
 
-#cardNumber {
-    color: #666;
+#subjects > h2 {
+    text-align: center;
 }
 
-/* =========================
-   QUIZ
-   ========================= */
+.subjects-container,
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
 
-#quizArea {
-    max-width: 600px;
-    margin: 25px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-top: 35px;
 }
 
-.quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+.subject-card {
+    position: relative;
+
+    padding: 28px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+
+    transition: all 0.3s ease;
+
+    overflow: hidden;
 }
 
-.quiz-option {
+.subject-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
     width: 100%;
+    height: 4px;
+
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
 }
-/* Center Quiz and Study Timer */
-#quiz .tool,
-#timer-section .tool {
+
+.subject-card:hover {
+    transform: translateY(-7px);
+    border-color: #c7d2fe;
+    box-shadow: 0 18px 35px rgba(79, 70, 229, 0.12);
+}
+
+.subject-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.subject-card p {
+    color: #6b7280;
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   MATERIALS
+   ========================================================= */
+
+#materials {
+    background:
+        linear-gradient(180deg, #f8fafc, #eef2ff);
+    max-width: none;
+}
+
+#materials > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.materials-upload {
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+
+    margin-top: 25px;
+}
+
+.materials-upload h3 {
+    margin-bottom: 15px;
+}
+
+#fileList {
+    margin: 18px 0;
+
+    padding: 15px;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+
+    color: #64748b;
+}
+
+.materials-library {
+    margin-top: 30px;
+
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.materials-library h3 {
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+}
+
+/* SEARCH */
+
+#materialSearch {
+    width: 100%;
+
+    padding: 14px 17px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #dbe0e8;
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+#materialSearch:focus {
+    background: white;
+    border-color: #6366f1;
+
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.material-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 16px 18px;
+    margin-bottom: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    transition: all 0.25s ease;
+}
+
+.material-item:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    transform: translateX(3px);
+}
+
+.material-item a {
+    text-decoration: none;
+    color: #4f46e5;
+    font-weight: 700;
+}
+
+.material-item a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+#quiz {
+    background: white;
+}
+
+.quiz-container,
+.quiz-box {
+    max-width: 800px;
+    margin: 30px auto 0;
+
+    padding: 30px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.quiz-container button,
+.quiz-box button {
+    margin-top: 15px;
+}
+
+/* =========================================================
+   FLASHCARDS
+   ========================================================= */
+
+#flashcards {
+    background: #f8fafc;
+}
+
+.flashcard,
+.flashcard-container {
+    max-width: 650px;
+    min-height: 220px;
+
+    margin: 30px auto;
+
+    padding: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: linear-gradient(135deg, #ffffff, #eef2ff);
+
+    border: 1px solid #dbe3ff;
+    border-radius: 22px;
+
+    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.1);
+
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    transition: transform 0.3s ease;
+}
+
+.flashcard:hover {
+    transform: scale(1.015);
+}
+
+/* =========================================================
+   STUDY TIMER
+   ========================================================= */
+
+#timer {
+    background: white;
+    text-align: center;
+}
+
+.timer-container,
+.timer-box {
     max-width: 600px;
-    margin: 0 auto;
+
+    margin: 30px auto;
+
+    padding: 35px;
+
+    background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+
+    border-radius: 24px;
+
+    border: 1px solid #ddd6fe;
+
+    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.1);
+}
+
+#timerDisplay {
+    font-size: clamp(3rem, 10vw, 5rem);
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    color: #4f46e5;
+
+    margin: 20px 0;
+}
+
+/* =========================================================
+   TODAY'S GOAL
+   ========================================================= */
+
+#goal {
+    background: #f8fafc;
+}
+
+.goal-container,
+.goal-box {
+    max-width: 700px;
+
+    margin: 30px auto;
+
+    padding: 28px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.goal-container input,
+.goal-box input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin: 10px 0;
+
+    border: 1px solid #dbe0e8;
+    border-radius: 11px;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    outline: none;
+}
+
+.goal-container input:focus,
+.goal-box input:focus {
+    border-color: #6366f1;
+
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* =========================================================
+   INPUTS — GENERAL
+   ========================================================= */
+
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    padding: 35px 7%;
+
+    text-align: center;
+
+    background: #111827;
+    color: #9ca3af;
+
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #c7d2fe;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #818cf8;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeUp 0.6s ease both;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    nav {
+        padding: 14px 5%;
+    }
+
+    nav h2 {
+        font-size: 1.25rem;
+    }
+
+    nav div {
+        gap: 3px;
+        overflow-x: auto;
+    }
+
+    nav a {
+        padding: 8px 9px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    section {
+        padding: 60px 5%;
+    }
+
+    .subjects-container,
+    .subject-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 600px) {
 
-    /* ===== MOBILE BASE ===== */
-
-    body {
-        overflow-x: hidden;
-    }
-
-    /* ===== NAVIGATION ===== */
-
     nav {
-        padding: 14px 18px;
         flex-direction: column;
         gap: 12px;
-        text-align: center;
     }
 
-    nav h2 {
-        font-size: 22px;
+    nav div {
+        width: 100%;
+        justify-content: flex-start;
+        padding-bottom: 2px;
     }
 
-    nav a {
-        margin: 0 7px;
-        font-size: 14px;
+    #home {
+        min-height: 70vh;
+        padding: 80px 5%;
     }
 
-
-    /* ===== HERO ===== */
-
-    .hero {
-        padding: 55px 18px;
+    #home h1 {
+        font-size: 2.8rem;
+        letter-spacing: -1.5px;
     }
 
-    .hero h1 {
-        font-size: 34px;
-        line-height: 1.2;
-    }
-
-    .hero p {
-        font-size: 17px;
-        line-height: 1.5;
-    }
-
-
-    /* ===== SECTIONS ===== */
-
-    section {
-        padding: 45px 18px;
+    #home p {
+        font-size: 1rem;
     }
 
     section h2 {
-        font-size: 27px;
-        margin-bottom: 25px;
+        font-size: 1.65rem;
     }
 
-
-    /* ===== SUBJECT CARDS ===== */
-
-    .subjects {
+    .subjects-container,
+    .subject-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
     }
 
-    .card {
-        padding: 22px;
+    .materials-upload,
+    .materials-library,
+    .quiz-container,
+    .quiz-box,
+    .goal-container,
+    .goal-box,
+    .timer-container,
+    .timer-box {
+        padding: 20px;
     }
 
-    .card h3 {
-        font-size: 20px;
-    }
-
-    .card p {
-        min-height: auto;
-        line-height: 1.5;
-    }
-
-
-    /* ===== STUDY TOOLS ===== */
-
-    .tools {
+    .material-item {
         flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
+        align-items: flex-start;
     }
 
-    .tool {
-        width: auto;
-        padding: 22px;
-        font-size: 28px;
-        box-sizing: border-box;
-    }
-
-    .tool h3 {
-        font-size: 20px;
-    }
-
-
-    /* ===== TIMER + QUIZ ===== */
-
-    #quiz .tool,
-    #timer-section .tool {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-    #quizArea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 20px;
-        margin: 20px auto;
-    }
-
-    .quiz-options {
-        gap: 12px;
-    }
-
-    .quiz-option {
-        min-height: 48px;
-        font-size: 16px;
-    }
-
-
-    /* ===== FLASHCARDS ===== */
-
+    .flashcard,
     .flashcard-container {
-        width: 100%;
-    }
-
-    .flashcard {
         min-height: 190px;
-        padding: 22px;
-        font-size: 21px;
-        box-sizing: border-box;
+        padding: 25px;
+        font-size: 1.05rem;
     }
 
-    .flashcard-buttons button {
-        margin: 4px 2px;
+    #timerDisplay {
+        font-size: 3.5rem;
     }
 
-
-    /* ===== MATERIAL ===== */
-
-    .material-display {
+    button,
+    .upload-button {
         width: 100%;
-        box-sizing: border-box;
-        padding: 20px;
-        margin-top: 25px;
-    }
-
-
-    /* ===== GOAL ===== */
-
-    .goal p {
-        font-size: 16px;
-        line-height: 1.6;
-    }
-
-
-    /* ===== BUTTONS ===== */
-
-    button {
-        min-height: 46px;
-        padding: 12px 18px;
-        font-size: 16px;
-    }
-
-
-    /* ===== FOOTER ===== */
-
-    footer {
-        padding: 22px 15px;
-        font-size: 14px;
     }
 }
-
-/* ========================= */
-/* FILE UPLOAD */
-/* ========================= */
-
-.upload-box {
-    max-width: 700px;
-    margin: 50px auto 0;
-    padding: 30px;
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    text-align: center;
-}
-
-.upload-box h3 {
-    font-size: 26px;
-    margin-bottom: 10px;
-}
-
-.upload-box p {
-    color: #666;
-}
-
-#fileInput {
-    display: none;
-}
-
-.upload-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 12px 24px;
-    background: #2563eb;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.upload-button:hover {
-    background: #1d4ed8;
-}
-
-#fileList {
-    margin-top: 25px;
-    text-align: left;
-}
-
-.uploaded-file {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    margin-top: 10px;
-    background: #f4f7fb;
-    border-radius: 10px;
-}
-
-.file-name {
-    font-weight: bold;
-}
-
-.file-type {
-    color: #666;
-    font-size: 14px;
-}
+```
