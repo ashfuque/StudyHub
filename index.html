@@ -214,6 +214,15 @@
 <div id="fileList">
     <p>No files uploaded yet.</p>
 </div>
+    <div class="materials-library">
+
+    <h3>📚 Study Materials Library</h3>
+
+    <div id="materialsList">
+        <p>Loading materials...</p>
+    </div>
+
+</div>
 
 </div>
         
@@ -403,6 +412,58 @@
         alert("File uploaded successfully! 📚");
         console.log(data);
     }
+</script>
+    <script>
+async function loadMaterials() {
+
+    const materialsList = document.getElementById("materialsList");
+
+    materialsList.innerHTML = "<p>Loading materials...</p>";
+
+    const { data, error } = await supabaseClient
+        .storage
+        .from("study-materials")
+        .list();
+
+    if (error) {
+        console.error(error);
+        materialsList.innerHTML =
+            "<p>Could not load materials.</p>";
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        materialsList.innerHTML =
+            "<p>No study materials uploaded yet.</p>";
+        return;
+    }
+
+    materialsList.innerHTML = "";
+
+    data.forEach(file => {
+
+        const fileDiv = document.createElement("div");
+
+        fileDiv.className = "material-item";
+
+        const { data: urlData } = supabaseClient
+            .storage
+            .from("study-materials")
+            .getPublicUrl(file.name);
+
+        fileDiv.innerHTML = `
+            <span>📄 ${file.name}</span>
+            <a href="${urlData.publicUrl}" target="_blank">
+                📥 Open
+            </a>
+        `;
+
+        materialsList.appendChild(fileDiv);
+
+    });
+}
+
+loadMaterials();
 </script>
     <script src="script.js"></script>
 
