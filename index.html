@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,24 +6,15 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>StudyHub 📚</title>
 
-    <!-- ========================= -->
-    <!-- SUPABASE -->
-    <!-- ========================= -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- ========================= -->
-    <!-- CSS -->
-    <!-- ========================= -->
-
     <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
@@ -41,20 +32,16 @@
         <div class="nav-links">
 
             <a href="#home">Home</a>
-
             <a href="#subjects">Subjects</a>
-
             <a href="#materials">Materials</a>
-
             <a href="#quiz">Quiz</a>
-
             <a href="#flashcards">Flashcards</a>
-
             <a href="#timer">Timer</a>
 
         </div>
 
     </nav>
+
 
 
     <!-- ========================= -->
@@ -66,8 +53,8 @@
         <h1>Welcome to StudyHub 📚</h1>
 
         <p>
-            Your personal place to study, practice,
-            revise and improve.
+            Your personal place to study,
+            practice, revise and improve.
         </p>
 
         <a href="#subjects">
@@ -75,6 +62,7 @@
         </a>
 
     </section>
+
 
 
     <!-- ========================= -->
@@ -92,6 +80,7 @@
 
         <div class="subject-container">
 
+
             <div class="subject-card">
 
                 <h3>📐 Mathematics</h3>
@@ -101,11 +90,13 @@
                     ratios and more.
                 </p>
 
-                <button onclick="selectSubject('Mathematics')">
+                <button
+                    onclick="selectSubject('Mathematics')">
                     Study Math
                 </button>
 
             </div>
+
 
 
             <div class="subject-card">
@@ -117,11 +108,13 @@
                     and general science.
                 </p>
 
-                <button onclick="selectSubject('Science')">
+                <button
+                    onclick="selectSubject('Science')">
                     Study Science
                 </button>
 
             </div>
+
 
 
             <div class="subject-card">
@@ -133,11 +126,13 @@
                     writing and literature.
                 </p>
 
-                <button onclick="selectSubject('English')">
+                <button
+                    onclick="selectSubject('English')">
                     Study English
                 </button>
 
             </div>
+
 
 
             <div class="subject-card">
@@ -149,7 +144,8 @@
                     society, history and geography.
                 </p>
 
-                <button onclick="selectSubject('BGS')">
+                <button
+                    onclick="selectSubject('BGS')">
                     Study BGS
                 </button>
 
@@ -161,6 +157,7 @@
         <div id="selectedSubject"></div>
 
     </section>
+
 
 
     <!-- ========================= -->
@@ -178,7 +175,7 @@
 
 
         <!-- ========================= -->
-        <!-- UPLOAD BOX -->
+        <!-- UPLOAD -->
         <!-- ========================= -->
 
         <div class="upload-box">
@@ -193,8 +190,7 @@
 
             <label
                 for="fileInput"
-                class="upload-button"
-            >
+                class="upload-button">
                 Choose Files
             </label>
 
@@ -210,13 +206,10 @@
 
             <button
                 type="button"
-                onclick="uploadFile()"
-            >
+                onclick="uploadFile()">
                 📤 Upload to StudyHub
             </button>
 
-
-            <!-- SELECTED FILES -->
 
             <div id="fileList">
 
@@ -227,8 +220,9 @@
             </div>
 
 
+
             <!-- ========================= -->
-            <!-- MATERIALS LIBRARY -->
+            <!-- LIBRARY -->
             <!-- ========================= -->
 
             <div class="materials-library">
@@ -236,14 +230,19 @@
                 <h3>
                     📚 Study Materials Library
                 </h3>
-<input
-    type="text"
-    id="materialSearch"
-    placeholder="🔎 Search study materials..."
-    oninput="searchMaterials()"
->
-```
 
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    id="materialSearch"
+                    placeholder="🔎 Search study materials..."
+                    oninput="searchMaterials()"
+                >
+
+
+                <!-- MATERIAL LIST -->
 
                 <div id="materialsList">
 
@@ -258,6 +257,7 @@
         </div>
 
     </section>
+
 
 
     <!-- ========================= -->
@@ -286,15 +286,14 @@
             <p id="quizResult"></p>
 
 
-            <button
-                onclick="startQuiz()"
-            >
+            <button onclick="startQuiz()">
                 Start Quiz 🚀
             </button>
 
         </div>
 
     </section>
+
 
 
     <!-- ========================= -->
@@ -315,8 +314,7 @@
             <div
                 id="flashcard"
                 class="flashcard"
-                onclick="flipFlashcard()"
-            >
+                onclick="flipFlashcard()">
 
                 <div id="flashcardText">
                     Click to start
@@ -340,6 +338,7 @@
         </div>
 
     </section>
+
 
 
     <!-- ========================= -->
@@ -383,6 +382,7 @@
     </section>
 
 
+
     <!-- ========================= -->
     <!-- TODAY'S GOAL -->
     <!-- ========================= -->
@@ -417,6 +417,7 @@
     </section>
 
 
+
     <!-- ========================= -->
     <!-- FOOTER -->
     <!-- ========================= -->
@@ -426,7 +427,8 @@
         <h3>StudyHub 📚</h3>
 
         <p>
-            Study smarter. Practice harder. Improve every day.
+            Study smarter. Practice harder.
+            Improve every day.
         </p>
 
         <p>
@@ -443,12 +445,14 @@
 
     <script>
 
+
         // =================================================
-        // SUPABASE CONNECTION
+        // SUPABASE
         // =================================================
 
         const SUPABASE_URL =
             "https://pjytoktykbaokkuhaera.supabase.co";
+
 
         const SUPABASE_KEY =
             "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
@@ -461,6 +465,7 @@
             );
 
 
+
         // =================================================
         // SUBJECTS
         // =================================================
@@ -468,17 +473,26 @@
         function selectSubject(subject) {
 
             const box =
-                document.getElementById("selectedSubject");
+                document.getElementById(
+                    "selectedSubject"
+                );
+
 
             box.innerHTML = `
+
                 <div class="selected-subject">
-                    <h3>📖 ${subject}</h3>
+
+                    <h3>
+                        📖 ${escapeHTML(subject)}
+                    </h3>
+
                     <p>
-                        You selected ${subject}.
-                        Your study materials and practice
-                        resources can be added here.
+                        You selected ${escapeHTML(subject)}.
+                        Your study resources can be added here.
                     </p>
+
                 </div>
+
             `;
 
         }
@@ -492,18 +506,27 @@
         function handleFiles() {
 
             const fileInput =
-                document.getElementById("fileInput");
+                document.getElementById(
+                    "fileInput"
+                );
+
 
             const fileList =
-                document.getElementById("fileList");
+                document.getElementById(
+                    "fileList"
+                );
 
 
-            if (!fileInput.files.length) {
+            if (
+                !fileInput.files ||
+                fileInput.files.length === 0
+            ) {
 
                 fileList.innerHTML =
                     "<p>No files selected yet.</p>";
 
                 return;
+
             }
 
 
@@ -511,15 +534,23 @@
                 "<h4>Selected Files:</h4>";
 
 
-            Array.from(fileInput.files).forEach(file => {
+            Array.from(
+                fileInput.files
+            ).forEach(file => {
 
                 const item =
-                    document.createElement("p");
+                    document.createElement(
+                        "p"
+                    );
+
 
                 item.textContent =
                     "📄 " + file.name;
 
-                fileList.appendChild(item);
+
+                fileList.appendChild(
+                    item
+                );
 
             });
 
@@ -534,23 +565,32 @@
         async function uploadFile() {
 
             const fileInput =
-                document.getElementById("fileInput");
+                document.getElementById(
+                    "fileInput"
+                );
+
 
             const files =
                 fileInput.files;
 
 
-            if (!files || files.length === 0) {
+            if (
+                !files ||
+                files.length === 0
+            ) {
 
                 alert(
                     "Please choose at least one file first."
                 );
 
                 return;
+
             }
 
 
-            for (const file of files) {
+            for (
+                const file of files
+            ) {
 
                 const safeName =
                     file.name.replace(
@@ -569,10 +609,14 @@
                     safeName;
 
 
-                const { error } =
+                const {
+                    error
+                } =
                     await supabaseClient
                         .storage
-                        .from("study-materials")
+                        .from(
+                            "study-materials"
+                        )
                         .upload(
                             fileName,
                             file
@@ -593,6 +637,7 @@
                     );
 
                     return;
+
                 }
 
             }
@@ -612,7 +657,7 @@
                 "<p>No files selected yet.</p>";
 
 
-            loadMaterials();
+            await loadMaterials();
 
         }
 
@@ -631,120 +676,30 @@
 
 
             if (!materialsList) {
+
                 return;
+
             }
-```javascript
-// =================================================
-// MATERIAL SEARCH
-// =================================================
-
-function searchMaterials() {
-
-    const searchInput =
-        document.getElementById("materialSearch");
-
-    const materialsList =
-        document.getElementById("materialsList");
-
-    const searchText =
-        searchInput.value
-            .toLowerCase()
-            .trim();
-
-
-    const materials =
-        materialsList.querySelectorAll(
-            ".material-item"
-        );
-
-
-    let visibleCount = 0;
-
-
-    materials.forEach(material => {
-
-        const fileName =
-            material
-                .textContent
-                .toLowerCase();
-
-
-        if (
-            fileName.includes(searchText)
-        ) {
-
-            material.style.display =
-                "flex";
-
-            visibleCount++;
-
-        } else {
-
-            material.style.display =
-                "none";
-
-        }
-
-    });
-
-
-    // Show message if nothing matches
-
-    let noResults =
-        document.getElementById(
-            "noSearchResults"
-        );
-
-
-    if (
-        searchText !== "" &&
-        visibleCount === 0
-    ) {
-
-        if (!noResults) {
-
-            noResults =
-                document.createElement("p");
-
-            noResults.id =
-                "noSearchResults";
-
-            materialsList.appendChild(
-                noResults
-            );
-
-        }
-
-
-        noResults.textContent =
-            `🔎 No materials found for "${searchInput.value}"`;
-
-    } else {
-
-        if (noResults) {
-
-            noResults.remove();
-
-        }
-
-    }
-
-}
-```
 
 
             materialsList.innerHTML =
                 "<p>Loading materials...</p>";
 
 
-            const { data, error } =
+            const {
+                data,
+                error
+            } =
                 await supabaseClient
                     .storage
-                    .from("study-materials")
+                    .from(
+                        "study-materials"
+                    )
                     .list(
                         "",
                         {
                             limit: 100,
+
                             sortBy: {
                                 column: "created_at",
                                 order: "desc"
@@ -762,27 +717,38 @@ function searchMaterials() {
 
 
                 materialsList.innerHTML = `
+
                     <div class="error-message">
+
                         <p>
                             ❌ Could not load materials.
                         </p>
 
                         <p>
-                            ${error.message}
+                            ${escapeHTML(
+                                error.message
+                            )}
                         </p>
+
                     </div>
+
                 `;
 
                 return;
+
             }
 
 
-            if (!data || data.length === 0) {
+            if (
+                !data ||
+                data.length === 0
+            ) {
 
                 materialsList.innerHTML =
                     "<p>No study materials uploaded yet.</p>";
 
                 return;
+
             }
 
 
@@ -792,12 +758,16 @@ function searchMaterials() {
             data.forEach(file => {
 
                 if (!file.name) {
+
                     return;
+
                 }
 
 
                 const fileDiv =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
 
 
                 fileDiv.className =
@@ -811,7 +781,9 @@ function searchMaterials() {
                 const publicUrl =
                     supabaseClient
                         .storage
-                        .from("study-materials")
+                        .from(
+                            "study-materials"
+                        )
                         .getPublicUrl(
                             fileName
                         )
@@ -826,7 +798,9 @@ function searchMaterials() {
                         📄
 
                         <span>
-                            ${escapeHTML(fileName)}
+                            ${escapeHTML(
+                                fileName
+                            )}
                         </span>
 
                     </div>
@@ -835,9 +809,10 @@ function searchMaterials() {
                     <a
                         href="${publicUrl}"
                         target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                        rel="noopener noreferrer">
+
                         📥 Open
+
                     </a>
 
                 `;
@@ -849,20 +824,150 @@ function searchMaterials() {
 
             });
 
+
+            // Re-apply search after loading
+
+            searchMaterials();
+
         }
 
 
 
         // =================================================
-        // SECURITY HELPER
+        // MATERIAL SEARCH
+        // =================================================
+
+        function searchMaterials() {
+
+            const searchInput =
+                document.getElementById(
+                    "materialSearch"
+                );
+
+
+            const materialsList =
+                document.getElementById(
+                    "materialsList"
+                );
+
+
+            if (
+                !searchInput ||
+                !materialsList
+            ) {
+
+                return;
+
+            }
+
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const materials =
+                materialsList.querySelectorAll(
+                    ".material-item"
+                );
+
+
+            let visibleCount = 0;
+
+
+            materials.forEach(
+                material => {
+
+                    const fileName =
+                        material.textContent
+                            .toLowerCase();
+
+
+                    if (
+                        fileName.includes(
+                            searchText
+                        )
+                    ) {
+
+                        material.style.display =
+                            "flex";
+
+                        visibleCount++;
+
+                    } else {
+
+                        material.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            let noResults =
+                document.getElementById(
+                    "noSearchResults"
+                );
+
+
+            if (
+                searchText !== "" &&
+                visibleCount === 0
+            ) {
+
+                if (!noResults) {
+
+                    noResults =
+                        document.createElement(
+                            "p"
+                        );
+
+
+                    noResults.id =
+                        "noSearchResults";
+
+
+                    materialsList.appendChild(
+                        noResults
+                    );
+
+                }
+
+
+                noResults.textContent =
+                    `🔎 No materials found for "${searchInput.value}"`;
+
+            } else {
+
+                if (noResults) {
+
+                    noResults.remove();
+
+                }
+
+            }
+
+        }
+
+
+
+        // =================================================
+        // ESCAPE HTML
         // =================================================
 
         function escapeHTML(text) {
 
             const div =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            div.textContent = text;
+
+            div.textContent =
+                text;
+
 
             return div.innerHTML;
 
@@ -880,13 +985,12 @@ function searchMaterials() {
                 question:
                     "What is 25% of 200?",
 
-                options:
-                    [
-                        "25",
-                        "40",
-                        "50",
-                        "75"
-                    ],
+                options: [
+                    "25",
+                    "40",
+                    "50",
+                    "75"
+                ],
 
                 answer:
                     "50"
@@ -897,13 +1001,12 @@ function searchMaterials() {
                 question:
                     "Which gas do humans need for respiration?",
 
-                options:
-                    [
-                        "Carbon dioxide",
-                        "Oxygen",
-                        "Nitrogen",
-                        "Hydrogen"
-                    ],
+                options: [
+                    "Carbon dioxide",
+                    "Oxygen",
+                    "Nitrogen",
+                    "Hydrogen"
+                ],
 
                 answer:
                     "Oxygen"
@@ -914,13 +1017,12 @@ function searchMaterials() {
                 question:
                     "What is the opposite of 'early'?",
 
-                options:
-                    [
-                        "Fast",
-                        "Late",
-                        "Quick",
-                        "Soon"
-                    ],
+                options: [
+                    "Fast",
+                    "Late",
+                    "Quick",
+                    "Soon"
+                ],
 
                 answer:
                     "Late"
@@ -931,6 +1033,7 @@ function searchMaterials() {
 
         let currentQuiz =
             0;
+
 
         let quizScore =
             0;
@@ -950,7 +1053,9 @@ function searchMaterials() {
         function showQuizQuestion() {
 
             const question =
-                quizQuestions[currentQuiz];
+                quizQuestions[
+                    currentQuiz
+                ];
 
 
             if (!question) {
@@ -964,13 +1069,16 @@ function searchMaterials() {
                 document.getElementById(
                     "quizOptions"
                 ).innerHTML = `
+
                     <h3>
                         Score:
                         ${quizScore}/${quizQuestions.length}
                     </h3>
+
                 `;
 
                 return;
+
             }
 
 
@@ -989,59 +1097,67 @@ function searchMaterials() {
             options.innerHTML = "";
 
 
-            question.options.forEach(option => {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
+            document.getElementById(
+                "quizResult"
+            ).textContent = "";
 
 
-                button.textContent =
-                    option;
+            question.options.forEach(
+                option => {
 
-
-                button.onclick =
-                    function () {
-
-                        if (
-                            option ===
-                            question.answer
-                        ) {
-
-                            quizScore++;
-
-                            document.getElementById(
-                                "quizResult"
-                            ).textContent =
-                                "✅ Correct!";
-
-                        } else {
-
-                            document.getElementById(
-                                "quizResult"
-                            ).textContent =
-                                "❌ Incorrect.";
-
-                        }
-
-
-                        currentQuiz++;
-
-
-                        setTimeout(
-                            showQuizQuestion,
-                            700
+                    const button =
+                        document.createElement(
+                            "button"
                         );
 
-                    };
+
+                    button.textContent =
+                        option;
 
 
-                options.appendChild(
-                    button
-                );
+                    button.onclick =
+                        function () {
 
-            });
+                            if (
+                                option ===
+                                question.answer
+                            ) {
+
+                                quizScore++;
+
+
+                                document.getElementById(
+                                    "quizResult"
+                                ).textContent =
+                                    "✅ Correct!";
+
+                            } else {
+
+                                document.getElementById(
+                                    "quizResult"
+                                ).textContent =
+                                    "❌ Incorrect.";
+
+                            }
+
+
+                            currentQuiz++;
+
+
+                            setTimeout(
+                                showQuizQuestion,
+                                700
+                            );
+
+                        };
+
+
+                    options.appendChild(
+                        button
+                    );
+
+                }
+            );
 
         }
 
@@ -1085,6 +1201,7 @@ function searchMaterials() {
         let currentCard =
             0;
 
+
         let cardFlipped =
             false;
 
@@ -1097,15 +1214,26 @@ function searchMaterials() {
                 );
 
 
+            if (!text) {
+
+                return;
+
+            }
+
+
             if (cardFlipped) {
 
                 text.textContent =
-                    flashcards[currentCard].answer;
+                    flashcards[
+                        currentCard
+                    ].answer;
 
             } else {
 
                 text.textContent =
-                    flashcards[currentCard].question;
+                    flashcards[
+                        currentCard
+                    ].question;
 
             }
 
@@ -1126,6 +1254,7 @@ function searchMaterials() {
 
             currentCard++;
 
+
             if (
                 currentCard >=
                 flashcards.length
@@ -1136,7 +1265,9 @@ function searchMaterials() {
             }
 
 
-            cardFlipped = false;
+            cardFlipped =
+                false;
+
 
             displayFlashcard();
 
@@ -1147,7 +1278,10 @@ function searchMaterials() {
 
             currentCard--;
 
-            if (currentCard < 0) {
+
+            if (
+                currentCard < 0
+            ) {
 
                 currentCard =
                     flashcards.length - 1;
@@ -1155,7 +1289,9 @@ function searchMaterials() {
             }
 
 
-            cardFlipped = false;
+            cardFlipped =
+                false;
+
 
             displayFlashcard();
 
@@ -1164,17 +1300,31 @@ function searchMaterials() {
 
 
         // =================================================
-        // STUDY TIMER
+        // TIMER
         // =================================================
 
         let timerSeconds =
             25 * 60;
+
 
         let timerInterval =
             null;
 
 
         function updateTimerDisplay() {
+
+            const display =
+                document.getElementById(
+                    "timerDisplay"
+                );
+
+
+            if (!display) {
+
+                return;
+
+            }
+
 
             const minutes =
                 Math.floor(
@@ -1186,9 +1336,7 @@ function searchMaterials() {
                 timerSeconds % 60;
 
 
-            document.getElementById(
-                "timerDisplay"
-            ).textContent =
+            display.textContent =
 
                 String(minutes)
                     .padStart(2, "0")
@@ -1204,7 +1352,9 @@ function searchMaterials() {
         function startTimer() {
 
             if (timerInterval) {
+
                 return;
+
             }
 
 
@@ -1220,6 +1370,7 @@ function searchMaterials() {
                                 timerInterval
                             );
 
+
                             timerInterval =
                                 null;
 
@@ -1228,11 +1379,14 @@ function searchMaterials() {
                                 "Study session complete! 🎉"
                             );
 
+
                             return;
+
                         }
 
 
                         timerSeconds--;
+
 
                         updateTimerDisplay();
 
@@ -1249,6 +1403,7 @@ function searchMaterials() {
                 timerInterval
             );
 
+
             timerInterval =
                 null;
 
@@ -1260,6 +1415,7 @@ function searchMaterials() {
             clearInterval(
                 timerInterval
             );
+
 
             timerInterval =
                 null;
@@ -1304,6 +1460,7 @@ function searchMaterials() {
                 );
 
                 return;
+
             }
 
 
@@ -1314,6 +1471,7 @@ function searchMaterials() {
 
 
             display.innerHTML = `
+
                 <div class="saved-goal">
 
                     🎯
@@ -1327,9 +1485,10 @@ function searchMaterials() {
                     </p>
 
                 </div>
+
             `;
 
-
+'[;[
             input.value = "";
 
         }
@@ -1344,7 +1503,9 @@ function searchMaterials() {
 
 
             if (!goal) {
+
                 return;
+
             }
 
 
@@ -1373,7 +1534,7 @@ function searchMaterials() {
 
 
         // =================================================
-        // PAGE STARTUP
+        // STARTUP
         // =================================================
 
         document.addEventListener(
