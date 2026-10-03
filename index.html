@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -195,13 +195,21 @@
             </label>
 
 
-            <input
-                type="file"
-                id="fileInput"
-                multiple
-                accept=".pdf,.doc,.docx,.txt"
-                onchange="handleFiles()"
-            >
+          ```html
+<label for="fileInput" class="upload-button">
+    📁 Choose Files
+</label>
+
+<input
+    type="file"
+    id="fileInput"
+    multiple
+    accept=".pdf,.doc,.docx,.txt"
+    onchange="handleFiles()"
+    style="display: none;"
+>
+```
+
 
 
             <button
