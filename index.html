@@ -601,22 +601,29 @@ async function updateAuthUI() {
 
     const authBox = document.getElementById("authBox");
     const userBox = document.getElementById("userBox");
-
+const uploadArea = document.getElementById("uploadArea");
+const loginRequiredMessage = document.getElementById("loginRequiredMessage");
     if (!authBox || !userBox) return;
 
     if (user) {
 
-        authBox.style.display = "none";
-        userBox.style.display = "block";
+    authBox.style.display = "none";
+    userBox.style.display = "block";
 
-        document.getElementById("userEmail").textContent =
-            user.email || "Unknown user";
+    document.getElementById("userEmail").textContent =
+        user.email || "Unknown user";
 
-    } else {
+    uploadArea.style.display = "block";
+    loginRequiredMessage.style.display = "none";
 
-        authBox.style.display = "block";
-        userBox.style.display = "none";
-    }
+} else {
+
+    authBox.style.display = "block";
+    userBox.style.display = "none";
+
+    uploadArea.style.display = "none";
+    loginRequiredMessage.style.display = "block";
+}
 }
 
 
