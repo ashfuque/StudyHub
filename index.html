@@ -163,7 +163,54 @@
     <!-- ========================= -->
     <!-- MATERIALS -->
     <!-- ========================= -->
+<!-- ========================= -->
+<!-- ACCOUNT -->
+<!-- ========================= -->
 
+<section id="account">
+
+    <h2>🔐 StudyHub Account</h2>
+
+    <div id="authBox">
+
+        <input
+            type="email"
+            id="authEmail"
+            placeholder="Email address"
+        >
+
+        <input
+            type="password"
+            id="authPassword"
+            placeholder="Password"
+        >
+
+        <button onclick="signUp()">
+            Create Account
+        </button>
+
+        <button onclick="signIn()">
+            Log In
+        </button>
+
+        <p id="authMessage"></p>
+
+    </div>
+
+    <div id="userBox" style="display:none;">
+
+        <p>
+            ✅ Logged in as:
+            <strong id="userEmail"></strong>
+        </p>
+
+        <button onclick="signOut()">
+            Log Out
+        </button>
+
+    </div>
+
+</section>
     <section id="materials">
 
         <h2>📚 Study Materials</h2>
