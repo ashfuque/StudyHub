@@ -768,14 +768,19 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
                     );
 
 
-                const fileName =
-                    Date.now() +
-                    "-" +
-                    Math.random()
-                        .toString(36)
-                        .substring(2, 8) +
-                    "-" +
-                    safeName;
+               const { data: { user } } =
+    await supabaseClient.auth.getUser();
+
+if (!user) {
+    alert("Please log in first.");
+    return;
+}
+
+const fileName =
+    user.id + "/" +
+    Date.now() + "-" +
+    Math.random().toString(36).substring(2, 8) + "-" +
+    safeName;
 
 
                 const {
