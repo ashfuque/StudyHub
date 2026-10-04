@@ -43,7 +43,6 @@
     </nav>
 
 
-
     <!-- ========================= -->
     <!-- HOME -->
     <!-- ========================= -->
@@ -52,17 +51,27 @@
 
         <h1>Welcome to StudyHub 📚</h1>
 
-    
         <a href="#subjects">
             <button>Start Studying 🚀</button>
         </a>
-<div class="floating-cards">
-    <div class="study-card card-1">📚 Notes</div>
-    <div class="study-card card-2">🧠 Quiz</div>
-    <div class="study-card card-3">⏱️ Focus</div>
-</div>
-    </section>
 
+        <div class="floating-cards">
+
+            <div class="study-card card-1">
+                📚 Notes
+            </div>
+
+            <div class="study-card card-2">
+                🧠 Quiz
+            </div>
+
+            <div class="study-card card-3">
+                ⏱️ Focus
+            </div>
+
+        </div>
+
+    </section>
 
 
     <!-- ========================= -->
@@ -77,9 +86,7 @@
             Choose a subject and start learning.
         </p>
 
-
         <div class="subject-container">
-
 
             <div class="subject-card">
 
@@ -90,13 +97,11 @@
                     ratios and more.
                 </p>
 
-                <button
-                    onclick="selectSubject('Mathematics')">
+                <button onclick="selectSubject('Mathematics')">
                     Study Math
                 </button>
 
             </div>
-
 
 
             <div class="subject-card">
@@ -108,13 +113,11 @@
                     and general science.
                 </p>
 
-                <button
-                    onclick="selectSubject('Science')">
+                <button onclick="selectSubject('Science')">
                     Study Science
                 </button>
 
             </div>
-
 
 
             <div class="subject-card">
@@ -126,13 +129,11 @@
                     writing and literature.
                 </p>
 
-                <button
-                    onclick="selectSubject('English')">
+                <button onclick="selectSubject('English')">
                     Study English
                 </button>
 
             </div>
-
 
 
             <div class="subject-card">
@@ -144,8 +145,7 @@
                     society, history and geography.
                 </p>
 
-                <button
-                    onclick="selectSubject('BGS')">
+                <button onclick="selectSubject('BGS')">
                     Study BGS
                 </button>
 
@@ -153,64 +153,66 @@
 
         </div>
 
-
         <div id="selectedSubject"></div>
 
     </section>
 
 
+    <!-- ========================= -->
+    <!-- ACCOUNT -->
+    <!-- ========================= -->
+
+    <section id="account">
+
+        <h2>🔐 StudyHub Account</h2>
+
+        <div id="authBox">
+
+            <input
+                type="email"
+                id="authEmail"
+                placeholder="Email address"
+            >
+
+            <input
+                type="password"
+                id="authPassword"
+                placeholder="Password"
+            >
+
+            <button onclick="signUp()">
+                Create Account
+            </button>
+
+            <button onclick="signIn()">
+                Log In
+            </button>
+
+            <p id="authMessage"></p>
+
+        </div>
+
+
+        <div id="userBox" style="display:none;">
+
+            <p>
+                ✅ Logged in as:
+                <strong id="userEmail"></strong>
+            </p>
+
+            <button onclick="signOut()">
+                Log Out
+            </button>
+
+        </div>
+
+    </section>
+
 
     <!-- ========================= -->
     <!-- MATERIALS -->
     <!-- ========================= -->
-<!-- ========================= -->
-<!-- ACCOUNT -->
-<!-- ========================= -->
 
-<section id="account">
-
-    <h2>🔐 StudyHub Account</h2>
-
-    <div id="authBox">
-
-        <input
-            type="email"
-            id="authEmail"
-            placeholder="Email address"
-        >
-
-        <input
-            type="password"
-            id="authPassword"
-            placeholder="Password"
-        >
-
-        <button onclick="signUp()">
-            Create Account
-        </button>
-
-        <button onclick="signIn()">
-            Log In
-        </button>
-
-        <p id="authMessage"></p>
-
-    </div>
-
-    <div id="userBox" style="display:none;">
-
-        <p>
-            ✅ Logged in as:
-            <strong id="userEmail"></strong>
-        </p>
-
-        <button onclick="signOut()">
-            Log Out
-        </button>
-
-    </div>
-
-</section>
     <section id="materials">
 
         <h2>📚 Study Materials</h2>
@@ -221,14 +223,18 @@
         </p>
 
 
-        <!-- ========================= -->
-        <!-- UPLOAD -->
-        <!-- ========================= -->
-<div id="loginRequiredMessage" style="display:none;">
-    🔒 Please log in to upload study materials.
-</div>
-        <div class="upload-box"
-id="uploadArea">
+        <div id="loginRequiredMessage" style="display:none;">
+
+            🔒 Please log in to upload study materials.
+
+        </div>
+
+
+        <div
+            class="upload-box"
+            id="uploadArea"
+        >
+
             <h3>📤 Upload Study Materials</h3>
 
             <p>
@@ -237,32 +243,36 @@ id="uploadArea">
             </p>
 
 
-          
+            <!-- FILE PICKER -->
+
+            <label
+                for="fileInput"
+                class="upload-button"
+            >
+                📁 Choose Files
+            </label>
+
+            <input
+                type="file"
+                id="fileInput"
+                multiple
+                accept=".pdf,.doc,.docx,.txt"
+                onchange="handleFiles()"
+                style="display:none;"
+            >
 
 
-          
-<label for="fileInput" class="upload-button">
-    📁 Choose Files
-</label>
-
-<input
-    type="file"
-    id="fileInput"
-    multiple
-    accept=".pdf,.doc,.docx,.txt"
-    onchange="handleFiles()"
-    style="display: none;"
->
-
-
-
+            <!-- UPLOAD BUTTON -->
 
             <button
                 type="button"
-                onclick="uploadFile()">
+                onclick="uploadFile()"
+            >
                 📤 Upload to StudyHub
             </button>
 
+
+            <!-- SELECTED FILES -->
 
             <div id="fileList">
 
@@ -271,7 +281,6 @@ id="uploadArea">
                 </p>
 
             </div>
-
 
 
             <!-- ========================= -->
@@ -300,7 +309,7 @@ id="uploadArea">
                 <div id="materialsList">
 
                     <p>
-                        Loading materials...
+                        Please log in to view your materials.
                     </p>
 
                 </div>
@@ -310,7 +319,6 @@ id="uploadArea">
         </div>
 
     </section>
-
 
 
     <!-- ========================= -->
@@ -332,12 +340,9 @@ id="uploadArea">
                 Ready for a quiz?
             </h3>
 
-
             <div id="quizOptions"></div>
 
-
             <p id="quizResult"></p>
-
 
             <button onclick="startQuiz()">
                 Start Quiz 🚀
@@ -346,7 +351,6 @@ id="uploadArea">
         </div>
 
     </section>
-
 
 
     <!-- ========================= -->
@@ -367,7 +371,8 @@ id="uploadArea">
             <div
                 id="flashcard"
                 class="flashcard"
-                onclick="flipFlashcard()">
+                onclick="flipFlashcard()"
+            >
 
                 <div id="flashcardText">
                     Click to start
@@ -391,7 +396,6 @@ id="uploadArea">
         </div>
 
     </section>
-
 
 
     <!-- ========================= -->
@@ -435,7 +439,6 @@ id="uploadArea">
     </section>
 
 
-
     <!-- ========================= -->
     <!-- TODAY'S GOAL -->
     <!-- ========================= -->
@@ -457,18 +460,15 @@ id="uploadArea">
                 placeholder="Example: Finish Science Chapter 5"
             >
 
-
             <button onclick="saveGoal()">
                 Save Goal
             </button>
-
 
             <div id="goalDisplay"></div>
 
         </div>
 
     </section>
-
 
 
     <!-- ========================= -->
@@ -491,7 +491,6 @@ id="uploadArea">
     </footer>
 
 
-
     <!-- ================================================= -->
     <!-- JAVASCRIPT -->
     <!-- ================================================= -->
@@ -506,133 +505,281 @@ id="uploadArea">
         const SUPABASE_URL =
             "https://pjytoktykbaokkuhaera.supabase.co";
 
-
         const SUPABASE_KEY =
             "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
-
 
         const supabaseClient =
             supabase.createClient(
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
-// =========================
-// STUDYHUB AUTHENTICATION
-// =========================
-
-async function signUp() {
-
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPassword").value;
-    const message = document.getElementById("authMessage");
-
-    if (!email || !password) {
-        message.textContent = "⚠️ Please enter your email and password.";
-        return;
-    }
-
-    if (password.length < 6) {
-        message.textContent = "⚠️ Password must be at least 6 characters.";
-        return;
-    }
-
-   const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-        emailRedirectTo: "https://ashfuque.github.io/StudyHub/"
-    }
-});
-
-    if (error) {
-        message.textContent = "❌ " + error.message;
-        return;
-    }
-
-    if (data.session) {
-        message.textContent = "✅ Account created! You are now logged in.";
-    } else {
-        message.textContent = "✅ Account created! Check your email to confirm your account.";
-    }
-}
 
 
-async function signIn() {
+        // =================================================
+        // AUTHENTICATION
+        // =================================================
 
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPassword").value;
-    const message = document.getElementById("authMessage");
+        async function signUp() {
 
-    if (!email || !password) {
-        message.textContent = "⚠️ Please enter your email and password.";
-        return;
-    }
+            const email =
+                document
+                    .getElementById("authEmail")
+                    .value
+                    .trim();
 
-    const { error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+            const password =
+                document
+                    .getElementById("authPassword")
+                    .value;
 
-    if (error) {
-        message.textContent = "❌ " + error.message;
-        return;
-    }
-
-    message.textContent = "✅ Login successful!";
-}
+            const message =
+                document.getElementById("authMessage");
 
 
-async function signOut() {
+            if (!email || !password) {
 
-    const { error } = await supabaseClient.auth.signOut();
+                message.textContent =
+                    "⚠️ Please enter your email and password.";
 
-    if (error) {
-        alert("❌ " + error.message);
-        return;
-    }
-
-    document.getElementById("authMessage").textContent = "You have been logged out.";
-}
+                return;
+            }
 
 
-async function updateAuthUI() {
+            if (password.length < 6) {
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
+                message.textContent =
+                    "⚠️ Password must be at least 6 characters.";
 
-    const authBox = document.getElementById("authBox");
-    const userBox = document.getElementById("userBox");
-const uploadArea = document.getElementById("uploadArea");
-const loginRequiredMessage = document.getElementById("loginRequiredMessage");
-    if (!authBox || !userBox) return;
-
-    if (user) {
-
-    authBox.style.display = "none";
-    userBox.style.display = "block";
-
-    document.getElementById("userEmail").textContent =
-        user.email || "Unknown user";
-
-    uploadArea.style.display = "block";
-    loginRequiredMessage.style.display = "none";
-
-} else {
-
-    authBox.style.display = "block";
-    userBox.style.display = "none";
-
-    uploadArea.style.display = "none";
-    loginRequiredMessage.style.display = "block";
-}
-}
+                return;
+            }
 
 
-// Watch for login/logout changes
-supabaseClient.auth.onAuthStateChange((event, session) => {
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.signUp({
 
-    updateAuthUI();
+                    email: email,
 
-});
+                    password: password,
+
+                    options: {
+
+                        emailRedirectTo:
+                            "https://ashfuque.github.io/StudyHub/"
+
+                    }
+
+                });
+
+
+            if (error) {
+
+                message.textContent =
+                    "❌ " + error.message;
+
+                return;
+            }
+
+
+            if (data.session) {
+
+                message.textContent =
+                    "✅ Account created! You are now logged in.";
+
+            } else {
+
+                message.textContent =
+                    "✅ Account created! Check your email to confirm your account.";
+
+            }
+
+        }
+
+
+        async function signIn() {
+
+            const email =
+                document
+                    .getElementById("authEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("authPassword")
+                    .value;
+
+            const message =
+                document.getElementById("authMessage");
+
+
+            if (!email || !password) {
+
+                message.textContent =
+                    "⚠️ Please enter your email and password.";
+
+                return;
+            }
+
+
+            const {
+                error
+            } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            if (error) {
+
+                message.textContent =
+                    "❌ " + error.message;
+
+                return;
+            }
+
+
+            message.textContent =
+                "✅ Login successful!";
+
+        }
+
+
+        async function signOut() {
+
+            const {
+                error
+            } =
+                await supabaseClient.auth.signOut();
+
+
+            if (error) {
+
+                alert(
+                    "❌ " + error.message
+                );
+
+                return;
+            }
+
+
+            document
+                .getElementById("authMessage")
+                .textContent =
+                "You have been logged out.";
+
+        }
+
+
+        // =================================================
+        // AUTH UI
+        // =================================================
+
+        async function updateAuthUI() {
+
+            const {
+                data: { user }
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            const authBox =
+                document.getElementById("authBox");
+
+            const userBox =
+                document.getElementById("userBox");
+
+            const uploadArea =
+                document.getElementById("uploadArea");
+
+            const loginRequiredMessage =
+                document.getElementById(
+                    "loginRequiredMessage"
+                );
+
+
+            if (!authBox || !userBox) {
+
+                return;
+
+            }
+
+
+            if (user) {
+
+                authBox.style.display =
+                    "none";
+
+                userBox.style.display =
+                    "block";
+
+
+                document
+                    .getElementById("userEmail")
+                    .textContent =
+                    user.email || "Unknown user";
+
+
+                uploadArea.style.display =
+                    "block";
+
+                loginRequiredMessage.style.display =
+                    "none";
+
+
+                // Load this user's files
+                await loadMaterials();
+
+
+            } else {
+
+                authBox.style.display =
+                    "block";
+
+                userBox.style.display =
+                    "none";
+
+
+                uploadArea.style.display =
+                    "none";
+
+                loginRequiredMessage.style.display =
+                    "block";
+
+
+                const materialsList =
+                    document.getElementById(
+                        "materialsList"
+                    );
+
+
+                if (materialsList) {
+
+                    materialsList.innerHTML =
+                        "<p>🔒 Please log in to view your materials.</p>";
+
+                }
+
+            }
+
+        }
+
+
+        // Watch login/logout changes
+
+        supabaseClient.auth.onAuthStateChange(
+            (event, session) => {
+
+                updateAuthUI();
+
+            }
+        );
 
 
         // =================================================
@@ -667,7 +814,6 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
         }
 
 
-
         // =================================================
         // FILE SELECTION
         // =================================================
@@ -678,7 +824,6 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
                 document.getElementById(
                     "fileInput"
                 );
-
 
             const fileList =
                 document.getElementById(
@@ -726,7 +871,6 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
         }
 
 
-
         // =================================================
         // UPLOAD FILES
         // =================================================
@@ -757,6 +901,25 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
             }
 
 
+            // Make sure user is logged in
+
+            const {
+                data: { user }
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (!user) {
+
+                alert(
+                    "Please log in first."
+                );
+
+                return;
+
+            }
+
+
             for (
                 const file of files
             ) {
@@ -768,19 +931,19 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
                     );
 
 
-               const { data: { user } } =
-    await supabaseClient.auth.getUser();
+                // Each user's files are stored
+                // inside their own UID folder
 
-if (!user) {
-    alert("Please log in first.");
-    return;
-}
-
-const fileName =
-    user.id + "/" +
-    Date.now() + "-" +
-    Math.random().toString(36).substring(2, 8) + "-" +
-    safeName;
+                const fileName =
+                    user.id +
+                    "/" +
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2, 8) +
+                    "-" +
+                    safeName;
 
 
                 const {
@@ -825,16 +988,19 @@ const fileName =
             fileInput.value = "";
 
 
-            document.getElementById(
-                "fileList"
-            ).innerHTML =
+            document
+                .getElementById(
+                    "fileList"
+                )
+                .innerHTML =
                 "<p>No files selected yet.</p>";
 
+
+            // Refresh library
 
             await loadMaterials();
 
         }
-
 
 
         // =================================================
@@ -856,9 +1022,30 @@ const fileName =
             }
 
 
-            materialsList.innerHTML =
-                "<p>Loading materials...</p>";
+            // Get logged-in user
 
+            const {
+                data: { user },
+                error: userError
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (userError || !user) {
+
+                materialsList.innerHTML =
+                    "<p>🔒 Please log in to view your study materials.</p>";
+
+                return;
+
+            }
+
+
+            materialsList.innerHTML =
+                "<p>Loading your materials...</p>";
+
+
+            // List ONLY the current user's folder
 
             const {
                 data,
@@ -870,7 +1057,7 @@ const fileName =
                         "study-materials"
                     )
                     .list(
-                        "",
+                        user.id,
                         {
                             limit: 100,
 
@@ -899,9 +1086,7 @@ const fileName =
                         </p>
 
                         <p>
-                            ${escapeHTML(
-                                error.message
-                            )}
+                            ${escapeHTML(error.message)}
                         </p>
 
                     </div>
@@ -929,11 +1114,52 @@ const fileName =
             materialsList.innerHTML = "";
 
 
-            data.forEach(file => {
+            // Create each material
+
+            for (
+                const file of data
+            ) {
 
                 if (!file.name) {
 
-                    return;
+                    continue;
+
+                }
+
+
+                const filePath =
+                    user.id +
+                    "/" +
+                    file.name;
+
+
+                // IMPORTANT:
+                // The bucket is private, so use
+                // a signed URL instead of getPublicUrl()
+
+                const {
+                    data: signedData,
+                    error: signedError
+                } =
+                    await supabaseClient
+                        .storage
+                        .from(
+                            "study-materials"
+                        )
+                        .createSignedUrl(
+                            filePath,
+                            60 * 60
+                        );
+
+
+                if (signedError) {
+
+                    console.error(
+                        "Signed URL error:",
+                        signedError
+                    );
+
+                    continue;
 
                 }
 
@@ -948,23 +1174,6 @@ const fileName =
                     "material-item";
 
 
-                const fileName =
-                    file.name;
-
-
-                const publicUrl =
-                    supabaseClient
-                        .storage
-                        .from(
-                            "study-materials"
-                        )
-                        .getPublicUrl(
-                            fileName
-                        )
-                        .data
-                        .publicUrl;
-
-
                 fileDiv.innerHTML = `
 
                     <div class="material-name">
@@ -972,16 +1181,14 @@ const fileName =
                         📄
 
                         <span>
-                            ${escapeHTML(
-                                fileName
-                            )}
+                            ${escapeHTML(file.name)}
                         </span>
 
                     </div>
 
 
                     <a
-                        href="${publicUrl}"
+                        href="${signedData.signedUrl}"
                         target="_blank"
                         rel="noopener noreferrer">
 
@@ -996,15 +1203,14 @@ const fileName =
                     fileDiv
                 );
 
-            });
+            }
 
 
-            // Re-apply search after loading
+            // Re-apply search
 
             searchMaterials();
 
         }
-
 
 
         // =================================================
@@ -1126,7 +1332,6 @@ const fileName =
         }
 
 
-
         // =================================================
         // ESCAPE HTML
         // =================================================
@@ -1146,7 +1351,6 @@ const fileName =
             return div.innerHTML;
 
         }
-
 
 
         // =================================================
@@ -1208,16 +1412,17 @@ const fileName =
         let currentQuiz =
             0;
 
-
         let quizScore =
             0;
 
 
         function startQuiz() {
 
-            currentQuiz = 0;
+            currentQuiz =
+                0;
 
-            quizScore = 0;
+            quizScore =
+                0;
 
             showQuizQuestion();
 
@@ -1234,31 +1439,37 @@ const fileName =
 
             if (!question) {
 
-                document.getElementById(
-                    "quizQuestion"
-                ).textContent =
+                document
+                    .getElementById(
+                        "quizQuestion"
+                    )
+                    .textContent =
                     "Quiz finished! 🎉";
 
 
-                document.getElementById(
-                    "quizOptions"
-                ).innerHTML = `
+                document
+                    .getElementById(
+                        "quizOptions"
+                    )
+                    .innerHTML = `
 
-                    <h3>
-                        Score:
-                        ${quizScore}/${quizQuestions.length}
-                    </h3>
+                        <h3>
+                            Score:
+                            ${quizScore}/${quizQuestions.length}
+                        </h3>
 
-                `;
+                    `;
 
                 return;
 
             }
 
 
-            document.getElementById(
-                "quizQuestion"
-            ).textContent =
+            document
+                .getElementById(
+                    "quizQuestion"
+                )
+                .textContent =
                 question.question;
 
 
@@ -1271,9 +1482,11 @@ const fileName =
             options.innerHTML = "";
 
 
-            document.getElementById(
-                "quizResult"
-            ).textContent = "";
+            document
+                .getElementById(
+                    "quizResult"
+                )
+                .textContent = "";
 
 
             question.options.forEach(
@@ -1300,16 +1513,20 @@ const fileName =
                                 quizScore++;
 
 
-                                document.getElementById(
-                                    "quizResult"
-                                ).textContent =
+                                document
+                                    .getElementById(
+                                        "quizResult"
+                                    )
+                                    .textContent =
                                     "✅ Correct!";
 
                             } else {
 
-                                document.getElementById(
-                                    "quizResult"
-                                ).textContent =
+                                document
+                                    .getElementById(
+                                        "quizResult"
+                                    )
+                                    .textContent =
                                     "❌ Incorrect.";
 
                             }
@@ -1334,7 +1551,6 @@ const fileName =
             );
 
         }
-
 
 
         // =================================================
@@ -1374,7 +1590,6 @@ const fileName =
 
         let currentCard =
             0;
-
 
         let cardFlipped =
             false;
@@ -1434,7 +1649,8 @@ const fileName =
                 flashcards.length
             ) {
 
-                currentCard = 0;
+                currentCard =
+                    0;
 
             }
 
@@ -1472,14 +1688,12 @@ const fileName =
         }
 
 
-
         // =================================================
         // TIMER
         // =================================================
 
         let timerSeconds =
             25 * 60;
-
 
         let timerInterval =
             null;
@@ -1561,7 +1775,6 @@ const fileName =
 
                         timerSeconds--;
 
-
                         updateTimerDisplay();
 
                     },
@@ -1602,7 +1815,6 @@ const fileName =
             updateTimerDisplay();
 
         }
-
 
 
         // =================================================
@@ -1662,6 +1874,7 @@ const fileName =
 
             `;
 
+
             input.value = "";
 
         }
@@ -1682,28 +1895,29 @@ const fileName =
             }
 
 
-            document.getElementById(
-                "goalDisplay"
-            ).innerHTML = `
+            document
+                .getElementById(
+                    "goalDisplay"
+                )
+                .innerHTML = `
 
-                <div class="saved-goal">
+                    <div class="saved-goal">
 
-                    🎯
+                        🎯
 
-                    <strong>
-                        Today's Goal
-                    </strong>
+                        <strong>
+                            Today's Goal
+                        </strong>
 
-                    <p>
-                        ${escapeHTML(goal)}
-                    </p>
+                        <p>
+                            ${escapeHTML(goal)}
+                        </p>
 
-                </div>
+                    </div>
 
-            `;
+                `;
 
         }
-
 
 
         // =================================================
@@ -1712,15 +1926,19 @@ const fileName =
 
         document.addEventListener(
             "DOMContentLoaded",
-            function () {
-
-                loadMaterials();
+            async function () {
 
                 loadGoal();
 
                 displayFlashcard();
 
                 updateTimerDisplay();
+
+                // Update authentication UI.
+                // This also loads the user's materials
+                // if they are already logged in.
+
+                await updateAuthUI();
 
             }
         );
@@ -1730,4 +1948,4 @@ const fileName =
 </body>
 
 </html>
-```
+
