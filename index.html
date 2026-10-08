@@ -1732,143 +1732,217 @@
         // =========================================================
         // AI QUIZ GENERATION
         // =========================================================
+async function generateQuizFromPDF() {
 
-        async function generateQuizFromPDF() {
+    if (!currentUser) {
 
-            if (!currentUser) {
+        alert("Please log in first.");
 
-                alert("Please log in first.");
+        return;
+    }
 
-                return;
+    if (!extractedPDFText) {
+
+        alert(
+            "Please select a PDF and extract its text first."
+        );
+
+        return;
+    }
+
+    if (extractedPDFText.length < 100) {
+
+        alert(
+            "Not enough text was extracted from this PDF."
+        );
+
+        return;
+    }
+
+    const button =
+        document.getElementById(
+            "generateQuizButton"
+        );
+
+    const container =
+        document.getElementById(
+            "generatedQuizContainer"
+        );
+
+    button.disabled = true;
+
+    button.textContent =
+        "🧠 Generating...";
+
+    container.innerHTML = `
+        <div class="ai-info">
+            🧠 AI is reading your material and creating
+            20 original MCQs. Please wait...
+        </div>
+    `;
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.functions.invoke(
+            "generate-quiz",
+            {
+                body: {
+                    text: extractedPDFText,
+                    difficulty: "Mixed"
+                }
             }
+        );
 
-            if (!extractedPDFText) {
 
-                alert(
-                    "Please select a PDF and extract its text first."
-                );
+        // =============================================
+        // READ THE REAL EDGE FUNCTION ERROR
+        // =============================================
 
-                return;
-            }
+        if (error) {
 
-            if (extractedPDFText.length < 100) {
+            console.error(
+                "Supabase Function Error:",
+                error
+            );
 
-                alert(
-                    "Not enough text was extracted from this PDF."
-                );
-
-                return;
-            }
-
-            const button =
-                document.getElementById(
-                    "generateQuizButton"
-                );
-
-            button.disabled = true;
-
-            button.textContent =
-                "🧠 Generating...";
-
-            const container =
-                document.getElementById(
-                    "generatedQuizContainer"
-                );
-
-            container.innerHTML = `
-                <div class="ai-info">
-                    🧠 AI is reading your material and creating
-                    20 original MCQs. Please wait...
-                </div>
-            `;
+            let realError =
+                error.message ||
+                "Unknown Edge Function error.";
 
             try {
 
-                const {
-                    data,
-                    error
-                } = await supabaseClient.functions.invoke(
-                    "generate-quiz",
-                    {
-                        body: {
-                            text: extractedPDFText,
-                            difficulty: "Mixed"
-                        }
+                if (error.context) {
+
+                    const errorBody =
+                        await error.context.json();
+
+                    console.error(
+                        "Edge Function Response:",
+                        errorBody
+                    );
+
+                    if (errorBody.error) {
+
+                        realError =
+                            errorBody.error;
+
+                    } else if (errorBody.message) {
+
+                        realError =
+                            errorBody.message;
                     }
+                }
+
+            } catch (readError) {
+
+                console.error(
+                    "Could not read Edge Function error:",
+                    readError
                 );
-
-                if (error) {
-
-                    console.error(error);
-
-                    throw new Error(
-                        error.message ||
-                        "AI function failed."
-                    );
-                }
-
-                if (
-                    !data ||
-                    !data.success ||
-                    !Array.isArray(data.questions)
-                ) {
-
-                    throw new Error(
-                        "The AI returned an invalid quiz."
-                    );
-                }
-
-                if (data.questions.length !== 20) {
-
-                    throw new Error(
-                        "AI returned " +
-                        data.questions.length +
-                        " questions instead of 20."
-                    );
-                }
-
-                generatedQuiz =
-                    data.questions;
-
-                displayGeneratedQuiz();
-
-                document
-                    .getElementById("quiz")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            } catch (error) {
-
-                console.error(error);
-
-                container.innerHTML = `
-                    <div
-                        class="ai-info"
-                        style="
-                            background:#fef2f2;
-                            border-color:#fecaca;
-                            color:#991b1b;
-                        "
-                    >
-                        <strong>
-                            ❌ Quiz generation failed
-                        </strong>
-
-                        <p>
-                            ${escapeHTML(error.message)}
-                        </p>
-                    </div>
-                `;
-
-            } finally {
-
-                button.disabled = false;
-
-                button.textContent =
-                    "🧠 Generate 20 MCQs with AI";
             }
+
+            throw new Error(realError);
         }
+
+
+        // =============================================
+        // CHECK AI RESPONSE
+        // =============================================
+
+        console.log(
+            "AI Quiz Response:",
+            data
+        );
+
+        if (
+            !data ||
+            !data.success ||
+            !Array.isArray(data.questions)
+        ) {
+
+            throw new Error(
+                data?.error ||
+                "The AI returned an invalid quiz."
+            );
+        }
+
+
+        if (data.questions.length !== 20) {
+
+            throw new Error(
+                "AI returned " +
+                data.questions.length +
+                " questions instead of 20."
+            );
+        }
+
+
+        // =============================================
+        // SAVE QUIZ
+        // =============================================
+
+        generatedQuiz =
+            data.questions;
+
+
+        // =============================================
+        // DISPLAY QUIZ
+        // =============================================
+
+        displayGeneratedQuiz();
+
+
+        document
+            .getElementById("quiz")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+    } catch (error) {
+
+        console.error(
+            "FINAL QUIZ ERROR:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div
+                class="ai-info"
+                style="
+                    background:#fef2f2;
+                    border-color:#fecaca;
+                    color:#991b1b;
+                "
+            >
+
+                <strong>
+                    ❌ Quiz generation failed
+                </strong>
+
+                <p style="margin-top:10px;">
+                    ${escapeHTML(
+                        error.message ||
+                        "Unknown error"
+                    )}
+                </p>
+
+            </div>
+        `;
+
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🧠 Generate 20 MCQs with AI";
+    }
+}
 
 
         // =========================================================
