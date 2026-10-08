@@ -1,6 +1,5 @@
-```css
 /* =========================================================
-   STUDYHUB — MODERN UI
+   EDUSPHERE — MODERN UI
    ========================================================= */
 
 * {
@@ -33,45 +32,73 @@ nav {
     align-items: center;
     justify-content: space-between;
 
-    padding: 16px 7%;
+    padding: 12px 7%;
 
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-nav h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: #4f46e5;
-}
+/* EDUSPHERE LOGO */
 
-nav div {
+nav .logo {
+    margin: 0;
+    padding: 0;
+
     display: flex;
     align-items: center;
+
+    flex-shrink: 0;
+}
+
+nav .logo img {
+    display: block;
+
+    width: 125px;
+    height: 42px;
+
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* NAVIGATION LINKS */
+
+nav .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
     gap: 8px;
 }
 
 nav a {
     text-decoration: none;
+
     color: #4b5563;
 
     padding: 9px 13px;
+
     border-radius: 10px;
 
     font-size: 0.92rem;
     font-weight: 600;
 
-    transition: all 0.25s ease;
+    white-space: nowrap;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
 nav a:hover {
     color: #4f46e5;
     background: #eef2ff;
+
     transform: translateY(-1px);
 }
 
@@ -81,13 +108,17 @@ nav a:hover {
 
 section {
     padding: 80px 7%;
+
     max-width: 1250px;
+
     margin: auto;
 }
 
 section h2 {
     font-size: 2rem;
+
     margin-bottom: 12px;
+
     color: #111827;
 }
 
@@ -101,13 +132,16 @@ section h3 {
 
 #home {
     position: relative;
+
     overflow: hidden;
 
     max-width: none;
+
     min-height: 75vh;
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
@@ -136,8 +170,11 @@ section h3 {
 
 #home h1 {
     font-size: clamp(2.7rem, 7vw, 5rem);
+
     line-height: 1.05;
+
     font-weight: 900;
+
     letter-spacing: -2px;
 
     color: #111827;
@@ -147,9 +184,11 @@ section h3 {
 
 #home p {
     max-width: 650px;
+
     margin: 0 auto 30px;
 
     font-size: 1.15rem;
+
     color: #6b7280;
 }
 
@@ -160,34 +199,41 @@ section h3 {
 button,
 .upload-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
     width: auto;
+
     min-width: 120px;
 
     margin: 5px;
 
     border: none;
+
     border-radius: 12px;
 
     padding: 12px 20px;
 
     font-family: inherit;
+
     font-size: 0.95rem;
+
     font-weight: 700;
 
     cursor: pointer;
 
-    background: linear-gradient(
-        135deg,
-        #4f46e5,
-        #6366f1
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #6366f1
+        );
 
     color: white;
 
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+    box-shadow:
+        0 8px 20px rgba(79, 70, 229, 0.2);
 
     transition: all 0.25s ease;
 }
@@ -195,7 +241,9 @@ button,
 button:hover,
 .upload-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.28);
+
+    box-shadow:
+        0 12px 25px rgba(79, 70, 229, 0.28);
 }
 
 button:active,
@@ -216,7 +264,9 @@ button + button,
     position: relative;
 
     width: 100%;
+
     max-width: 650px;
+
     height: 130px;
 
     margin: 45px auto 0;
@@ -227,42 +277,51 @@ button + button,
 
     padding: 14px 22px;
 
-    background: rgba(255, 255, 255, 0.85);
+    background:
+        rgba(255, 255, 255, 0.85);
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(99, 102, 241, 0.15);
+    border:
+        1px solid rgba(99, 102, 241, 0.15);
+
     border-radius: 14px;
 
     box-shadow:
         0 12px 30px rgba(15, 23, 42, 0.1);
 
     font-weight: 700;
+
     color: #374151;
 
-    animation: floatCard 4s ease-in-out infinite;
+    animation:
+        floatCard 4s ease-in-out infinite;
 }
 
 .card-1 {
     left: 5%;
     top: 20px;
+
     animation-delay: 0s;
 }
 
 .card-2 {
     left: 42%;
     top: 0;
+
     animation-delay: 1s;
 }
 
 .card-3 {
     right: 5%;
     top: 25px;
+
     animation-delay: 2s;
 }
 
 @keyframes floatCard {
+
     0%,
     100% {
         transform: translateY(0);
@@ -288,7 +347,10 @@ button + button,
 .subjects-container,
 .subject-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
     gap: 22px;
 
     margin-top: 35px;
@@ -301,7 +363,9 @@ button + button,
 
     background: #ffffff;
 
-    border: 1px solid #e5e7eb;
+    border:
+        1px solid #e5e7eb;
+
     border-radius: 18px;
 
     box-shadow:
@@ -316,6 +380,7 @@ button + button,
     content: "";
 
     position: absolute;
+
     top: 0;
     left: 0;
 
@@ -341,12 +406,75 @@ button + button,
 
 .subject-card h3 {
     margin-bottom: 8px;
+
     font-size: 1.2rem;
 }
 
 .subject-card p {
     color: #6b7280;
+
     font-size: 0.92rem;
+}
+
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
+
+#account {
+    background: #ffffff;
+
+    text-align: center;
+}
+
+#authBox,
+#userBox {
+    max-width: 600px;
+
+    margin: 30px auto 0;
+
+    padding: 28px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+#authBox input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin: 8px 0;
+
+    border:
+        1px solid #dbe0e8;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+
+    outline: none;
+}
+
+#authBox input:focus {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+#authMessage {
+    margin-top: 12px;
+
+    font-weight: 600;
 }
 
 /* =========================================================
@@ -371,13 +499,15 @@ button + button,
     margin-right: auto;
 }
 
-.materials-upload {
+.upload-box {
     background: white;
 
     padding: 28px;
 
     border-radius: 20px;
-    border: 1px solid #e5e7eb;
+
+    border:
+        1px solid #e5e7eb;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.07);
@@ -385,7 +515,7 @@ button + button,
     margin-top: 25px;
 }
 
-.materials-upload h3 {
+.upload-box h3 {
     margin-bottom: 15px;
 }
 
@@ -396,7 +526,9 @@ button + button,
 
     background: #f8fafc;
 
-    border: 1px dashed #cbd5e1;
+    border:
+        1px dashed #cbd5e1;
+
     border-radius: 12px;
 
     color: #64748b;
@@ -410,7 +542,9 @@ button + button,
     padding: 28px;
 
     border-radius: 20px;
-    border: 1px solid #e5e7eb;
+
+    border:
+        1px solid #e5e7eb;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.06);
@@ -418,6 +552,7 @@ button + button,
 
 .materials-library h3 {
     font-size: 1.35rem;
+
     margin-bottom: 18px;
 }
 
@@ -432,12 +567,15 @@ button + button,
 
     margin-bottom: 20px;
 
-    border: 1px solid #dbe0e8;
+    border:
+        1px solid #dbe0e8;
+
     border-radius: 12px;
 
     background: #f8fafc;
 
     font-family: inherit;
+
     font-size: 0.95rem;
 
     outline: none;
@@ -456,17 +594,22 @@ button + button,
 
 .material-item {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 15px;
 
     padding: 16px 18px;
+
     margin-bottom: 12px;
 
     background: #f8fafc;
 
-    border: 1px solid #e5e7eb;
+    border:
+        1px solid #e5e7eb;
+
     border-radius: 14px;
 
     transition: all 0.25s ease;
@@ -482,7 +625,9 @@ button + button,
 
 .material-item a {
     text-decoration: none;
+
     color: #4f46e5;
+
     font-weight: 700;
 }
 
@@ -508,7 +653,9 @@ button + button,
 
     background: #f8fafc;
 
-    border: 1px solid #e5e7eb;
+    border:
+        1px solid #e5e7eb;
+
     border-radius: 20px;
 
     box-shadow:
@@ -531,6 +678,7 @@ button + button,
 .flashcard,
 .flashcard-container {
     max-width: 650px;
+
     min-height: 220px;
 
     margin: 30px auto;
@@ -538,7 +686,9 @@ button + button,
     padding: 35px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -550,16 +700,20 @@ button + button,
             #eef2ff
         );
 
-    border: 1px solid #dbe3ff;
+    border:
+        1px solid #dbe3ff;
+
     border-radius: 22px;
 
     box-shadow:
         0 15px 40px rgba(79, 70, 229, 0.1);
 
     font-size: 1.25rem;
+
     font-weight: 700;
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.3s ease;
 }
 
 .flashcard:hover {
@@ -572,6 +726,7 @@ button + button,
 
 #timer {
     background: white;
+
     text-align: center;
 }
 
@@ -592,14 +747,16 @@ button + button,
 
     border-radius: 24px;
 
-    border: 1px solid #ddd6fe;
+    border:
+        1px solid #ddd6fe;
 
     box-shadow:
         0 15px 40px rgba(79, 70, 229, 0.1);
 }
 
 #timerDisplay {
-    font-size: clamp(3rem, 10vw, 5rem);
+    font-size:
+        clamp(3rem, 10vw, 5rem);
 
     font-weight: 900;
 
@@ -630,7 +787,8 @@ button + button,
 
     border-radius: 20px;
 
-    border: 1px solid #e5e7eb;
+    border:
+        1px solid #e5e7eb;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.06);
@@ -644,10 +802,13 @@ button + button,
 
     margin: 10px 0;
 
-    border: 1px solid #dbe0e8;
+    border:
+        1px solid #dbe0e8;
+
     border-radius: 11px;
 
     font-family: inherit;
+
     font-size: 0.95rem;
 
     outline: none;
@@ -692,8 +853,15 @@ footer {
     font-size: 0.9rem;
 }
 
+footer h3 {
+    color: white;
+
+    margin-bottom: 8px;
+}
+
 footer a {
     color: #c7d2fe;
+
     text-decoration: none;
 }
 
@@ -715,6 +883,7 @@ footer a:hover {
 
 ::-webkit-scrollbar-thumb {
     background: #c7d2fe;
+
     border-radius: 20px;
 }
 
@@ -727,6 +896,7 @@ footer a:hover {
    ========================================================= */
 
 @keyframes fadeUp {
+
     from {
         opacity: 0;
         transform: translateY(15px);
@@ -739,7 +909,8 @@ footer a:hover {
 }
 
 section {
-    animation: fadeUp 0.6s ease both;
+    animation:
+        fadeUp 0.6s ease both;
 }
 
 /* =========================================================
@@ -749,21 +920,27 @@ section {
 @media (max-width: 900px) {
 
     nav {
-        padding: 14px 5%;
+        padding: 12px 5%;
     }
 
-    nav h2 {
-        font-size: 1.25rem;
+    nav .logo img {
+        width: 110px;
+        height: 38px;
     }
 
-    nav div {
+    nav .nav-links {
         gap: 3px;
+
         overflow-x: auto;
+
+        max-width: 75%;
     }
 
     nav a {
         padding: 8px 9px;
+
         font-size: 0.8rem;
+
         white-space: nowrap;
     }
 
@@ -773,7 +950,8 @@ section {
 
     .subjects-container,
     .subject-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 }
 
@@ -785,23 +963,44 @@ section {
 
     nav {
         flex-direction: column;
-        gap: 12px;
+
+        gap: 10px;
+
+        padding: 12px 5%;
     }
 
-    nav div {
+    nav .logo img {
+        width: 125px;
+        height: 40px;
+    }
+
+    nav .nav-links {
         width: 100%;
+
+        max-width: none;
+
         justify-content: flex-start;
+
+        overflow-x: auto;
 
         padding-bottom: 2px;
     }
 
+    nav a {
+        padding: 8px 10px;
+
+        font-size: 0.8rem;
+    }
+
     #home {
         min-height: 70vh;
+
         padding: 80px 5%;
     }
 
     #home h1 {
         font-size: 2.8rem;
+
         letter-spacing: -1.5px;
     }
 
@@ -818,7 +1017,7 @@ section {
         grid-template-columns: 1fr;
     }
 
-    .materials-upload,
+    .upload-box,
     .materials-library,
     .quiz-container,
     .quiz-box,
@@ -831,12 +1030,14 @@ section {
 
     .material-item {
         flex-direction: column;
+
         align-items: flex-start;
     }
 
     .flashcard,
     .flashcard-container {
         min-height: 190px;
+
         padding: 25px;
 
         font-size: 1.05rem;
@@ -851,6 +1052,7 @@ section {
     button,
     .upload-button {
         min-width: 110px;
+
         padding: 11px 16px;
     }
 
@@ -858,49 +1060,33 @@ section {
 
     .floating-cards {
         height: 170px;
+
         margin-top: 40px;
     }
 
     .study-card {
         padding: 11px 15px;
+
         font-size: 0.85rem;
     }
 
     .card-1 {
         left: 0;
+
         top: 35px;
     }
 
     .card-2 {
         left: 50%;
+
         margin-left: -45px;
+
         top: 0;
     }
 
     .card-3 {
         right: 0;
+
         top: 70px;
-    }
-}
-/* =========================
-   EDUSPHERE LOGO
-   ========================= */
-
-.logo {
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 60px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-}
-
-@media (max-width: 600px) {
-    .logo img {
-        height: 48px;
     }
 }
