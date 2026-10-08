@@ -370,7 +370,7 @@
 
 
         <!-- ================================================= -->
-        <!-- PDF AI STUDY GENERATOR - STEP 1 -->
+        <!-- AI STUDY GENERATOR -->
         <!-- ================================================= -->
 
         <div class="pdf-extractor">
@@ -381,9 +381,9 @@
 
 
             <p>
-                Select a PDF and extract its text.
-                This text will later be used to
-                automatically generate quizzes and flashcards.
+                Upload a PDF, extract its text,
+                and let AI create a 20-question quiz
+                from the material.
             </p>
 
 
@@ -394,6 +394,17 @@
             >
 
                 📖 Extract PDF Text
+
+            </button>
+
+
+            <button
+                type="button"
+                id="generateQuizButton"
+                onclick="generateQuizFromPDF()"
+            >
+
+                🧠 Generate 20 MCQs with AI
 
             </button>
 
@@ -464,37 +475,37 @@
 
 
 <!-- ================================================= -->
-<!-- QUIZ -->
+<!-- AI QUIZ -->
 <!-- ================================================= -->
 
 <section id="quiz">
 
     <h2>
-        🧠 Quiz
+        🧠 AI Quiz
     </h2>
 
 
     <p>
-        Test your knowledge.
+        Generate a quiz from any uploaded PDF.
     </p>
 
 
-    <div class="quiz-box">
+    <div
+        id="generatedQuizContainer"
+        class="quiz-box"
+    >
 
-        <h3 id="quizQuestion">
-            Ready for a quiz?
+        <h3>
+            📚 Your AI quiz will appear here
         </h3>
 
-
-        <div id="quizOptions"></div>
-
-
-        <p id="quizResult"></p>
-
-
-        <button onclick="startQuiz()">
-            Start Quiz 🚀
-        </button>
+        <p>
+            Upload a PDF from the Materials section,
+            extract its text, and click
+            <strong>
+                Generate 20 MCQs with AI
+            </strong>.
+        </p>
 
     </div>
 
@@ -1103,15 +1114,11 @@ async function extractSelectedPDF() {
         );
 
 
-    const button =
+    const extractButton =
         document.getElementById(
             "extractPDFButton"
         );
 
-
-    // -------------------------------------------------
-    // Check selected files
-    // -------------------------------------------------
 
     if (
         !fileInput.files ||
@@ -1126,8 +1133,6 @@ async function extractSelectedPDF() {
 
     }
 
-
-    // Find PDF
 
     const pdfFile =
         Array.from(
@@ -1152,10 +1157,6 @@ async function extractSelectedPDF() {
     }
 
 
-    // -------------------------------------------------
-    // File size limit
-    // -------------------------------------------------
-
     const maxSize =
         25 * 1024 * 1024;
 
@@ -1170,10 +1171,6 @@ async function extractSelectedPDF() {
 
     }
 
-
-    // -------------------------------------------------
-    // Reset UI
-    // -------------------------------------------------
 
     status.style.display =
         "block";
@@ -1191,19 +1188,15 @@ async function extractSelectedPDF() {
         "";
 
 
-    button.disabled =
+    extractButton.disabled =
         true;
 
 
-    button.textContent =
+    extractButton.textContent =
         "⏳ Extracting...";
 
 
     try {
-
-        // -------------------------------------------------
-        // Read PDF file
-        // -------------------------------------------------
 
         const arrayBuffer =
             await pdfFile.arrayBuffer();
@@ -1220,10 +1213,6 @@ async function extractSelectedPDF() {
         let extractedText =
             "";
 
-
-        // -------------------------------------------------
-        // Read every page
-        // -------------------------------------------------
 
         for (
             let pageNumber = 1;
@@ -1260,10 +1249,6 @@ async function extractSelectedPDF() {
         }
 
 
-        // -------------------------------------------------
-        // Clean extracted text
-        // -------------------------------------------------
-
         extractedText =
             extractedText
                 .replace(
@@ -1277,10 +1262,6 @@ async function extractSelectedPDF() {
                 .trim();
 
 
-        // -------------------------------------------------
-        // No text found
-        // -------------------------------------------------
-
         if (!extractedText) {
 
             throw new Error(
@@ -1289,10 +1270,6 @@ async function extractSelectedPDF() {
 
         }
 
-
-        // -------------------------------------------------
-        // Word count
-        // -------------------------------------------------
 
         const wordCount =
             extractedText
@@ -1308,17 +1285,9 @@ async function extractSelectedPDF() {
             extractedText.length;
 
 
-        // -------------------------------------------------
-        // Display extracted text
-        // -------------------------------------------------
-
         textArea.value =
             extractedText;
 
-
-        // -------------------------------------------------
-        // Display PDF information
-        // -------------------------------------------------
 
         info.style.display =
             "block";
@@ -1356,29 +1325,6 @@ async function extractSelectedPDF() {
             "✅ PDF text extracted successfully!";
 
 
-        console.log(
-            "PDF extraction successful."
-        );
-
-
-        console.log(
-            "Pages:",
-            pdf.numPages
-        );
-
-
-        console.log(
-            "Words:",
-            wordCount
-        );
-
-
-        console.log(
-            "Characters:",
-            characterCount
-        );
-
-
     } catch (error) {
 
         console.error(
@@ -1399,14 +1345,671 @@ async function extractSelectedPDF() {
 
     } finally {
 
-        button.disabled =
+        extractButton.disabled =
             false;
 
 
-        button.textContent =
+        extractButton.textContent =
             "📖 Extract PDF Text";
 
     }
+
+}
+
+
+// =====================================================
+// AI QUIZ GENERATOR
+// =====================================================
+
+async function generateQuizFromPDF() {
+
+    const status =
+        document.getElementById(
+            "pdfExtractionStatus"
+        );
+
+
+    const extractedTextBox =
+        document.getElementById(
+            "pdfExtractedText"
+        );
+
+
+    const generateButton =
+        document.getElementById(
+            "generateQuizButton"
+        );
+
+
+    if (
+        !extractedTextBox ||
+        !extractedTextBox.value.trim()
+    ) {
+
+        alert(
+            "Please extract the PDF text first."
+        );
+
+        return;
+
+    }
+
+
+    const text =
+        extractedTextBox.value.trim();
+
+
+    if (text.length < 100) {
+
+        alert(
+            "There is not enough text to generate a quiz."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        generateButton.disabled =
+            true;
+
+
+        generateButton.textContent =
+            "⏳ AI is generating...";
+
+
+        status.style.display =
+            "block";
+
+
+        status.textContent =
+            "🧠 Gemini is creating 20 original MCQs from your PDF...";
+
+
+        // ---------------------------------------------
+        // Check login
+        // ---------------------------------------------
+
+        const {
+            data: {
+                session
+            }
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (!session) {
+
+            throw new Error(
+                "Please log in before generating a quiz."
+            );
+
+        }
+
+
+        // ---------------------------------------------
+        // Call Supabase Edge Function
+        // ---------------------------------------------
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.functions.invoke(
+                "generate-quiz",
+                {
+
+                    body: {
+
+                        text: text,
+
+                        difficulty: "Mixed"
+
+                    }
+
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Edge Function error:",
+                error
+            );
+
+            throw new Error(
+                error.message ||
+                "The AI quiz generator failed."
+            );
+
+        }
+
+
+        if (
+            !data ||
+            !Array.isArray(
+                data.questions
+            )
+        ) {
+
+            console.error(
+                "Invalid AI response:",
+                data
+            );
+
+            throw new Error(
+                "The AI returned an invalid quiz."
+            );
+
+        }
+
+
+        if (
+            data.questions.length !== 20
+        ) {
+
+            throw new Error(
+                `AI returned ${data.questions.length} questions instead of 20.`
+            );
+
+        }
+
+
+        // ---------------------------------------------
+        // Validate questions
+        // ---------------------------------------------
+
+        data.questions.forEach(
+            (question, index) => {
+
+                if (
+                    !question.question ||
+                    !Array.isArray(
+                        question.options
+                    ) ||
+                    question.options.length !== 4
+                ) {
+
+                    throw new Error(
+                        `Question ${index + 1} has invalid data.`
+                    );
+
+                }
+
+            }
+        );
+
+
+        // ---------------------------------------------
+        // Save globally
+        // ---------------------------------------------
+
+        window.generatedQuiz =
+            data.questions;
+
+
+        status.textContent =
+            "✅ 20 MCQs generated successfully!";
+
+
+        // ---------------------------------------------
+        // Display quiz
+        // ---------------------------------------------
+
+        displayGeneratedQuiz(
+            window.generatedQuiz
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "AI quiz error:",
+            error
+        );
+
+
+        status.textContent =
+            "❌ Quiz generation failed.";
+
+
+        alert(
+            "Quiz generation failed:\n\n" +
+            error.message
+        );
+
+
+    } finally {
+
+        generateButton.disabled =
+            false;
+
+
+        generateButton.textContent =
+            "🧠 Generate 20 MCQs with AI";
+
+    }
+
+}
+
+
+// =====================================================
+// DISPLAY AI QUIZ
+// =====================================================
+
+function displayGeneratedQuiz(
+    questions
+) {
+
+    const quizContainer =
+        document.getElementById(
+            "generatedQuizContainer"
+        );
+
+
+    if (!quizContainer) {
+
+        return;
+
+    }
+
+
+    quizContainer.innerHTML = `
+
+        <div class="ai-quiz-header">
+
+            <h3>
+                🧠 AI Generated Quiz
+            </h3>
+
+            <p>
+                20 questions generated from
+                your uploaded study material.
+            </p>
+
+        </div>
+
+
+        <div
+            id="generatedQuizQuestions"
+            class="generated-quiz-questions"
+        ></div>
+
+
+        <button
+            type="button"
+            onclick="submitGeneratedQuiz()"
+        >
+
+            ✅ Submit Quiz
+
+        </button>
+
+
+        <div
+            id="generatedQuizResult"
+        ></div>
+
+    `;
+
+
+    const questionsContainer =
+        document.getElementById(
+            "generatedQuizQuestions"
+        );
+
+
+    questions.forEach(
+        (question, index) => {
+
+            const questionBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            questionBox.className =
+                "generated-question";
+
+
+            questionBox.innerHTML = `
+
+                <h4>
+
+                    ${index + 1}.
+                    ${escapeHTML(
+                        question.question
+                    )}
+
+                </h4>
+
+                <div
+                    class="generated-options"
+                >
+
+                    ${question.options
+                        .map(
+                            (
+                                option,
+                                optionIndex
+                            ) => `
+
+                                <label>
+
+                                    <input
+                                        type="radio"
+                                        name="generated-question-${index}"
+                                        value="${optionIndex}"
+                                    >
+
+                                    <span>
+                                        ${escapeHTML(
+                                            option
+                                        )}
+                                    </span>
+
+                                </label>
+
+                            `
+                        )
+                        .join("")}
+
+                </div>
+
+            `;
+
+
+            questionsContainer.appendChild(
+                questionBox
+            );
+
+        }
+    );
+
+
+    // Go to quiz section
+
+    document
+        .getElementById("quiz")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+// =====================================================
+// SUBMIT AI QUIZ
+// =====================================================
+
+function submitGeneratedQuiz() {
+
+    if (
+        !window.generatedQuiz ||
+        window.generatedQuiz.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    let score =
+        0;
+
+
+    let answered =
+        0;
+
+
+    window.generatedQuiz.forEach(
+        (question, index) => {
+
+            const selected =
+                document.querySelector(
+                    `input[name="generated-question-${index}"]:checked`
+                );
+
+
+            if (selected) {
+
+                answered++;
+
+
+                if (
+                    Number(
+                        selected.value
+                    ) ===
+                    Number(
+                        question.answer
+                    )
+                ) {
+
+                    score++;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    const total =
+        window.generatedQuiz.length;
+
+
+    const percentage =
+        Math.round(
+            (score / total) * 100
+        );
+
+
+    const result =
+        document.getElementById(
+            "generatedQuizResult"
+        );
+
+
+    if (!result) {
+
+        return;
+
+    }
+
+
+    let message;
+
+
+    if (percentage >= 90) {
+
+        message =
+            "🔥 Outstanding! Excellent understanding.";
+
+    } else if (percentage >= 80) {
+
+        message =
+            "👏 Excellent work! Keep it up.";
+
+    } else if (percentage >= 70) {
+
+        message =
+            "👍 Great job! A little more practice will help.";
+
+    } else if (percentage >= 50) {
+
+        message =
+            "📚 Good attempt. Review the material and try again.";
+
+    } else {
+
+        message =
+            "💪 Keep practicing. You can improve this score.";
+
+    }
+
+
+    result.innerHTML = `
+
+        <div class="quiz-result-box">
+
+            <h3>
+                🎉 Quiz Result
+            </h3>
+
+            <p>
+                Score:
+                <strong>
+                    ${score}/${total}
+                </strong>
+            </p>
+
+            <p>
+                Percentage:
+                <strong>
+                    ${percentage}%
+                </strong>
+            </p>
+
+            <p>
+                Answered:
+                <strong>
+                    ${answered}/${total}
+                </strong>
+            </p>
+
+            <p>
+                ${message}
+            </p>
+
+        </div>
+
+
+        <div class="quiz-explanations">
+
+            <h3>
+                📖 Review & Explanations
+            </h3>
+
+            ${window.generatedQuiz
+                .map(
+                    (
+                        question,
+                        index
+                    ) => {
+
+                        const selected =
+                            document.querySelector(
+                                `input[name="generated-question-${index}"]:checked`
+                            );
+
+
+                        const selectedAnswer =
+                            selected
+                                ? Number(
+                                    selected.value
+                                )
+                                : null;
+
+
+                        const correct =
+                            Number(
+                                question.answer
+                            );
+
+
+                        const isCorrect =
+                            selectedAnswer ===
+                            correct;
+
+
+                        return `
+
+                            <div
+                                class="
+                                    explanation-item
+                                    ${
+                                        isCorrect
+                                            ? "correct-answer"
+                                            : "wrong-answer"
+                                    }
+                                "
+                            >
+
+                                <strong>
+                                    ${index + 1}.
+                                    ${escapeHTML(
+                                        question.question
+                                    )}
+                                </strong>
+
+
+                                <p>
+
+                                    ${
+                                        selectedAnswer ===
+                                        null
+
+                                            ? "⚪ Not answered."
+
+                                            : isCorrect
+
+                                                ? "✅ Correct!"
+
+                                                : "❌ Incorrect."
+                                    }
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>
+                                        Correct answer:
+                                    </strong>
+
+                                    ${escapeHTML(
+                                        question.options[
+                                            correct
+                                        ]
+                                    )}
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>
+                                        Explanation:
+                                    </strong>
+
+                                    ${escapeHTML(
+                                        question.explanation ||
+                                        "No explanation provided."
+                                    )}
+
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("")}
+
+        </div>
+
+    `;
+
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 }
 
@@ -1589,12 +2192,19 @@ async function loadMaterials() {
             .list(
                 user.id,
                 {
+
                     limit: 100,
 
                     sortBy: {
-                        column: "created_at",
-                        order: "desc"
+
+                        column:
+                            "created_at",
+
+                        order:
+                            "desc"
+
                     }
+
                 }
             );
 
@@ -1616,7 +2226,9 @@ async function loadMaterials() {
                 </p>
 
                 <p>
-                    ${escapeHTML(error.message)}
+                    ${escapeHTML(
+                        error.message
+                    )}
                 </p>
 
             </div>
@@ -1706,7 +2318,9 @@ async function loadMaterials() {
                 📄
 
                 <span>
-                    ${escapeHTML(file.name)}
+                    ${escapeHTML(
+                        file.name
+                    )}
                 </span>
 
             </div>
@@ -1798,6 +2412,7 @@ function searchMaterials() {
                 material.style.display =
                     "flex";
 
+
                 visibleCount++;
 
             } else {
@@ -1870,7 +2485,7 @@ function escapeHTML(text) {
 
 
     div.textContent =
-        text;
+        text ?? "";
 
 
     return div.innerHTML;
@@ -1879,56 +2494,68 @@ function escapeHTML(text) {
 
 
 // =====================================================
-// QUIZ
+// OLD CLASSIC QUIZ
 // =====================================================
 
 const quizQuestions = [
 
     {
+
         question:
             "What is 25% of 200?",
 
         options: [
+
             "25",
             "40",
             "50",
             "75"
+
         ],
 
         answer:
             "50"
+
     },
 
 
     {
+
         question:
             "Which gas do humans need for respiration?",
 
         options: [
+
             "Carbon dioxide",
             "Oxygen",
             "Nitrogen",
             "Hydrogen"
+
         ],
 
         answer:
             "Oxygen"
+
     },
 
 
     {
+
         question:
             "What is the opposite of 'early'?",
 
         options: [
+
             "Fast",
             "Late",
             "Quick",
             "Soon"
+
         ],
 
         answer:
             "Late"
+
     }
 
 ];
@@ -1971,114 +2598,13 @@ function showQuizQuestion() {
             .getElementById(
                 "quizQuestion"
             )
-            .textContent =
+            ?.textContent =
             "Quiz finished! 🎉";
 
-
-        document
-            .getElementById(
-                "quizOptions"
-            )
-            .innerHTML = `
-
-                <h3>
-                    Score:
-                    ${quizScore}/${quizQuestions.length}
-                </h3>
-
-            `;
 
         return;
 
     }
-
-
-    document
-        .getElementById(
-            "quizQuestion"
-        )
-        .textContent =
-        question.question;
-
-
-    const options =
-        document.getElementById(
-            "quizOptions"
-        );
-
-
-    options.innerHTML =
-        "";
-
-
-    document
-        .getElementById(
-            "quizResult"
-        )
-        .textContent =
-        "";
-
-
-    question.options.forEach(
-        option => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.textContent =
-                option;
-
-
-            button.onclick =
-                function () {
-
-                    if (
-                        option ===
-                        question.answer
-                    ) {
-
-                        quizScore++;
-
-
-                        document
-                            .getElementById(
-                                "quizResult"
-                            )
-                            .textContent =
-                            "✅ Correct!";
-
-                    } else {
-
-                        document
-                            .getElementById(
-                                "quizResult"
-                            )
-                            .textContent =
-                            "❌ Incorrect.";
-
-                    }
-
-
-                    currentQuiz++;
-
-
-                    setTimeout(
-                        showQuizQuestion,
-                        700
-                    );
-
-                };
-
-
-            options.appendChild(
-                button
-            );
-
-        }
-    );
 
 }
 
@@ -2090,29 +2616,35 @@ function showQuizQuestion() {
 const flashcards = [
 
     {
+
         question:
             "What is photosynthesis?",
 
         answer:
             "The process by which green plants make food using sunlight, carbon dioxide and water."
+
     },
 
 
     {
+
         question:
             "What is an irrational number?",
 
         answer:
             "A number that cannot be expressed as a ratio of two integers."
+
     },
 
 
     {
+
         question:
             "What is an NGO?",
 
         answer:
             "A non-governmental organization that works independently of direct government control."
+
     }
 
 ];
@@ -2135,6 +2667,18 @@ function displayFlashcard() {
 
 
     if (!text) {
+
+        return;
+
+    }
+
+
+    if (
+        !flashcards.length
+    ) {
+
+        text.textContent =
+            "No flashcards available.";
 
         return;
 
@@ -2259,12 +2803,18 @@ function updateTimerDisplay() {
 
     display.textContent =
         String(minutes)
-            .padStart(2, "0")
+            .padStart(
+                2,
+                "0"
+            )
         +
         ":"
         +
         String(seconds)
-            .padStart(2, "0");
+            .padStart(
+                2,
+                "0"
+            );
 
 }
 
@@ -2400,7 +2950,9 @@ function saveGoal() {
             </strong>
 
             <p>
-                ${escapeHTML(goal)}
+                ${escapeHTML(
+                    goal
+                )}
             </p>
 
         </div>
@@ -2429,27 +2981,38 @@ function loadGoal() {
     }
 
 
-    document
-        .getElementById(
+    const display =
+        document.getElementById(
             "goalDisplay"
-        )
-        .innerHTML = `
+        );
 
-            <div class="saved-goal">
 
-                🎯
+    if (!display) {
 
-                <strong>
-                    Today's Goal
-                </strong>
+        return;
 
-                <p>
-                    ${escapeHTML(goal)}
-                </p>
+    }
 
-            </div>
 
-        `;
+    display.innerHTML = `
+
+        <div class="saved-goal">
+
+            🎯
+
+            <strong>
+                Today's Goal
+            </strong>
+
+            <p>
+                ${escapeHTML(
+                    goal
+                )}
+            </p>
+
+        </div>
+
+    `;
 
 }
 
@@ -2472,6 +3035,7 @@ document.addEventListener(
 
     }
 );
+
 
 </script>
 
