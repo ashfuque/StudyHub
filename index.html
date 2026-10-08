@@ -1,42 +1,62 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>EduSphere | Learn. Explore. Grow.</title>
+    <title>EduSphere | Learn. Explore. Grow.</title>
 
-<link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- PDF.js -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 
 </head>
+
 
 <body>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- NAVIGATION -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <nav>
 
     <h2 class="logo">
-        <img src="edusphere-logo.png" alt="EduSphere">
+
+        <img
+            src="edusphere-logo.png"
+            alt="EduSphere"
+        >
+
     </h2>
 
+
     <div class="nav-links">
-        
+
         <a href="#home">Home</a>
+
         <a href="#subjects">Subjects</a>
+
         <a href="#materials">Materials</a>
+
         <a href="#quiz">Quiz</a>
+
         <a href="#flashcards">Flashcards</a>
+
         <a href="#timer">Timer</a>
 
     </div>
@@ -44,19 +64,32 @@
 </nav>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- HOME -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
-<section id="home" class="hero">
+<section
+    id="home"
+    class="hero"
+>
 
-    <h1>Welcome to EduSphere 📚</h1>
+    <h1>
+        Welcome to EduSphere 📚
+    </h1>
 
-    <p>Learn. Explore. Grow.</p>
+    <p>
+        Learn. Explore. Grow.
+    </p>
+
 
     <a href="#subjects">
-        <button>Start Studying 🚀</button>
+
+        <button>
+            Start Studying 🚀
+        </button>
+
     </a>
+
 
     <div class="floating-cards">
 
@@ -77,30 +110,38 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- SUBJECTS -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="subjects">
 
-    <h2>📚 Subjects</h2>
+    <h2>
+        📚 Subjects
+    </h2>
 
     <p>
         Choose a subject and start learning.
     </p>
 
+
     <div class="subject-container">
+
 
         <div class="subject-card">
 
-            <h3>📐 Mathematics</h3>
+            <h3>
+                📐 Mathematics
+            </h3>
 
             <p>
                 Algebra, geometry, equations,
                 ratios and more.
             </p>
 
-            <button onclick="selectSubject('Mathematics')">
+            <button
+                onclick="selectSubject('Mathematics')"
+            >
                 Study Math
             </button>
 
@@ -109,14 +150,18 @@
 
         <div class="subject-card">
 
-            <h3>🔬 Science</h3>
+            <h3>
+                🔬 Science
+            </h3>
 
             <p>
                 Physics, chemistry, biology
                 and general science.
             </p>
 
-            <button onclick="selectSubject('Science')">
+            <button
+                onclick="selectSubject('Science')"
+            >
                 Study Science
             </button>
 
@@ -125,14 +170,18 @@
 
         <div class="subject-card">
 
-            <h3>📖 English</h3>
+            <h3>
+                📖 English
+            </h3>
 
             <p>
                 Grammar, vocabulary,
                 writing and literature.
             </p>
 
-            <button onclick="selectSubject('English')">
+            <button
+                onclick="selectSubject('English')"
+            >
                 Study English
             </button>
 
@@ -141,14 +190,18 @@
 
         <div class="subject-card">
 
-            <h3>🌍 BGS</h3>
+            <h3>
+                🌍 BGS
+            </h3>
 
             <p>
                 Bangladesh and Global Studies,
                 society, history and geography.
             </p>
 
-            <button onclick="selectSubject('BGS')">
+            <button
+                onclick="selectSubject('BGS')"
+            >
                 Study BGS
             </button>
 
@@ -156,18 +209,22 @@
 
     </div>
 
+
     <div id="selectedSubject"></div>
 
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- ACCOUNT -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="account">
 
-    <h2>🔐 EduSphere Account</h2>
+    <h2>
+        🔐 EduSphere Account
+    </h2>
+
 
     <div id="authBox">
 
@@ -177,31 +234,42 @@
             placeholder="Email address"
         >
 
+
         <input
             type="password"
             id="authPassword"
             placeholder="Password"
         >
 
+
         <button onclick="signUp()">
             Create Account
         </button>
 
+
         <button onclick="signIn()">
             Log In
         </button>
+
 
         <p id="authMessage"></p>
 
     </div>
 
 
-    <div id="userBox" style="display:none;">
+    <div
+        id="userBox"
+        style="display:none;"
+    >
 
         <p>
+
             ✅ Logged in as:
+
             <strong id="userEmail"></strong>
+
         </p>
+
 
         <button onclick="signOut()">
             Log Out
@@ -212,13 +280,16 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- MATERIALS -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="materials">
 
-    <h2>📚 Study Materials</h2>
+    <h2>
+        📚 Study Materials
+    </h2>
+
 
     <p>
         Upload and access your study materials
@@ -226,7 +297,10 @@
     </p>
 
 
-    <div id="loginRequiredMessage" style="display:none;">
+    <div
+        id="loginRequiredMessage"
+        style="display:none;"
+    >
 
         🔒 Please log in to upload study materials.
 
@@ -238,7 +312,11 @@
         id="uploadArea"
     >
 
-        <h3>📤 Upload Study Materials</h3>
+
+        <h3>
+            📤 Upload Study Materials
+        </h3>
+
 
         <p>
             Upload notes, chapters, PDFs,
@@ -252,8 +330,11 @@
             for="fileInput"
             class="upload-button"
         >
+
             📁 Choose Files
+
         </label>
+
 
         <input
             type="file"
@@ -271,7 +352,9 @@
             type="button"
             onclick="uploadFile()"
         >
+
             📤 Upload to EduSphere
+
         </button>
 
 
@@ -286,9 +369,65 @@
         </div>
 
 
-        <!-- ========================= -->
+        <!-- ================================================= -->
+        <!-- PDF AI STUDY GENERATOR - STEP 1 -->
+        <!-- ================================================= -->
+
+        <div class="pdf-extractor">
+
+            <h3>
+                🧠 AI Study Generator
+            </h3>
+
+
+            <p>
+                Select a PDF and extract its text.
+                This text will later be used to
+                automatically generate quizzes and flashcards.
+            </p>
+
+
+            <button
+                type="button"
+                id="extractPDFButton"
+                onclick="extractSelectedPDF()"
+            >
+
+                📖 Extract PDF Text
+
+            </button>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="pdfExtractionStatus"
+                style="display:none;"
+            ></div>
+
+
+            <!-- PDF INFORMATION -->
+
+            <div
+                id="pdfInfo"
+                style="display:none;"
+            ></div>
+
+
+            <!-- EXTRACTED TEXT -->
+
+            <textarea
+                id="pdfExtractedText"
+                readonly
+                placeholder="Extracted PDF text will appear here..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- ================================================= -->
         <!-- LIBRARY -->
-        <!-- ========================= -->
+        <!-- ================================================= -->
 
         <div class="materials-library">
 
@@ -324,13 +463,16 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- QUIZ -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="quiz">
 
-    <h2>🧠 Quiz</h2>
+    <h2>
+        🧠 Quiz
+    </h2>
+
 
     <p>
         Test your knowledge.
@@ -343,9 +485,12 @@
             Ready for a quiz?
         </h3>
 
+
         <div id="quizOptions"></div>
 
+
         <p id="quizResult"></p>
+
 
         <button onclick="startQuiz()">
             Start Quiz 🚀
@@ -356,13 +501,16 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- FLASHCARDS -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="flashcards">
 
-    <h2>🃏 Flashcards</h2>
+    <h2>
+        🃏 Flashcards
+    </h2>
+
 
     <p>
         Use flashcards for quick revision.
@@ -390,6 +538,7 @@
                 ◀ Previous
             </button>
 
+
             <button onclick="nextCard()">
                 Next ▶
             </button>
@@ -401,13 +550,16 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- TIMER -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="timer">
 
-    <h2>⏱️ Study Timer</h2>
+    <h2>
+        ⏱️ Study Timer
+    </h2>
+
 
     <p>
         Focus on your studies without distractions.
@@ -427,9 +579,11 @@
                 ▶ Start
             </button>
 
+
             <button onclick="pauseTimer()">
                 ⏸ Pause
             </button>
+
 
             <button onclick="resetTimer()">
                 🔄 Reset
@@ -442,13 +596,16 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- TODAY'S GOAL -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <section id="goal">
 
-    <h2>🎯 Today's Goal</h2>
+    <h2>
+        🎯 Today's Goal
+    </h2>
+
 
     <p>
         Set a simple goal for today's study session.
@@ -463,9 +620,11 @@
             placeholder="Example: Finish Science Chapter 5"
         >
 
+
         <button onclick="saveGoal()">
             Save Goal
         </button>
+
 
         <div id="goalDisplay"></div>
 
@@ -474,18 +633,22 @@
 </section>
 
 
-<!-- ========================= -->
+<!-- ================================================= -->
 <!-- FOOTER -->
-<!-- ========================= -->
+<!-- ================================================= -->
 
 <footer>
 
-    <h3>EduSphere 📚</h3>
+    <h3>
+        EduSphere 📚
+    </h3>
+
 
     <p>
         Study smarter. Practice harder.
         Improve every day.
     </p>
+
 
     <p>
         © 2026 EduSphere
@@ -500,515 +663,294 @@
 
 <script>
 
-    // =================================================
-    // SUPABASE
-    // =================================================
 
-    const SUPABASE_URL =
-        "https://pjytoktykbaokkuhaera.supabase.co";
+// =====================================================
+// SUPABASE
+// =====================================================
 
-    const SUPABASE_KEY =
-        "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
+const SUPABASE_URL =
+    "https://pjytoktykbaokkuhaera.supabase.co";
 
-    const supabaseClient =
-        supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
 
+const SUPABASE_KEY =
+    "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
 
-    // =================================================
-    // AUTHENTICATION
-    // =================================================
 
-    async function signUp() {
-
-        const email =
-            document
-                .getElementById("authEmail")
-                .value
-                .trim();
-
-        const password =
-            document
-                .getElementById("authPassword")
-                .value;
-
-        const message =
-            document.getElementById("authMessage");
-
-
-        if (!email || !password) {
-
-            message.textContent =
-                "⚠️ Please enter your email and password.";
-
-            return;
-        }
-
-
-        if (password.length < 6) {
-
-            message.textContent =
-                "⚠️ Password must be at least 6 characters.";
-
-            return;
-        }
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.signUp({
-
-                email: email,
-
-                password: password,
-
-                options: {
-
-                   emailRedirectTo:
-    "https://eduspherebd.github.io/EduSphere/"
-                }
-
-            });
-
-
-        if (error) {
-
-            message.textContent =
-                "❌ " + error.message;
-
-            return;
-
-        }
-
-
-        if (data.session) {
-
-            message.textContent =
-                "✅ Account created! You are now logged in.";
-
-        } else {
-
-            message.textContent =
-                "✅ Account created! Check your email to confirm your account.";
-
-        }
-
-    }
-
-
-    async function signIn() {
-
-        const email =
-            document
-                .getElementById("authEmail")
-                .value
-                .trim();
-
-        const password =
-            document
-                .getElementById("authPassword")
-                .value;
-
-        const message =
-            document.getElementById("authMessage");
-
-
-        if (!email || !password) {
-
-            message.textContent =
-                "⚠️ Please enter your email and password.";
-
-            return;
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient.auth.signInWithPassword({
-
-                email: email,
-
-                password: password
-
-            });
-
-
-        if (error) {
-
-            message.textContent =
-                "❌ " + error.message;
-
-            return;
-
-        }
-
-
-        message.textContent =
-            "✅ Login successful!";
-
-    }
-
-
-    async function signOut() {
-
-        const {
-            error
-        } =
-            await supabaseClient.auth.signOut();
-
-
-        if (error) {
-
-            alert(
-                "❌ " + error.message
-            );
-
-            return;
-
-        }
-
-
-        document
-            .getElementById("authMessage")
-            .textContent =
-            "You have been logged out.";
-
-    }
-
-
-    // =================================================
-    // AUTH UI
-    // =================================================
-
-    async function updateAuthUI() {
-
-        const {
-            data: { user }
-        } =
-            await supabaseClient.auth.getUser();
-
-
-        const authBox =
-            document.getElementById("authBox");
-
-        const userBox =
-            document.getElementById("userBox");
-
-        const uploadArea =
-            document.getElementById("uploadArea");
-
-        const loginRequiredMessage =
-            document.getElementById(
-                "loginRequiredMessage"
-            );
-
-
-        if (!authBox || !userBox) {
-
-            return;
-
-        }
-
-
-        if (user) {
-
-            authBox.style.display =
-                "none";
-
-            userBox.style.display =
-                "block";
-
-
-            document
-                .getElementById("userEmail")
-                .textContent =
-                user.email || "Unknown user";
-
-
-            uploadArea.style.display =
-                "block";
-
-            loginRequiredMessage.style.display =
-                "none";
-
-
-            await loadMaterials();
-
-
-        } else {
-
-            authBox.style.display =
-                "block";
-
-            userBox.style.display =
-                "none";
-
-
-            uploadArea.style.display =
-                "none";
-
-            loginRequiredMessage.style.display =
-                "block";
-
-
-            const materialsList =
-                document.getElementById(
-                    "materialsList"
-                );
-
-
-            if (materialsList) {
-
-                materialsList.innerHTML =
-                    "<p>🔒 Please log in to view your materials.</p>";
-
-            }
-
-        }
-
-    }
-
-
-    // Watch login/logout changes
-
-    supabaseClient.auth.onAuthStateChange(
-        (event, session) => {
-
-            updateAuthUI();
-
-        }
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
     );
 
 
-    // =================================================
-    // SUBJECTS
-    // =================================================
+// =====================================================
+// PDF.JS WORKER
+// =====================================================
 
-    function selectSubject(subject) {
-
-        const box =
-            document.getElementById(
-                "selectedSubject"
-            );
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
 
-        box.innerHTML = `
+// =====================================================
+// AUTHENTICATION
+// =====================================================
 
-            <div class="selected-subject">
+async function signUp() {
 
-                <h3>
-                    📖 ${escapeHTML(subject)}
-                </h3>
-
-                <p>
-                    You selected ${escapeHTML(subject)}.
-                    Your study resources can be added here.
-                </p>
-
-            </div>
-
-        `;
-
-    }
+    const email =
+        document
+            .getElementById("authEmail")
+            .value
+            .trim();
 
 
-    // =================================================
-    // FILE SELECTION
-    // =================================================
-
-    function handleFiles() {
-
-        const fileInput =
-            document.getElementById(
-                "fileInput"
-            );
-
-        const fileList =
-            document.getElementById(
-                "fileList"
-            );
+    const password =
+        document
+            .getElementById("authPassword")
+            .value;
 
 
-        if (
-            !fileInput.files ||
-            fileInput.files.length === 0
-        ) {
-
-            fileList.innerHTML =
-                "<p>No files selected yet.</p>";
-
-            return;
-
-        }
+    const message =
+        document.getElementById("authMessage");
 
 
-        fileList.innerHTML =
-            "<h4>Selected Files:</h4>";
+    if (!email || !password) {
 
+        message.textContent =
+            "⚠️ Please enter your email and password.";
 
-        Array.from(
-            fileInput.files
-        ).forEach(file => {
-
-            const item =
-                document.createElement(
-                    "p"
-                );
-
-
-            item.textContent =
-                "📄 " + file.name;
-
-
-            fileList.appendChild(
-                item
-            );
-
-        });
+        return;
 
     }
 
 
-    // =================================================
-    // UPLOAD FILES
-    // =================================================
+    if (password.length < 6) {
 
-    async function uploadFile() {
+        message.textContent =
+            "⚠️ Password must be at least 6 characters.";
 
-        const fileInput =
-            document.getElementById(
-                "fileInput"
-            );
+        return;
+
+    }
 
 
-        const files =
-            fileInput.files;
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signUp({
 
+            email: email,
 
-        if (
-            !files ||
-            files.length === 0
-        ) {
+            password: password,
 
-            alert(
-                "Please choose at least one file first."
-            );
+            options: {
 
-            return;
-
-        }
-
-
-        // Make sure user is logged in
-
-        const {
-            data: { user }
-        } =
-            await supabaseClient.auth.getUser();
-
-
-        if (!user) {
-
-            alert(
-                "Please log in first."
-            );
-
-            return;
-
-        }
-
-
-        for (
-            const file of files
-        ) {
-
-            const safeName =
-                file.name.replace(
-                    /[^a-zA-Z0-9._-]/g,
-                    "_"
-                );
-
-
-            // Each user's files are stored
-            // inside their own UID folder
-
-            const fileName =
-                user.id +
-                "/" +
-                Date.now() +
-                "-" +
-                Math.random()
-                    .toString(36)
-                    .substring(2, 8) +
-                "-" +
-                safeName;
-
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .storage
-                    .from(
-                        "study-materials"
-                    )
-                    .upload(
-                        fileName,
-                        file
-                    );
-
-
-            if (error) {
-
-                console.error(
-                    "Upload error:",
-                    error
-                );
-
-
-                alert(
-                    "Upload failed:\n" +
-                    error.message
-                );
-
-                return;
+                emailRedirectTo:
+                    "https://eduspherebd.github.io/EduSphere/"
 
             }
 
-        }
+        });
 
+
+    if (error) {
+
+        message.textContent =
+            "❌ " + error.message;
+
+        return;
+
+    }
+
+
+    if (data.session) {
+
+        message.textContent =
+            "✅ Account created! You are now logged in.";
+
+    } else {
+
+        message.textContent =
+            "✅ Account created! Check your email to confirm your account.";
+
+    }
+
+}
+
+
+// =====================================================
+// LOGIN
+// =====================================================
+
+async function signIn() {
+
+    const email =
+        document
+            .getElementById("authEmail")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("authPassword")
+            .value;
+
+
+    const message =
+        document.getElementById("authMessage");
+
+
+    if (!email || !password) {
+
+        message.textContent =
+            "⚠️ Please enter your email and password.";
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    if (error) {
+
+        message.textContent =
+            "❌ " + error.message;
+
+        return;
+
+    }
+
+
+    message.textContent =
+        "✅ Login successful!";
+
+}
+
+
+// =====================================================
+// LOGOUT
+// =====================================================
+
+async function signOut() {
+
+    const {
+        error
+    } =
+        await supabaseClient.auth.signOut();
+
+
+    if (error) {
 
         alert(
-            "All files uploaded successfully! 📚"
+            "❌ " + error.message
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("authMessage")
+        .textContent =
+        "You have been logged out.";
+
+}
+
+
+// =====================================================
+// AUTH UI
+// =====================================================
+
+async function updateAuthUI() {
+
+    const {
+        data: { user }
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    const authBox =
+        document.getElementById("authBox");
+
+
+    const userBox =
+        document.getElementById("userBox");
+
+
+    const uploadArea =
+        document.getElementById("uploadArea");
+
+
+    const loginRequiredMessage =
+        document.getElementById(
+            "loginRequiredMessage"
         );
 
 
-        fileInput.value = "";
+    if (!authBox || !userBox) {
+
+        return;
+
+    }
+
+
+    if (user) {
+
+        authBox.style.display =
+            "none";
+
+
+        userBox.style.display =
+            "block";
 
 
         document
-            .getElementById(
-                "fileList"
-            )
-            .innerHTML =
-            "<p>No files selected yet.</p>";
+            .getElementById("userEmail")
+            .textContent =
+            user.email || "Unknown user";
+
+
+        uploadArea.style.display =
+            "block";
+
+
+        loginRequiredMessage.style.display =
+            "none";
 
 
         await loadMaterials();
 
-    }
+    } else {
+
+        authBox.style.display =
+            "block";
 
 
-    // =================================================
-    // LOAD MATERIALS
-    // =================================================
+        userBox.style.display =
+            "none";
 
-    async function loadMaterials() {
+
+        uploadArea.style.display =
+            "none";
+
+
+        loginRequiredMessage.style.display =
+            "block";
+
 
         const materialsList =
             document.getElementById(
@@ -1016,38 +958,530 @@
             );
 
 
-        if (!materialsList) {
-
-            return;
-
-        }
-
-
-        const {
-            data: { user },
-            error: userError
-        } =
-            await supabaseClient.auth.getUser();
-
-
-        if (userError || !user) {
+        if (materialsList) {
 
             materialsList.innerHTML =
-                "<p>🔒 Please log in to view your study materials.</p>";
+                "<p>🔒 Please log in to view your materials.</p>";
 
-            return;
+        }
+
+    }
+
+}
+
+
+// =====================================================
+// AUTH STATE LISTENER
+// =====================================================
+
+supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+        updateAuthUI();
+
+    }
+);
+
+
+// =====================================================
+// SUBJECTS
+// =====================================================
+
+function selectSubject(subject) {
+
+    const box =
+        document.getElementById(
+            "selectedSubject"
+        );
+
+
+    box.innerHTML = `
+
+        <div class="selected-subject">
+
+            <h3>
+                📖 ${escapeHTML(subject)}
+            </h3>
+
+            <p>
+                You selected ${escapeHTML(subject)}.
+                Your study resources can be added here.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+// =====================================================
+// FILE SELECTION
+// =====================================================
+
+function handleFiles() {
+
+    const fileInput =
+        document.getElementById(
+            "fileInput"
+        );
+
+
+    const fileList =
+        document.getElementById(
+            "fileList"
+        );
+
+
+    if (
+        !fileInput.files ||
+        fileInput.files.length === 0
+    ) {
+
+        fileList.innerHTML =
+            "<p>No files selected yet.</p>";
+
+        return;
+
+    }
+
+
+    fileList.innerHTML =
+        "<h4>Selected Files:</h4>";
+
+
+    Array.from(
+        fileInput.files
+    ).forEach(file => {
+
+        const item =
+            document.createElement(
+                "p"
+            );
+
+
+        item.textContent =
+            "📄 " + file.name;
+
+
+        fileList.appendChild(
+            item
+        );
+
+    });
+
+}
+
+
+// =====================================================
+// PDF TEXT EXTRACTION
+// =====================================================
+
+async function extractSelectedPDF() {
+
+    const fileInput =
+        document.getElementById(
+            "fileInput"
+        );
+
+
+    const status =
+        document.getElementById(
+            "pdfExtractionStatus"
+        );
+
+
+    const info =
+        document.getElementById(
+            "pdfInfo"
+        );
+
+
+    const textArea =
+        document.getElementById(
+            "pdfExtractedText"
+        );
+
+
+    const button =
+        document.getElementById(
+            "extractPDFButton"
+        );
+
+
+    // -------------------------------------------------
+    // Check selected files
+    // -------------------------------------------------
+
+    if (
+        !fileInput.files ||
+        fileInput.files.length === 0
+    ) {
+
+        alert(
+            "Please choose a PDF first."
+        );
+
+        return;
+
+    }
+
+
+    // Find PDF
+
+    const pdfFile =
+        Array.from(
+            fileInput.files
+        ).find(
+            file =>
+                file.type === "application/pdf" ||
+                file.name
+                    .toLowerCase()
+                    .endsWith(".pdf")
+        );
+
+
+    if (!pdfFile) {
+
+        alert(
+            "Please choose a PDF file."
+        );
+
+        return;
+
+    }
+
+
+    // -------------------------------------------------
+    // File size limit
+    // -------------------------------------------------
+
+    const maxSize =
+        25 * 1024 * 1024;
+
+
+    if (pdfFile.size > maxSize) {
+
+        alert(
+            "This PDF is too large.\n\nPlease use a PDF smaller than 25 MB."
+        );
+
+        return;
+
+    }
+
+
+    // -------------------------------------------------
+    // Reset UI
+    // -------------------------------------------------
+
+    status.style.display =
+        "block";
+
+
+    status.textContent =
+        "⏳ Opening PDF...";
+
+
+    info.style.display =
+        "none";
+
+
+    textArea.value =
+        "";
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "⏳ Extracting...";
+
+
+    try {
+
+        // -------------------------------------------------
+        // Read PDF file
+        // -------------------------------------------------
+
+        const arrayBuffer =
+            await pdfFile.arrayBuffer();
+
+
+        const pdf =
+            await pdfjsLib
+                .getDocument({
+                    data: arrayBuffer
+                })
+                .promise;
+
+
+        let extractedText =
+            "";
+
+
+        // -------------------------------------------------
+        // Read every page
+        // -------------------------------------------------
+
+        for (
+            let pageNumber = 1;
+            pageNumber <= pdf.numPages;
+            pageNumber++
+        ) {
+
+            status.textContent =
+                `⏳ Reading page ${pageNumber} of ${pdf.numPages}...`;
+
+
+            const page =
+                await pdf.getPage(
+                    pageNumber
+                );
+
+
+            const textContent =
+                await page.getTextContent();
+
+
+            const pageText =
+                textContent.items
+                    .map(
+                        item => item.str
+                    )
+                    .join(" ");
+
+
+            extractedText +=
+                `\n\n--- Page ${pageNumber} ---\n\n` +
+                pageText;
 
         }
 
 
-        materialsList.innerHTML =
-            "<p>Loading your materials...</p>";
+        // -------------------------------------------------
+        // Clean extracted text
+        // -------------------------------------------------
+
+        extractedText =
+            extractedText
+                .replace(
+                    /[ \t]+/g,
+                    " "
+                )
+                .replace(
+                    /\n\s+/g,
+                    "\n"
+                )
+                .trim();
 
 
-        // List ONLY the current user's folder
+        // -------------------------------------------------
+        // No text found
+        // -------------------------------------------------
+
+        if (!extractedText) {
+
+            throw new Error(
+                "No readable text was found in this PDF. The PDF may be image-based or scanned."
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // Word count
+        // -------------------------------------------------
+
+        const wordCount =
+            extractedText
+                .split(/\s+/)
+                .filter(
+                    word =>
+                        word.length > 0
+                )
+                .length;
+
+
+        const characterCount =
+            extractedText.length;
+
+
+        // -------------------------------------------------
+        // Display extracted text
+        // -------------------------------------------------
+
+        textArea.value =
+            extractedText;
+
+
+        // -------------------------------------------------
+        // Display PDF information
+        // -------------------------------------------------
+
+        info.style.display =
+            "block";
+
+
+        info.innerHTML = `
+
+            <div class="pdf-info-box">
+
+                <strong>
+                    📄 ${escapeHTML(pdfFile.name)}
+                </strong>
+
+                <p>
+                    📑 Pages:
+                    ${pdf.numPages}
+                </p>
+
+                <p>
+                    📝 Words:
+                    ${wordCount.toLocaleString()}
+                </p>
+
+                <p>
+                    🔤 Characters:
+                    ${characterCount.toLocaleString()}
+                </p>
+
+            </div>
+
+        `;
+
+
+        status.textContent =
+            "✅ PDF text extracted successfully!";
+
+
+        console.log(
+            "PDF extraction successful."
+        );
+
+
+        console.log(
+            "Pages:",
+            pdf.numPages
+        );
+
+
+        console.log(
+            "Words:",
+            wordCount
+        );
+
+
+        console.log(
+            "Characters:",
+            characterCount
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "PDF extraction error:",
+            error
+        );
+
+
+        status.textContent =
+            "❌ PDF extraction failed.";
+
+
+        alert(
+            "PDF extraction failed:\n\n" +
+            error.message
+        );
+
+
+    } finally {
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "📖 Extract PDF Text";
+
+    }
+
+}
+
+
+// =====================================================
+// UPLOAD FILES
+// =====================================================
+
+async function uploadFile() {
+
+    const fileInput =
+        document.getElementById(
+            "fileInput"
+        );
+
+
+    const files =
+        fileInput.files;
+
+
+    if (
+        !files ||
+        files.length === 0
+    ) {
+
+        alert(
+            "Please choose at least one file first."
+        );
+
+        return;
+
+    }
+
+
+    const {
+        data: { user }
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        alert(
+            "Please log in first."
+        );
+
+        return;
+
+    }
+
+
+    for (
+        const file of files
+    ) {
+
+        const safeName =
+            file.name.replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+            );
+
+
+        const fileName =
+            user.id +
+            "/" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2, 8) +
+            "-" +
+            safeName;
+
 
         const {
-            data,
             error
         } =
             await supabaseClient
@@ -1055,801 +1489,951 @@
                 .from(
                     "study-materials"
                 )
-                .list(
-                    user.id,
-                    {
-                        limit: 100,
-
-                        sortBy: {
-                            column: "created_at",
-                            order: "desc"
-                        }
-                    }
+                .upload(
+                    fileName,
+                    file
                 );
 
 
         if (error) {
 
             console.error(
-                "Library error:",
+                "Upload error:",
                 error
             );
 
 
-            materialsList.innerHTML = `
-
-                <div class="error-message">
-
-                    <p>
-                        ❌ Could not load materials.
-                    </p>
-
-                    <p>
-                        ${escapeHTML(error.message)}
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        if (
-            !data ||
-            data.length === 0
-        ) {
-
-            materialsList.innerHTML =
-                "<p>No study materials uploaded yet.</p>";
-
-            return;
-
-        }
-
-
-        materialsList.innerHTML = "";
-
-
-        // Create each material
-
-        for (
-            const file of data
-        ) {
-
-            if (!file.name) {
-
-                continue;
-
-            }
-
-
-            const filePath =
-                user.id +
-                "/" +
-                file.name;
-
-
-            // Private bucket:
-            // Create a temporary signed URL
-
-            const {
-                data: signedData,
-                error: signedError
-            } =
-                await supabaseClient
-                    .storage
-                    .from(
-                        "study-materials"
-                    )
-                    .createSignedUrl(
-                        filePath,
-                        60 * 60
-                    );
-
-
-            if (signedError) {
-
-                console.error(
-                    "Signed URL error:",
-                    signedError
-                );
-
-                continue;
-
-            }
-
-
-            const fileDiv =
-                document.createElement(
-                    "div"
-                );
-
-
-            fileDiv.className =
-                "material-item";
-
-
-            fileDiv.innerHTML = `
-
-                <div class="material-name">
-
-                    📄
-
-                    <span>
-                        ${escapeHTML(file.name)}
-                    </span>
-
-                </div>
-
-
-                <a
-                    href="${signedData.signedUrl}"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    📥 Open
-
-                </a>
-
-            `;
-
-
-            materialsList.appendChild(
-                fileDiv
+            alert(
+                "Upload failed:\n" +
+                error.message
             );
 
+            return;
+
         }
-
-
-        searchMaterials();
 
     }
 
 
-    // =================================================
-    // MATERIAL SEARCH
-    // =================================================
-
-    function searchMaterials() {
-
-        const searchInput =
-            document.getElementById(
-                "materialSearch"
-            );
+    alert(
+        "All files uploaded successfully! 📚"
+    );
 
 
-        const materialsList =
-            document.getElementById(
-                "materialsList"
-            );
+    fileInput.value =
+        "";
 
 
-        if (
-            !searchInput ||
-            !materialsList
-        ) {
-
-            return;
-
-        }
+    document
+        .getElementById(
+            "fileList"
+        )
+        .innerHTML =
+        "<p>No files selected yet.</p>";
 
 
-        const searchText =
-            searchInput.value
-                .toLowerCase()
-                .trim();
+    await loadMaterials();
+
+}
 
 
-        const materials =
-            materialsList.querySelectorAll(
-                ".material-item"
-            );
+// =====================================================
+// LOAD MATERIALS
+// =====================================================
 
+async function loadMaterials() {
 
-        let visibleCount = 0;
-
-
-        materials.forEach(
-            material => {
-
-                const fileName =
-                    material.textContent
-                        .toLowerCase();
-
-
-                if (
-                    fileName.includes(
-                        searchText
-                    )
-                ) {
-
-                    material.style.display =
-                        "flex";
-
-                    visibleCount++;
-
-                } else {
-
-                    material.style.display =
-                        "none";
-
-                }
-
-            }
+    const materialsList =
+        document.getElementById(
+            "materialsList"
         );
 
 
-        let noResults =
-            document.getElementById(
-                "noSearchResults"
-            );
+    if (!materialsList) {
 
-
-        if (
-            searchText !== "" &&
-            visibleCount === 0
-        ) {
-
-            if (!noResults) {
-
-                noResults =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                noResults.id =
-                    "noSearchResults";
-
-
-                materialsList.appendChild(
-                    noResults
-                );
-
-            }
-
-
-            noResults.textContent =
-                `🔎 No materials found for "${searchInput.value}"`;
-
-        } else {
-
-            if (noResults) {
-
-                noResults.remove();
-
-            }
-
-        }
+        return;
 
     }
 
 
-    // =================================================
-    // ESCAPE HTML
-    // =================================================
+    const {
+        data: { user },
+        error: userError
+    } =
+        await supabaseClient.auth.getUser();
 
-    function escapeHTML(text) {
 
-        const div =
+    if (userError || !user) {
+
+        materialsList.innerHTML =
+            "<p>🔒 Please log in to view your study materials.</p>";
+
+        return;
+
+    }
+
+
+    materialsList.innerHTML =
+        "<p>Loading your materials...</p>";
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .storage
+            .from(
+                "study-materials"
+            )
+            .list(
+                user.id,
+                {
+                    limit: 100,
+
+                    sortBy: {
+                        column: "created_at",
+                        order: "desc"
+                    }
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Library error:",
+            error
+        );
+
+
+        materialsList.innerHTML = `
+
+            <div class="error-message">
+
+                <p>
+                    ❌ Could not load materials.
+                </p>
+
+                <p>
+                    ${escapeHTML(error.message)}
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        materialsList.innerHTML =
+            "<p>No study materials uploaded yet.</p>";
+
+        return;
+
+    }
+
+
+    materialsList.innerHTML =
+        "";
+
+
+    for (
+        const file of data
+    ) {
+
+        if (!file.name) {
+
+            continue;
+
+        }
+
+
+        const filePath =
+            user.id +
+            "/" +
+            file.name;
+
+
+        const {
+            data: signedData,
+            error: signedError
+        } =
+            await supabaseClient
+                .storage
+                .from(
+                    "study-materials"
+                )
+                .createSignedUrl(
+                    filePath,
+                    60 * 60
+                );
+
+
+        if (signedError) {
+
+            console.error(
+                "Signed URL error:",
+                signedError
+            );
+
+            continue;
+
+        }
+
+
+        const fileDiv =
             document.createElement(
                 "div"
             );
 
 
-        div.textContent =
-            text;
+        fileDiv.className =
+            "material-item";
 
 
-        return div.innerHTML;
+        fileDiv.innerHTML = `
 
-    }
+            <div class="material-name">
 
+                📄
 
-    // =================================================
-    // QUIZ
-    // =================================================
+                <span>
+                    ${escapeHTML(file.name)}
+                </span>
 
-    const quizQuestions = [
-
-        {
-            question:
-                "What is 25% of 200?",
-
-            options: [
-                "25",
-                "40",
-                "50",
-                "75"
-            ],
-
-            answer:
-                "50"
-        },
+            </div>
 
 
-        {
-            question:
-                "Which gas do humans need for respiration?",
+            <a
+                href="${signedData.signedUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-            options: [
-                "Carbon dioxide",
-                "Oxygen",
-                "Nitrogen",
-                "Hydrogen"
-            ],
+                📥 Open
 
-            answer:
-                "Oxygen"
-        },
+            </a>
+
+        `;
 
 
-        {
-            question:
-                "What is the opposite of 'early'?",
-
-            options: [
-                "Fast",
-                "Late",
-                "Quick",
-                "Soon"
-            ],
-
-            answer:
-                "Late"
-        }
-
-    ];
-
-
-    let currentQuiz =
-        0;
-
-    let quizScore =
-        0;
-
-
-    function startQuiz() {
-
-        currentQuiz =
-            0;
-
-        quizScore =
-            0;
-
-        showQuizQuestion();
+        materialsList.appendChild(
+            fileDiv
+        );
 
     }
 
 
-    function showQuizQuestion() {
+    searchMaterials();
 
-        const question =
-            quizQuestions[
-                currentQuiz
-            ];
+}
 
 
-        if (!question) {
+// =====================================================
+// MATERIAL SEARCH
+// =====================================================
 
-            document
-                .getElementById(
-                    "quizQuestion"
+function searchMaterials() {
+
+    const searchInput =
+        document.getElementById(
+            "materialSearch"
+        );
+
+
+    const materialsList =
+        document.getElementById(
+            "materialsList"
+        );
+
+
+    if (
+        !searchInput ||
+        !materialsList
+    ) {
+
+        return;
+
+    }
+
+
+    const searchText =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+    const materials =
+        materialsList.querySelectorAll(
+            ".material-item"
+        );
+
+
+    let visibleCount =
+        0;
+
+
+    materials.forEach(
+        material => {
+
+            const fileName =
+                material.textContent
+                    .toLowerCase();
+
+
+            if (
+                fileName.includes(
+                    searchText
                 )
-                .textContent =
-                "Quiz finished! 🎉";
+            ) {
+
+                material.style.display =
+                    "flex";
+
+                visibleCount++;
+
+            } else {
+
+                material.style.display =
+                    "none";
+
+            }
+
+        }
+    );
 
 
-            document
-                .getElementById(
-                    "quizOptions"
-                )
-                .innerHTML = `
+    let noResults =
+        document.getElementById(
+            "noSearchResults"
+        );
 
-                    <h3>
-                        Score:
-                        ${quizScore}/${quizQuestions.length}
-                    </h3>
 
-                `;
+    if (
+        searchText !== "" &&
+        visibleCount === 0
+    ) {
 
-            return;
+        if (!noResults) {
+
+            noResults =
+                document.createElement(
+                    "p"
+                );
+
+
+            noResults.id =
+                "noSearchResults";
+
+
+            materialsList.appendChild(
+                noResults
+            );
 
         }
 
+
+        noResults.textContent =
+            `🔎 No materials found for "${searchInput.value}"`;
+
+    } else {
+
+        if (noResults) {
+
+            noResults.remove();
+
+        }
+
+    }
+
+}
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+// =====================================================
+// QUIZ
+// =====================================================
+
+const quizQuestions = [
+
+    {
+        question:
+            "What is 25% of 200?",
+
+        options: [
+            "25",
+            "40",
+            "50",
+            "75"
+        ],
+
+        answer:
+            "50"
+    },
+
+
+    {
+        question:
+            "Which gas do humans need for respiration?",
+
+        options: [
+            "Carbon dioxide",
+            "Oxygen",
+            "Nitrogen",
+            "Hydrogen"
+        ],
+
+        answer:
+            "Oxygen"
+    },
+
+
+    {
+        question:
+            "What is the opposite of 'early'?",
+
+        options: [
+            "Fast",
+            "Late",
+            "Quick",
+            "Soon"
+        ],
+
+        answer:
+            "Late"
+    }
+
+];
+
+
+let currentQuiz =
+    0;
+
+
+let quizScore =
+    0;
+
+
+function startQuiz() {
+
+    currentQuiz =
+        0;
+
+
+    quizScore =
+        0;
+
+
+    showQuizQuestion();
+
+}
+
+
+function showQuizQuestion() {
+
+    const question =
+        quizQuestions[
+            currentQuiz
+        ];
+
+
+    if (!question) {
 
         document
             .getElementById(
                 "quizQuestion"
             )
             .textContent =
-            question.question;
-
-
-        const options =
-            document.getElementById(
-                "quizOptions"
-            );
-
-
-        options.innerHTML = "";
+            "Quiz finished! 🎉";
 
 
         document
             .getElementById(
-                "quizResult"
+                "quizOptions"
             )
-            .textContent = "";
+            .innerHTML = `
+
+                <h3>
+                    Score:
+                    ${quizScore}/${quizQuestions.length}
+                </h3>
+
+            `;
+
+        return;
+
+    }
 
 
-        question.options.forEach(
-            option => {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                button.textContent =
-                    option;
+    document
+        .getElementById(
+            "quizQuestion"
+        )
+        .textContent =
+        question.question;
 
 
-                button.onclick =
-                    function () {
-
-                        if (
-                            option ===
-                            question.answer
-                        ) {
-
-                            quizScore++;
-
-
-                            document
-                                .getElementById(
-                                    "quizResult"
-                                )
-                                .textContent =
-                                "✅ Correct!";
-
-                        } else {
-
-                            document
-                                .getElementById(
-                                    "quizResult"
-                                )
-                                .textContent =
-                                "❌ Incorrect.";
-
-                        }
-
-
-                        currentQuiz++;
-
-
-                        setTimeout(
-                            showQuizQuestion,
-                            700
-                        );
-
-                    };
-
-
-                options.appendChild(
-                    button
-                );
-
-            }
+    const options =
+        document.getElementById(
+            "quizOptions"
         );
 
-    }
 
+    options.innerHTML =
+        "";
 
-    // =================================================
-    // FLASHCARDS
-    // =================================================
 
-    const flashcards = [
+    document
+        .getElementById(
+            "quizResult"
+        )
+        .textContent =
+        "";
 
-        {
-            question:
-                "What is photosynthesis?",
 
-            answer:
-                "The process by which green plants make food using sunlight, carbon dioxide and water."
-        },
+    question.options.forEach(
+        option => {
 
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-        {
-            question:
-                "What is an irrational number?",
 
-            answer:
-                "A number that cannot be expressed as a ratio of two integers."
-        },
+            button.textContent =
+                option;
 
 
-        {
-            question:
-                "What is an NGO?",
-
-            answer:
-                "A non-governmental organization that works independently of direct government control."
-        }
-
-    ];
-
-
-    let currentCard =
-        0;
-
-    let cardFlipped =
-        false;
-
-
-    function displayFlashcard() {
-
-        const text =
-            document.getElementById(
-                "flashcardText"
-            );
-
-
-        if (!text) {
-
-            return;
-
-        }
-
-
-        if (cardFlipped) {
-
-            text.textContent =
-                flashcards[
-                    currentCard
-                ].answer;
-
-        } else {
-
-            text.textContent =
-                flashcards[
-                    currentCard
-                ].question;
-
-        }
-
-    }
-
-
-    function flipFlashcard() {
-
-        cardFlipped =
-            !cardFlipped;
-
-        displayFlashcard();
-
-    }
-
-
-    function nextCard() {
-
-        currentCard++;
-
-
-        if (
-            currentCard >=
-            flashcards.length
-        ) {
-
-            currentCard =
-                0;
-
-        }
-
-
-        cardFlipped =
-            false;
-
-
-        displayFlashcard();
-
-    }
-
-
-    function previousCard() {
-
-        currentCard--;
-
-
-        if (
-            currentCard < 0
-        ) {
-
-            currentCard =
-                flashcards.length - 1;
-
-        }
-
-
-        cardFlipped =
-            false;
-
-
-        displayFlashcard();
-
-    }
-
-
-    // =================================================
-    // TIMER
-    // =================================================
-
-    let timerSeconds =
-        25 * 60;
-
-    let timerInterval =
-        null;
-
-
-    function updateTimerDisplay() {
-
-        const display =
-            document.getElementById(
-                "timerDisplay"
-            );
-
-
-        if (!display) {
-
-            return;
-
-        }
-
-
-        const minutes =
-            Math.floor(
-                timerSeconds / 60
-            );
-
-
-        const seconds =
-            timerSeconds % 60;
-
-
-        display.textContent =
-            String(minutes)
-                .padStart(2, "0")
-            + ":" +
-            String(seconds)
-                .padStart(2, "0");
-
-    }
-
-
-    function startTimer() {
-
-        if (timerInterval) {
-
-            return;
-
-        }
-
-
-        timerInterval =
-            setInterval(
+            button.onclick =
                 function () {
 
                     if (
-                        timerSeconds <= 0
+                        option ===
+                        question.answer
                     ) {
 
-                        clearInterval(
-                            timerInterval
-                        );
+                        quizScore++;
 
 
-                        timerInterval =
-                            null;
+                        document
+                            .getElementById(
+                                "quizResult"
+                            )
+                            .textContent =
+                            "✅ Correct!";
 
+                    } else {
 
-                        alert(
-                            "Study session complete! 🎉"
-                        );
-
-
-                        return;
+                        document
+                            .getElementById(
+                                "quizResult"
+                            )
+                            .textContent =
+                            "❌ Incorrect.";
 
                     }
 
 
-                    timerSeconds--;
+                    currentQuiz++;
 
-                    updateTimerDisplay();
 
-                },
-                1000
+                    setTimeout(
+                        showQuizQuestion,
+                        700
+                    );
+
+                };
+
+
+            options.appendChild(
+                button
             );
-
-    }
-
-
-    function pauseTimer() {
-
-        clearInterval(
-            timerInterval
-        );
-
-
-        timerInterval =
-            null;
-
-    }
-
-
-    function resetTimer() {
-
-        clearInterval(
-            timerInterval
-        );
-
-
-        timerInterval =
-            null;
-
-
-        timerSeconds =
-            25 * 60;
-
-
-        updateTimerDisplay();
-
-    }
-
-
-    // =================================================
-    // TODAY'S GOAL
-    // =================================================
-
-    function saveGoal() {
-
-        const input =
-            document.getElementById(
-                "goalInput"
-            );
-
-
-        const display =
-            document.getElementById(
-                "goalDisplay"
-            );
-
-
-        const goal =
-            input.value.trim();
-
-
-        if (!goal) {
-
-            alert(
-                "Please enter a goal."
-            );
-
-            return;
 
         }
+    );
+
+}
 
 
-        localStorage.setItem(
-            "edusphereGoal",
-            goal
+// =====================================================
+// FLASHCARDS
+// =====================================================
+
+const flashcards = [
+
+    {
+        question:
+            "What is photosynthesis?",
+
+        answer:
+            "The process by which green plants make food using sunlight, carbon dioxide and water."
+    },
+
+
+    {
+        question:
+            "What is an irrational number?",
+
+        answer:
+            "A number that cannot be expressed as a ratio of two integers."
+    },
+
+
+    {
+        question:
+            "What is an NGO?",
+
+        answer:
+            "A non-governmental organization that works independently of direct government control."
+    }
+
+];
+
+
+let currentCard =
+    0;
+
+
+let cardFlipped =
+    false;
+
+
+function displayFlashcard() {
+
+    const text =
+        document.getElementById(
+            "flashcardText"
         );
 
 
-        display.innerHTML = `
+    if (!text) {
+
+        return;
+
+    }
+
+
+    if (cardFlipped) {
+
+        text.textContent =
+            flashcards[
+                currentCard
+            ].answer;
+
+    } else {
+
+        text.textContent =
+            flashcards[
+                currentCard
+            ].question;
+
+    }
+
+}
+
+
+function flipFlashcard() {
+
+    cardFlipped =
+        !cardFlipped;
+
+
+    displayFlashcard();
+
+}
+
+
+function nextCard() {
+
+    currentCard++;
+
+
+    if (
+        currentCard >=
+        flashcards.length
+    ) {
+
+        currentCard =
+            0;
+
+    }
+
+
+    cardFlipped =
+        false;
+
+
+    displayFlashcard();
+
+}
+
+
+function previousCard() {
+
+    currentCard--;
+
+
+    if (
+        currentCard < 0
+    ) {
+
+        currentCard =
+            flashcards.length - 1;
+
+    }
+
+
+    cardFlipped =
+        false;
+
+
+    displayFlashcard();
+
+}
+
+
+// =====================================================
+// TIMER
+// =====================================================
+
+let timerSeconds =
+    25 * 60;
+
+
+let timerInterval =
+    null;
+
+
+function updateTimerDisplay() {
+
+    const display =
+        document.getElementById(
+            "timerDisplay"
+        );
+
+
+    if (!display) {
+
+        return;
+
+    }
+
+
+    const minutes =
+        Math.floor(
+            timerSeconds / 60
+        );
+
+
+    const seconds =
+        timerSeconds % 60;
+
+
+    display.textContent =
+        String(minutes)
+            .padStart(2, "0")
+        +
+        ":"
+        +
+        String(seconds)
+            .padStart(2, "0");
+
+}
+
+
+function startTimer() {
+
+    if (timerInterval) {
+
+        return;
+
+    }
+
+
+    timerInterval =
+        setInterval(
+            function () {
+
+                if (
+                    timerSeconds <= 0
+                ) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+
+                    timerInterval =
+                        null;
+
+
+                    alert(
+                        "Study session complete! 🎉"
+                    );
+
+
+                    return;
+
+                }
+
+
+                timerSeconds--;
+
+
+                updateTimerDisplay();
+
+            },
+            1000
+        );
+
+}
+
+
+function pauseTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+}
+
+
+function resetTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+
+    timerSeconds =
+        25 * 60;
+
+
+    updateTimerDisplay();
+
+}
+
+
+// =====================================================
+// TODAY'S GOAL
+// =====================================================
+
+function saveGoal() {
+
+    const input =
+        document.getElementById(
+            "goalInput"
+        );
+
+
+    const display =
+        document.getElementById(
+            "goalDisplay"
+        );
+
+
+    const goal =
+        input.value.trim();
+
+
+    if (!goal) {
+
+        alert(
+            "Please enter a goal."
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "edusphereGoal",
+        goal
+    );
+
+
+    display.innerHTML = `
+
+        <div class="saved-goal">
+
+            🎯
+
+            <strong>
+                Today's Goal
+            </strong>
+
+            <p>
+                ${escapeHTML(goal)}
+            </p>
+
+        </div>
+
+    `;
+
+
+    input.value =
+        "";
+
+}
+
+
+function loadGoal() {
+
+    const goal =
+        localStorage.getItem(
+            "edusphereGoal"
+        );
+
+
+    if (!goal) {
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "goalDisplay"
+        )
+        .innerHTML = `
 
             <div class="saved-goal">
 
@@ -1867,70 +2451,27 @@
 
         `;
 
-
-        input.value = "";
-
-    }
+}
 
 
-    function loadGoal() {
+// =====================================================
+// STARTUP
+// =====================================================
 
-        const goal =
-            localStorage.getItem(
-                "edusphereGoal"
-            );
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
 
+        loadGoal();
 
-        if (!goal) {
+        displayFlashcard();
 
-            return;
+        updateTimerDisplay();
 
-        }
-
-
-        document
-            .getElementById(
-                "goalDisplay"
-            )
-            .innerHTML = `
-
-                <div class="saved-goal">
-
-                    🎯
-
-                    <strong>
-                        Today's Goal
-                    </strong>
-
-                    <p>
-                        ${escapeHTML(goal)}
-                    </p>
-
-                </div>
-
-            `;
+        await updateAuthUI();
 
     }
-
-
-    // =================================================
-    // STARTUP
-    // =================================================
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        async function () {
-
-            loadGoal();
-
-            displayFlashcard();
-
-            updateTimerDisplay();
-
-            await updateAuthUI();
-
-        }
-    );
+);
 
 </script>
 
