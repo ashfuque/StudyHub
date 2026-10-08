@@ -1,5 +1,5 @@
 /* =========================================================
-   EDUSPHERE — MODERN UI
+   EDUSPHERE — COMPLETE MODERN RESPONSIVE CSS
    ========================================================= */
 
 * {
@@ -10,6 +10,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
     background: #f5f7fb;
     color: #1f2937;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 /* =========================================================
@@ -28,13 +30,15 @@ nav {
     top: 0;
     z-index: 1000;
 
+    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 12px 7%;
+    padding: 10px 6%;
 
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
@@ -43,7 +47,9 @@ nav {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* EDUSPHERE LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 nav .logo {
     margin: 0;
@@ -53,46 +59,58 @@ nav .logo {
     align-items: center;
 
     flex-shrink: 0;
+
+    line-height: 0;
 }
 
 nav .logo img {
     display: block;
 
-    width: 125px;
-    height: 42px;
+    width: 135px;
+    height: 48px;
 
     object-fit: contain;
-    object-position: left center;
+    object-position: center;
+
+    flex-shrink: 0;
 }
 
-/* NAVIGATION LINKS */
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
 
 nav .nav-links {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
-    gap: 8px;
+    gap: 5px;
+
+    min-width: 0;
 }
 
 nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     text-decoration: none;
 
     color: #4b5563;
 
-    padding: 9px 13px;
+    padding: 8px 11px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 600;
 
     white-space: nowrap;
 
     transition:
-        color 0.25s ease,
-        background 0.25s ease,
-        transform 0.25s ease;
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 nav a:hover {
@@ -103,23 +121,25 @@ nav a:hover {
 }
 
 /* =========================================================
-   GENERAL SECTION
+   GENERAL SECTIONS
    ========================================================= */
 
 section {
-    padding: 80px 7%;
-
+    width: 100%;
     max-width: 1250px;
 
     margin: auto;
+
+    padding: 75px 7%;
 }
 
 section h2 {
-    font-size: 2rem;
-
     margin-bottom: 12px;
 
     color: #111827;
+
+    font-size: 2rem;
+    line-height: 1.2;
 }
 
 section h3 {
@@ -147,7 +167,7 @@ section h3 {
 
     text-align: center;
 
-    padding: 100px 7%;
+    padding: 90px 7%;
 
     background:
         radial-gradient(
@@ -169,27 +189,28 @@ section h3 {
 }
 
 #home h1 {
-    font-size: clamp(2.7rem, 7vw, 5rem);
+    max-width: 900px;
 
-    line-height: 1.05;
-
-    font-weight: 900;
-
-    letter-spacing: -2px;
+    margin-bottom: 20px;
 
     color: #111827;
 
-    margin-bottom: 20px;
+    font-size: clamp(2.7rem, 7vw, 5rem);
+    font-weight: 900;
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
 }
 
 #home p {
     max-width: 650px;
 
-    margin: 0 auto 30px;
-
-    font-size: 1.15rem;
+    margin: 0 auto 28px;
 
     color: #6b7280;
+
+    font-size: 1.15rem;
 }
 
 /* =========================================================
@@ -204,38 +225,35 @@ button,
     justify-content: center;
 
     width: auto;
-
     min-width: 120px;
 
     margin: 5px;
 
-    border: none;
-
-    border-radius: 12px;
-
     padding: 12px 20px;
 
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #6366f1
+    );
+
+    color: white;
+
     font-family: inherit;
-
     font-size: 0.95rem;
-
     font-weight: 700;
 
     cursor: pointer;
 
-    background:
-        linear-gradient(
-            135deg,
-            #4f46e5,
-            #6366f1
-        );
-
-    color: white;
-
     box-shadow:
         0 8px 20px rgba(79, 70, 229, 0.2);
 
-    transition: all 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 button:hover,
@@ -251,8 +269,7 @@ button:active,
     transform: translateY(0);
 }
 
-button + button,
-.upload-button + button {
+button + button {
     margin-left: 8px;
 }
 
@@ -264,12 +281,11 @@ button + button,
     position: relative;
 
     width: 100%;
-
     max-width: 650px;
 
     height: 130px;
 
-    margin: 45px auto 0;
+    margin: 42px auto 0;
 }
 
 .study-card {
@@ -277,26 +293,22 @@ button + button,
 
     padding: 14px 22px;
 
-    background:
-        rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    border:
-        1px solid rgba(99, 102, 241, 0.15);
-
+    border: 1px solid rgba(99, 102, 241, 0.15);
     border-radius: 14px;
+
+    color: #374151;
+
+    font-weight: 700;
 
     box-shadow:
         0 12px 30px rgba(15, 23, 42, 0.1);
 
-    font-weight: 700;
-
-    color: #374151;
-
-    animation:
-        floatCard 4s ease-in-out infinite;
+    animation: floatCard 4s ease-in-out infinite;
 }
 
 .card-1 {
@@ -321,7 +333,6 @@ button + button,
 }
 
 @keyframes floatCard {
-
     0%,
     100% {
         transform: translateY(0);
@@ -348,8 +359,7 @@ button + button,
 .subject-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 22px;
 
@@ -363,17 +373,15 @@ button + button,
 
     background: #ffffff;
 
-    border:
-        1px solid #e5e7eb;
-
+    border: 1px solid #e5e7eb;
     border-radius: 18px;
 
     box-shadow:
         0 8px 25px rgba(15, 23, 42, 0.06);
 
-    transition: all 0.3s ease;
-
     overflow: hidden;
+
+    transition: all 0.3s ease;
 }
 
 .subject-card::before {
@@ -387,12 +395,11 @@ button + button,
     width: 100%;
     height: 4px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #4f46e5,
-            #8b5cf6
-        );
+    background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #8b5cf6
+    );
 }
 
 .subject-card:hover {
@@ -436,9 +443,7 @@ button + button,
 
     background: #f8fafc;
 
-    border:
-        1px solid #e5e7eb;
-
+    border: 1px solid #e5e7eb;
     border-radius: 20px;
 
     box-shadow:
@@ -448,17 +453,16 @@ button + button,
 #authBox input {
     width: 100%;
 
-    padding: 13px 15px;
-
     margin: 8px 0;
 
-    border:
-        1px solid #dbe0e8;
+    padding: 13px 15px;
 
+    border: 1px solid #dbe0e8;
     border-radius: 11px;
 
-    font-family: inherit;
+    background: white;
 
+    font-family: inherit;
     font-size: 0.95rem;
 
     outline: none;
@@ -482,14 +486,13 @@ button + button,
    ========================================================= */
 
 #materials {
-    background:
-        linear-gradient(
-            180deg,
-            #f8fafc,
-            #eef2ff
-        );
-
     max-width: none;
+
+    background: linear-gradient(
+        180deg,
+        #f8fafc,
+        #eef2ff
+    );
 }
 
 #materials > * {
@@ -500,19 +503,17 @@ button + button,
 }
 
 .upload-box {
-    background: white;
+    margin-top: 25px;
 
     padding: 28px;
 
-    border-radius: 20px;
+    background: white;
 
-    border:
-        1px solid #e5e7eb;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.07);
-
-    margin-top: 25px;
 }
 
 .upload-box h3 {
@@ -526,9 +527,7 @@ button + button,
 
     background: #f8fafc;
 
-    border:
-        1px dashed #cbd5e1;
-
+    border: 1px dashed #cbd5e1;
     border-radius: 12px;
 
     color: #64748b;
@@ -537,23 +536,21 @@ button + button,
 .materials-library {
     margin-top: 30px;
 
-    background: white;
-
     padding: 28px;
 
-    border-radius: 20px;
+    background: white;
 
-    border:
-        1px solid #e5e7eb;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .materials-library h3 {
-    font-size: 1.35rem;
-
     margin-bottom: 18px;
+
+    font-size: 1.35rem;
 }
 
 /* =========================================================
@@ -563,19 +560,16 @@ button + button,
 #materialSearch {
     width: 100%;
 
-    padding: 14px 17px;
-
     margin-bottom: 20px;
 
-    border:
-        1px solid #dbe0e8;
-
-    border-radius: 12px;
+    padding: 14px 17px;
 
     background: #f8fafc;
 
-    font-family: inherit;
+    border: 1px solid #dbe0e8;
+    border-radius: 12px;
 
+    font-family: inherit;
     font-size: 0.95rem;
 
     outline: none;
@@ -596,7 +590,6 @@ button + button,
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     gap: 15px;
@@ -607,9 +600,7 @@ button + button,
 
     background: #f8fafc;
 
-    border:
-        1px solid #e5e7eb;
-
+    border: 1px solid #e5e7eb;
     border-radius: 14px;
 
     transition: all 0.25s ease;
@@ -624,11 +615,11 @@ button + button,
 }
 
 .material-item a {
-    text-decoration: none;
-
     color: #4f46e5;
 
     font-weight: 700;
+
+    text-decoration: none;
 }
 
 .material-item a:hover {
@@ -653,9 +644,7 @@ button + button,
 
     background: #f8fafc;
 
-    border:
-        1px solid #e5e7eb;
-
+    border: 1px solid #e5e7eb;
     border-radius: 20px;
 
     box-shadow:
@@ -678,7 +667,6 @@ button + button,
 .flashcard,
 .flashcard-container {
     max-width: 650px;
-
     min-height: 220px;
 
     margin: 30px auto;
@@ -688,32 +676,26 @@ button + button,
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #eef2ff
-        );
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #eef2ff
+    );
 
-    border:
-        1px solid #dbe3ff;
-
+    border: 1px solid #dbe3ff;
     border-radius: 22px;
+
+    font-size: 1.25rem;
+    font-weight: 700;
 
     box-shadow:
         0 15px 40px rgba(79, 70, 229, 0.1);
 
-    font-size: 1.25rem;
-
-    font-weight: 700;
-
-    transition:
-        transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .flashcard:hover {
@@ -721,7 +703,7 @@ button + button,
 }
 
 /* =========================================================
-   STUDY TIMER
+   TIMER
    ========================================================= */
 
 #timer {
@@ -738,33 +720,28 @@ button + button,
 
     padding: 35px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #eef2ff,
-            #f5f3ff
-        );
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f5f3ff
+    );
 
+    border: 1px solid #ddd6fe;
     border-radius: 24px;
-
-    border:
-        1px solid #ddd6fe;
 
     box-shadow:
         0 15px 40px rgba(79, 70, 229, 0.1);
 }
 
 #timerDisplay {
-    font-size:
-        clamp(3rem, 10vw, 5rem);
-
-    font-weight: 900;
-
-    letter-spacing: 3px;
+    margin: 20px 0;
 
     color: #4f46e5;
 
-    margin: 20px 0;
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 900;
+
+    letter-spacing: 3px;
 }
 
 /* =========================================================
@@ -785,10 +762,8 @@ button + button,
 
     background: white;
 
+    border: 1px solid #e5e7eb;
     border-radius: 20px;
-
-    border:
-        1px solid #e5e7eb;
 
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.06);
@@ -798,17 +773,14 @@ button + button,
 .goal-box input {
     width: 100%;
 
-    padding: 13px 15px;
-
     margin: 10px 0;
 
-    border:
-        1px solid #dbe0e8;
+    padding: 13px 15px;
 
+    border: 1px solid #dbe0e8;
     border-radius: 11px;
 
     font-family: inherit;
-
     font-size: 0.95rem;
 
     outline: none;
@@ -823,7 +795,7 @@ button + button,
 }
 
 /* =========================================================
-   INPUTS
+   GENERAL INPUTS
    ========================================================= */
 
 input,
@@ -844,19 +816,19 @@ textarea::placeholder {
 footer {
     padding: 35px 7%;
 
-    text-align: center;
-
     background: #111827;
 
     color: #9ca3af;
+
+    text-align: center;
 
     font-size: 0.9rem;
 }
 
 footer h3 {
-    color: white;
-
     margin-bottom: 8px;
+
+    color: white;
 }
 
 footer a {
@@ -892,11 +864,10 @@ footer a:hover {
 }
 
 /* =========================================================
-   ANIMATIONS
+   SECTION ANIMATION
    ========================================================= */
 
 @keyframes fadeUp {
-
     from {
         opacity: 0;
         transform: translateY(15px);
@@ -909,8 +880,7 @@ footer a:hover {
 }
 
 section {
-    animation:
-        fadeUp 0.6s ease both;
+    animation: fadeUp 0.6s ease both;
 }
 
 /* =========================================================
@@ -920,28 +890,32 @@ section {
 @media (max-width: 900px) {
 
     nav {
-        padding: 12px 5%;
+        padding: 10px 4%;
     }
 
     nav .logo img {
-        width: 110px;
-        height: 38px;
+        width: 120px;
+        height: 44px;
     }
 
     nav .nav-links {
-        gap: 3px;
+        gap: 2px;
 
         overflow-x: auto;
 
-        max-width: 75%;
+        max-width: 76%;
+
+        scrollbar-width: none;
+    }
+
+    nav .nav-links::-webkit-scrollbar {
+        display: none;
     }
 
     nav a {
-        padding: 8px 9px;
+        padding: 7px 9px;
 
         font-size: 0.8rem;
-
-        white-space: nowrap;
     }
 
     section {
@@ -950,8 +924,7 @@ section {
 
     .subjects-container,
     .subject-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -961,113 +934,147 @@ section {
 
 @media (max-width: 600px) {
 
+    /* -----------------------------------------------------
+       MOBILE NAVIGATION
+       ----------------------------------------------------- */
+
     nav {
+        position: sticky;
+
+        top: 0;
+
         flex-direction: column;
 
-        gap: 10px;
+        gap: 4px;
 
-        padding: 12px 5%;
+        padding: 7px 0 5px;
+    }
+
+    nav .logo {
+        width: 100%;
+
+        height: 55px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
     }
 
     nav .logo img {
-        width: 125px;
-        height: 40px;
+        width: 145px;
+        height: 48px;
+
+        object-fit: contain;
     }
+
+    /*
+       Keep all navigation links in one horizontal row.
+       User can swipe left/right to reach Timer, Goal and Account.
+    */
 
     nav .nav-links {
         width: 100%;
 
-        max-width: none;
+        max-width: 100%;
+
+        display: flex;
 
         justify-content: flex-start;
 
+        align-items: center;
+
+        gap: 2px;
+
+        padding: 3px 12px 8px;
+
         overflow-x: auto;
 
-        padding-bottom: 2px;
+        overflow-y: hidden;
+
+        scrollbar-width: thin;
+
+        scrollbar-color: #c7d2fe #f1f5f9;
+    }
+
+    nav .nav-links::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    nav .nav-links::-webkit-scrollbar-track {
+        background: #f1f5f9;
+
+        border-radius: 10px;
+    }
+
+    nav .nav-links::-webkit-scrollbar-thumb {
+        background: #c7d2fe;
+
+        border-radius: 10px;
     }
 
     nav a {
-        padding: 8px 10px;
+        flex-shrink: 0;
 
-        font-size: 0.8rem;
+        padding: 7px 11px;
+
+        font-size: 0.82rem;
+
+        border-radius: 8px;
     }
 
-    #home {
-        min-height: 70vh;
 
-        padding: 80px 5%;
+    /* -----------------------------------------------------
+       HOME
+       ----------------------------------------------------- */
+
+    #home {
+        min-height: 68vh;
+
+        padding: 65px 18px 55px;
     }
 
     #home h1 {
-        font-size: 2.8rem;
+        font-size: 2.7rem;
+
+        line-height: 1.06;
 
         letter-spacing: -1.5px;
+
+        margin-bottom: 18px;
     }
 
     #home p {
+        margin-bottom: 24px;
+
         font-size: 1rem;
     }
 
-    section h2 {
-        font-size: 1.65rem;
+    #home button {
+        padding: 12px 18px;
+
+        font-size: 0.95rem;
     }
 
-    .subjects-container,
-    .subject-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .upload-box,
-    .materials-library,
-    .quiz-container,
-    .quiz-box,
-    .goal-container,
-    .goal-box,
-    .timer-container,
-    .timer-box {
-        padding: 20px;
-    }
-
-    .material-item {
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-    .flashcard,
-    .flashcard-container {
-        min-height: 190px;
-
-        padding: 25px;
-
-        font-size: 1.05rem;
-    }
-
-    #timerDisplay {
-        font-size: 3.5rem;
-    }
-
-    /* MOBILE BUTTONS */
-
-    button,
-    .upload-button {
-        min-width: 110px;
-
-        padding: 11px 16px;
-    }
-
-    /* MOBILE FLOATING CARDS */
+    /* -----------------------------------------------------
+       FLOATING CARDS
+       ----------------------------------------------------- */
 
     .floating-cards {
-        height: 170px;
+        width: 100%;
 
-        margin-top: 40px;
+        height: 155px;
+
+        margin-top: 38px;
     }
 
     .study-card {
-        padding: 11px 15px;
+        padding: 11px 14px;
 
-        font-size: 0.85rem;
+        font-size: 0.82rem;
+
+        border-radius: 13px;
     }
 
     .card-1 {
@@ -1079,14 +1086,158 @@ section {
     .card-2 {
         left: 50%;
 
-        margin-left: -45px;
-
         top: 0;
+
+        margin-left: 0;
+
+        transform: translateX(-50%);
     }
 
     .card-3 {
         right: 0;
 
-        top: 70px;
+        top: 72px;
+    }
+
+
+    /* -----------------------------------------------------
+       SECTIONS
+       ----------------------------------------------------- */
+
+    section {
+        padding: 55px 18px;
+    }
+
+    section h2 {
+        font-size: 1.65rem;
+    }
+
+
+    /* -----------------------------------------------------
+       SUBJECTS
+       ----------------------------------------------------- */
+
+    .subjects-container,
+    .subject-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+
+        margin-top: 25px;
+    }
+
+    .subject-card {
+        padding: 24px 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       ACCOUNT
+       ----------------------------------------------------- */
+
+    #authBox,
+    #userBox {
+        padding: 20px;
+
+        border-radius: 17px;
+    }
+
+
+    /* -----------------------------------------------------
+       MATERIALS
+       ----------------------------------------------------- */
+
+    .upload-box,
+    .materials-library,
+    .quiz-container,
+    .quiz-box,
+    .goal-container,
+    .goal-box,
+    .timer-container,
+    .timer-box {
+        padding: 20px;
+
+        border-radius: 17px;
+    }
+
+    .material-item {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    /* -----------------------------------------------------
+       FLASHCARDS
+       ----------------------------------------------------- */
+
+    .flashcard,
+    .flashcard-container {
+        min-height: 190px;
+
+        padding: 25px;
+
+        font-size: 1.05rem;
+    }
+
+
+    /* -----------------------------------------------------
+       TIMER
+       ----------------------------------------------------- */
+
+    #timerDisplay {
+        font-size: 3.5rem;
+    }
+
+
+    /* -----------------------------------------------------
+       BUTTONS
+       ----------------------------------------------------- */
+
+    button,
+    .upload-button {
+        min-width: 105px;
+
+        padding: 10px 15px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    nav .logo img {
+        width: 130px;
+        height: 44px;
+    }
+
+    nav .logo {
+        height: 50px;
+    }
+
+    nav a {
+        padding: 6px 9px;
+
+        font-size: 0.76rem;
+    }
+
+    #home {
+        padding-top: 55px;
+    }
+
+    #home h1 {
+        font-size: 2.35rem;
+    }
+
+    #home p {
+        font-size: 0.95rem;
+    }
+
+    .study-card {
+        padding: 9px 11px;
+
+        font-size: 0.76rem;
     }
 }
