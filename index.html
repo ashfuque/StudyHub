@@ -2,20 +2,10 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>EduSphere | Learn. Explore. Grow.</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <title>EduSphere 📚</title>
 
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -23,3022 +13,2374 @@
     <!-- PDF.js -->
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 
-</head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        section {
+            padding: 70px 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 7vw, 64px);
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #6b7280;
+        }
+
+        .hero button,
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 32px;
+            color: #111827;
+        }
+
+        .subject-grid,
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            color: #2563eb;
+        }
+
+        .auth-box,
+        .materials-box,
+        .generator-box,
+        .quiz-box,
+        .flashcard-box,
+        .timer-box,
+        .goal-box {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            margin-top: 20px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 250px;
+            resize: vertical;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .secondary {
+            background: #6b7280;
+        }
+
+        .danger {
+            background: #dc2626;
+        }
+
+        .success {
+            background: #16a34a;
+        }
+
+        .status {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            display: none;
+        }
+
+        .file-picker {
+            border: 2px dashed #93c5fd;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            background: #eff6ff;
+            margin-top: 15px;
+        }
+
+        /*
+         * IMPORTANT:
+         * The input is visually hidden but NOT display:none.
+         * The label opens the native file picker.
+         */
+        #fileInput {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .choose-file-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2563eb;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .choose-file-btn:active {
+            transform: scale(0.97);
+        }
+
+        #selectedFileName {
+            margin-top: 12px;
+            color: #4b5563;
+            word-break: break-word;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-top: 10px;
+            background: #fafafa;
+        }
+
+        .file-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .file-actions button {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .ai-info {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-question {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        .quiz-question h3 {
+            margin-bottom: 12px;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            background: #eef2ff;
+        }
+
+        .quiz-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .correct-answer {
+            color: #15803d;
+            font-weight: 700;
+        }
+
+        .wrong-answer {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .flashcard {
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            background: #eff6ff;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .timer-display {
+            font-size: 55px;
+            text-align: center;
+            font-weight: 800;
+            margin: 20px;
+            color: #2563eb;
+        }
+
+        .goal-progress {
+            height: 15px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .goal-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            transition: width 0.3s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #111827;
+            color: white;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            section {
+                padding: 50px 4%;
+            }
+
+            .file-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .file-actions {
+                width: 100%;
+            }
+
+            .file-actions button {
+                flex: 1;
+            }
+
+            .timer-display {
+                font-size: 45px;
+            }
+        }
+    </style>
+</head>
 
 <body>
 
+    <!-- ========================= NAV ========================= -->
 
-<!-- ================================================= -->
-<!-- NAVIGATION -->
-<!-- ================================================= -->
+    <nav>
+        <div class="logo">
+            <img src="edusphere-logo.png" alt="EduSphere">
+            <span>EduSphere 📚</span>
+        </div>
 
-<nav>
-
-    <h2 class="logo">
-
-        <img
-            src="edusphere-logo.png"
-            alt="EduSphere"
-        >
-
-    </h2>
-
-
-    <div class="nav-links">
-
-        <a href="#home">Home</a>
-
-        <a href="#subjects">Subjects</a>
-
-        <a href="#materials">Materials</a>
-
-        <a href="#quiz">Quiz</a>
-
-        <a href="#flashcards">Flashcards</a>
-
-        <a href="#timer">Timer</a>
-
-    </div>
-
-</nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#subjects">Subjects</a></li>
+            <li><a href="#materials">Materials</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#flashcards">Flashcards</a></li>
+            <li><a href="#timer">Timer</a></li>
+        </ul>
+    </nav>
 
 
-<!-- ================================================= -->
-<!-- HOME -->
-<!-- ================================================= -->
+    <!-- ========================= HOME ========================= -->
 
-<section
-    id="home"
-    class="hero"
->
+    <section id="home" class="hero">
 
-    <h1>
-        Welcome to EduSphere 📚
-    </h1>
+        <h1>Welcome to EduSphere 📚</h1>
 
-    <p>
-        Learn. Explore. Grow.
-    </p>
+        <p>Learn. Explore. Grow.</p>
 
-
-    <a href="#subjects">
-
-        <button>
+        <button onclick="document.getElementById('materials').scrollIntoView()">
             Start Studying 🚀
         </button>
 
-    </a>
+    </section>
 
 
-    <div class="floating-cards">
+    <!-- ========================= SUBJECTS ========================= -->
 
-        <div class="study-card card-1">
-            📚 Notes
-        </div>
+    <section id="subjects">
 
-        <div class="study-card card-2">
-            🧠 Quiz
-        </div>
+        <h2>📚 Subjects</h2>
 
-        <div class="study-card card-3">
-            ⏱️ Focus
-        </div>
+        <div class="subject-grid">
 
-    </div>
+            <div class="card">
+                <h3>Mathematics</h3>
+                <p>Practice numbers, equations, geometry and problem solving.</p>
+            </div>
 
-</section>
+            <div class="card">
+                <h3>Science</h3>
+                <p>Explore physics, chemistry, biology and the world around us.</p>
+            </div>
 
+            <div class="card">
+                <h3>English</h3>
+                <p>Improve grammar, vocabulary, writing and comprehension.</p>
+            </div>
 
-<!-- ================================================= -->
-<!-- SUBJECTS -->
-<!-- ================================================= -->
-
-<section id="subjects">
-
-    <h2>
-        📚 Subjects
-    </h2>
-
-    <p>
-        Choose a subject and start learning.
-    </p>
-
-
-    <div class="subject-container">
-
-
-        <div class="subject-card">
-
-            <h3>
-                📐 Mathematics
-            </h3>
-
-            <p>
-                Algebra, geometry, equations,
-                ratios and more.
-            </p>
-
-            <button
-                onclick="selectSubject('Mathematics')"
-            >
-                Study Math
-            </button>
+            <div class="card">
+                <h3>BGS</h3>
+                <p>Learn about Bangladesh, society, history and geography.</p>
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="subject-card">
 
-            <h3>
-                🔬 Science
-            </h3>
+    <!-- ========================= ACCOUNT ========================= -->
 
-            <p>
-                Physics, chemistry, biology
-                and general science.
-            </p>
+    <section id="account">
 
-            <button
-                onclick="selectSubject('Science')"
-            >
-                Study Science
-            </button>
+        <h2>👤 Account</h2>
 
-        </div>
-
-
-        <div class="subject-card">
-
-            <h3>
-                📖 English
-            </h3>
-
-            <p>
-                Grammar, vocabulary,
-                writing and literature.
-            </p>
-
-            <button
-                onclick="selectSubject('English')"
-            >
-                Study English
-            </button>
-
-        </div>
-
-
-        <div class="subject-card">
-
-            <h3>
-                🌍 BGS
-            </h3>
-
-            <p>
-                Bangladesh and Global Studies,
-                society, history and geography.
-            </p>
-
-            <button
-                onclick="selectSubject('BGS')"
-            >
-                Study BGS
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div id="selectedSubject"></div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- ACCOUNT -->
-<!-- ================================================= -->
-
-<section id="account">
-
-    <h2>
-        🔐 EduSphere Account
-    </h2>
-
-
-    <div id="authBox">
-
-        <input
-            type="email"
-            id="authEmail"
-            placeholder="Email address"
-        >
-
-
-        <input
-            type="password"
-            id="authPassword"
-            placeholder="Password"
-        >
-
-
-        <button onclick="signUp()">
-            Create Account
-        </button>
-
-
-        <button onclick="signIn()">
-            Log In
-        </button>
-
-
-        <p id="authMessage"></p>
-
-    </div>
-
-
-    <div
-        id="userBox"
-        style="display:none;"
-    >
-
-        <p>
-
-            ✅ Logged in as:
-
-            <strong id="userEmail"></strong>
-
-        </p>
-
-
-        <button onclick="signOut()">
-            Log Out
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- MATERIALS -->
-<!-- ================================================= -->
-
-<section id="materials">
-
-    <h2>
-        📚 Study Materials
-    </h2>
-
-
-    <p>
-        Upload and access your study materials
-        from EduSphere.
-    </p>
-
-
-    <div
-        id="loginRequiredMessage"
-        style="display:none;"
-    >
-
-        🔒 Please log in to upload study materials.
-
-    </div>
-
-
-    <div
-        class="upload-box"
-        id="uploadArea"
-    >
-
-
-        <h3>
-            📤 Upload Study Materials
-        </h3>
-
-
-        <p>
-            Upload notes, chapters, PDFs,
-            documents or text files.
-        </p>
-
-
-        <!-- FILE PICKER -->
-
-        <label
-            for="fileInput"
-            class="upload-button"
-        >
-
-            📁 Choose Files
-
-        </label>
-
-
-        <input
-            type="file"
-            id="fileInput"
-            multiple
-            accept=".pdf,.doc,.docx,.txt"
-            onchange="handleFiles()"
-            style="display:none;"
-        >
-
-
-        <!-- UPLOAD BUTTON -->
-
-        <button
-            type="button"
-            onclick="uploadFile()"
-        >
-
-            📤 Upload to EduSphere
-
-        </button>
-
-
-        <!-- SELECTED FILES -->
-
-        <div id="fileList">
-
-            <p>
-                No files selected yet.
-            </p>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- AI STUDY GENERATOR -->
-        <!-- ================================================= -->
-
-        <div class="pdf-extractor">
-
-            <h3>
-                🧠 AI Study Generator
-            </h3>
-
-
-            <p>
-                Upload a PDF, extract its text,
-                and let AI create a 20-question quiz
-                from the material.
-            </p>
-
-
-            <button
-                type="button"
-                id="extractPDFButton"
-                onclick="extractSelectedPDF()"
-            >
-
-                📖 Extract PDF Text
-
-            </button>
-
-
-            <button
-                type="button"
-                id="generateQuizButton"
-                onclick="generateQuizFromPDF()"
-            >
-
-                🧠 Generate 20 MCQs with AI
-
-            </button>
-
-
-            <!-- STATUS -->
-
-            <div
-                id="pdfExtractionStatus"
-                style="display:none;"
-            ></div>
-
-
-            <!-- PDF INFORMATION -->
-
-            <div
-                id="pdfInfo"
-                style="display:none;"
-            ></div>
-
-
-            <!-- EXTRACTED TEXT -->
-
-            <textarea
-                id="pdfExtractedText"
-                readonly
-                placeholder="Extracted PDF text will appear here..."
-            ></textarea>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- LIBRARY -->
-        <!-- ================================================= -->
-
-        <div class="materials-library">
-
-            <h3>
-                📚 Study Materials Library
-            </h3>
-
-
-            <!-- SEARCH -->
+        <div class="auth-box">
 
             <input
-                type="text"
-                id="materialSearch"
-                placeholder="🔎 Search study materials..."
-                oninput="searchMaterials()"
+                type="email"
+                id="email"
+                placeholder="Email address"
+                autocomplete="email"
             >
 
-
-            <!-- MATERIAL LIST -->
-
-            <div id="materialsList">
-
-                <p>
-                    Please log in to view your materials.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- AI QUIZ -->
-<!-- ================================================= -->
-
-<section id="quiz">
-
-    <h2>
-        🧠 AI Quiz
-    </h2>
-
-
-    <p>
-        Generate a quiz from any uploaded PDF.
-    </p>
-
-
-    <div
-        id="generatedQuizContainer"
-        class="quiz-box"
-    >
-
-        <h3>
-            📚 Your AI quiz will appear here
-        </h3>
-
-        <p>
-            Upload a PDF from the Materials section,
-            extract its text, and click
-            <strong>
-                Generate 20 MCQs with AI
-            </strong>.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- FLASHCARDS -->
-<!-- ================================================= -->
-
-<section id="flashcards">
-
-    <h2>
-        🃏 Flashcards
-    </h2>
-
-
-    <p>
-        Use flashcards for quick revision.
-    </p>
-
-
-    <div class="flashcard-box">
-
-        <div
-            id="flashcard"
-            class="flashcard"
-            onclick="flipFlashcard()"
-        >
-
-            <div id="flashcardText">
-                Click to start
-            </div>
-
-        </div>
-
-
-        <div class="flashcard-controls">
-
-            <button onclick="previousCard()">
-                ◀ Previous
-            </button>
-
-
-            <button onclick="nextCard()">
-                Next ▶
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- TIMER -->
-<!-- ================================================= -->
-
-<section id="timer">
-
-    <h2>
-        ⏱️ Study Timer
-    </h2>
-
-
-    <p>
-        Focus on your studies without distractions.
-    </p>
-
-
-    <div class="timer-box">
-
-        <div id="timerDisplay">
-            25:00
-        </div>
-
-
-        <div class="timer-controls">
-
-            <button onclick="startTimer()">
-                ▶ Start
-            </button>
-
-
-            <button onclick="pauseTimer()">
-                ⏸ Pause
-            </button>
-
-
-            <button onclick="resetTimer()">
-                🔄 Reset
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- TODAY'S GOAL -->
-<!-- ================================================= -->
-
-<section id="goal">
-
-    <h2>
-        🎯 Today's Goal
-    </h2>
-
-
-    <p>
-        Set a simple goal for today's study session.
-    </p>
-
-
-    <div class="goal-box">
-
-        <input
-            type="text"
-            id="goalInput"
-            placeholder="Example: Finish Science Chapter 5"
-        >
-
-
-        <button onclick="saveGoal()">
-            Save Goal
-        </button>
-
-
-        <div id="goalDisplay"></div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- FOOTER -->
-<!-- ================================================= -->
-
-<footer>
-
-    <h3>
-        EduSphere 📚
-    </h3>
-
-
-    <p>
-        Study smarter. Practice harder.
-        Improve every day.
-    </p>
-
-
-    <p>
-        © 2026 EduSphere
-    </p>
-
-</footer>
-
-
-<!-- ================================================= -->
-<!-- JAVASCRIPT -->
-<!-- ================================================= -->
-
-<script>
-
-
-// =====================================================
-// SUPABASE
-// =====================================================
-
-const SUPABASE_URL =
-    "https://pjytoktykbaokkuhaera.supabase.co";
-
-
-const SUPABASE_KEY =
-    "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
-
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-// =====================================================
-// PDF.JS WORKER
-// =====================================================
-
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
-
-
-// =====================================================
-// AUTHENTICATION
-// =====================================================
-
-async function signUp() {
-
-    const email =
-        document
-            .getElementById("authEmail")
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById("authPassword")
-            .value;
-
-
-    const message =
-        document.getElementById("authMessage");
-
-
-    if (!email || !password) {
-
-        message.textContent =
-            "⚠️ Please enter your email and password.";
-
-        return;
-
-    }
-
-
-    if (password.length < 6) {
-
-        message.textContent =
-            "⚠️ Password must be at least 6 characters.";
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: password,
-
-            options: {
-
-                emailRedirectTo:
-                    "https://eduspherebd.github.io/EduSphere/"
-
-            }
-
-        });
-
-
-    if (error) {
-
-        message.textContent =
-            "❌ " + error.message;
-
-        return;
-
-    }
-
-
-    if (data.session) {
-
-        message.textContent =
-            "✅ Account created! You are now logged in.";
-
-    } else {
-
-        message.textContent =
-            "✅ Account created! Check your email to confirm your account.";
-
-    }
-
-}
-
-
-// =====================================================
-// LOGIN
-// =====================================================
-
-async function signIn() {
-
-    const email =
-        document
-            .getElementById("authEmail")
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById("authPassword")
-            .value;
-
-
-    const message =
-        document.getElementById("authMessage");
-
-
-    if (!email || !password) {
-
-        message.textContent =
-            "⚠️ Please enter your email and password.";
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-        });
-
-
-    if (error) {
-
-        message.textContent =
-            "❌ " + error.message;
-
-        return;
-
-    }
-
-
-    message.textContent =
-        "✅ Login successful!";
-
-}
-
-
-// =====================================================
-// LOGOUT
-// =====================================================
-
-async function signOut() {
-
-    const {
-        error
-    } =
-        await supabaseClient.auth.signOut();
-
-
-    if (error) {
-
-        alert(
-            "❌ " + error.message
-        );
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("authMessage")
-        .textContent =
-        "You have been logged out.";
-
-}
-
-
-// =====================================================
-// AUTH UI
-// =====================================================
-
-async function updateAuthUI() {
-
-    const {
-        data: { user }
-    } =
-        await supabaseClient.auth.getUser();
-
-
-    const authBox =
-        document.getElementById("authBox");
-
-
-    const userBox =
-        document.getElementById("userBox");
-
-
-    const uploadArea =
-        document.getElementById("uploadArea");
-
-
-    const loginRequiredMessage =
-        document.getElementById(
-            "loginRequiredMessage"
-        );
-
-
-    if (!authBox || !userBox) {
-
-        return;
-
-    }
-
-
-    if (user) {
-
-        authBox.style.display =
-            "none";
-
-
-        userBox.style.display =
-            "block";
-
-
-        document
-            .getElementById("userEmail")
-            .textContent =
-            user.email || "Unknown user";
-
-
-        uploadArea.style.display =
-            "block";
-
-
-        loginRequiredMessage.style.display =
-            "none";
-
-
-        await loadMaterials();
-
-    } else {
-
-        authBox.style.display =
-            "block";
-
-
-        userBox.style.display =
-            "none";
-
-
-        uploadArea.style.display =
-            "none";
-
-
-        loginRequiredMessage.style.display =
-            "block";
-
-
-        const materialsList =
-            document.getElementById(
-                "materialsList"
-            );
-
-
-        if (materialsList) {
-
-            materialsList.innerHTML =
-                "<p>🔒 Please log in to view your materials.</p>";
-
-        }
-
-    }
-
-}
-
-
-// =====================================================
-// AUTH STATE LISTENER
-// =====================================================
-
-supabaseClient.auth.onAuthStateChange(
-    (event, session) => {
-
-        updateAuthUI();
-
-    }
-);
-
-
-// =====================================================
-// SUBJECTS
-// =====================================================
-
-function selectSubject(subject) {
-
-    const box =
-        document.getElementById(
-            "selectedSubject"
-        );
-
-
-    box.innerHTML = `
-
-        <div class="selected-subject">
-
-            <h3>
-                📖 ${escapeHTML(subject)}
-            </h3>
-
-            <p>
-                You selected ${escapeHTML(subject)}.
-                Your study resources can be added here.
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-// =====================================================
-// FILE SELECTION
-// =====================================================
-
-function handleFiles() {
-
-    const fileInput =
-        document.getElementById(
-            "fileInput"
-        );
-
-
-    const fileList =
-        document.getElementById(
-            "fileList"
-        );
-
-
-    if (
-        !fileInput.files ||
-        fileInput.files.length === 0
-    ) {
-
-        fileList.innerHTML =
-            "<p>No files selected yet.</p>";
-
-        return;
-
-    }
-
-
-    fileList.innerHTML =
-        "<h4>Selected Files:</h4>";
-
-
-    Array.from(
-        fileInput.files
-    ).forEach(file => {
-
-        const item =
-            document.createElement(
-                "p"
-            );
-
-
-        item.textContent =
-            "📄 " + file.name;
-
-
-        fileList.appendChild(
-            item
-        );
-
-    });
-
-}
-
-
-// =====================================================
-// PDF TEXT EXTRACTION
-// =====================================================
-
-async function extractSelectedPDF() {
-
-    const fileInput =
-        document.getElementById(
-            "fileInput"
-        );
-
-
-    const status =
-        document.getElementById(
-            "pdfExtractionStatus"
-        );
-
-
-    const info =
-        document.getElementById(
-            "pdfInfo"
-        );
-
-
-    const textArea =
-        document.getElementById(
-            "pdfExtractedText"
-        );
-
-
-    const extractButton =
-        document.getElementById(
-            "extractPDFButton"
-        );
-
-
-    if (
-        !fileInput.files ||
-        fileInput.files.length === 0
-    ) {
-
-        alert(
-            "Please choose a PDF first."
-        );
-
-        return;
-
-    }
-
-
-    const pdfFile =
-        Array.from(
-            fileInput.files
-        ).find(
-            file =>
-                file.type === "application/pdf" ||
-                file.name
-                    .toLowerCase()
-                    .endsWith(".pdf")
-        );
-
-
-    if (!pdfFile) {
-
-        alert(
-            "Please choose a PDF file."
-        );
-
-        return;
-
-    }
-
-
-    const maxSize =
-        25 * 1024 * 1024;
-
-
-    if (pdfFile.size > maxSize) {
-
-        alert(
-            "This PDF is too large.\n\nPlease use a PDF smaller than 25 MB."
-        );
-
-        return;
-
-    }
-
-
-    status.style.display =
-        "block";
-
-
-    status.textContent =
-        "⏳ Opening PDF...";
-
-
-    info.style.display =
-        "none";
-
-
-    textArea.value =
-        "";
-
-
-    extractButton.disabled =
-        true;
-
-
-    extractButton.textContent =
-        "⏳ Extracting...";
-
-
-    try {
-
-        const arrayBuffer =
-            await pdfFile.arrayBuffer();
-
-
-        const pdf =
-            await pdfjsLib
-                .getDocument({
-                    data: arrayBuffer
-                })
-                .promise;
-
-
-        let extractedText =
-            "";
-
-
-        for (
-            let pageNumber = 1;
-            pageNumber <= pdf.numPages;
-            pageNumber++
-        ) {
-
-            status.textContent =
-                `⏳ Reading page ${pageNumber} of ${pdf.numPages}...`;
-
-
-            const page =
-                await pdf.getPage(
-                    pageNumber
-                );
-
-
-            const textContent =
-                await page.getTextContent();
-
-
-            const pageText =
-                textContent.items
-                    .map(
-                        item => item.str
-                    )
-                    .join(" ");
-
-
-            extractedText +=
-                `\n\n--- Page ${pageNumber} ---\n\n` +
-                pageText;
-
-        }
-
-
-        extractedText =
-            extractedText
-                .replace(
-                    /[ \t]+/g,
-                    " "
-                )
-                .replace(
-                    /\n\s+/g,
-                    "\n"
-                )
-                .trim();
-
-
-        if (!extractedText) {
-
-            throw new Error(
-                "No readable text was found in this PDF. The PDF may be image-based or scanned."
-            );
-
-        }
-
-
-        const wordCount =
-            extractedText
-                .split(/\s+/)
-                .filter(
-                    word =>
-                        word.length > 0
-                )
-                .length;
-
-
-        const characterCount =
-            extractedText.length;
-
-
-        textArea.value =
-            extractedText;
-
-
-        info.style.display =
-            "block";
-
-
-        info.innerHTML = `
-
-            <div class="pdf-info-box">
-
-                <strong>
-                    📄 ${escapeHTML(pdfFile.name)}
-                </strong>
-
-                <p>
-                    📑 Pages:
-                    ${pdf.numPages}
-                </p>
-
-                <p>
-                    📝 Words:
-                    ${wordCount.toLocaleString()}
-                </p>
-
-                <p>
-                    🔤 Characters:
-                    ${characterCount.toLocaleString()}
-                </p>
-
-            </div>
-
-        `;
-
-
-        status.textContent =
-            "✅ PDF text extracted successfully!";
-
-
-    } catch (error) {
-
-        console.error(
-            "PDF extraction error:",
-            error
-        );
-
-
-        status.textContent =
-            "❌ PDF extraction failed.";
-
-
-        alert(
-            "PDF extraction failed:\n\n" +
-            error.message
-        );
-
-
-    } finally {
-
-        extractButton.disabled =
-            false;
-
-
-        extractButton.textContent =
-            "📖 Extract PDF Text";
-
-    }
-
-}
-
-
-// =====================================================
-// AI QUIZ GENERATOR
-// =====================================================
-
-async function generateQuizFromPDF() {
-
-    const status =
-        document.getElementById(
-            "pdfExtractionStatus"
-        );
-
-
-    const extractedTextBox =
-        document.getElementById(
-            "pdfExtractedText"
-        );
-
-
-    const generateButton =
-        document.getElementById(
-            "generateQuizButton"
-        );
-
-
-    if (
-        !extractedTextBox ||
-        !extractedTextBox.value.trim()
-    ) {
-
-        alert(
-            "Please extract the PDF text first."
-        );
-
-        return;
-
-    }
-
-
-    const text =
-        extractedTextBox.value.trim();
-
-
-    if (text.length < 100) {
-
-        alert(
-            "There is not enough text to generate a quiz."
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        generateButton.disabled =
-            true;
-
-
-        generateButton.textContent =
-            "⏳ AI is generating...";
-
-
-        status.style.display =
-            "block";
-
-
-        status.textContent =
-            "🧠 Gemini is creating 20 original MCQs from your PDF...";
-
-
-        // ---------------------------------------------
-        // Check login
-        // ---------------------------------------------
-
-        const {
-            data: {
-                session
-            }
-        } =
-            await supabaseClient.auth.getSession();
-
-
-        if (!session) {
-
-            throw new Error(
-                "Please log in before generating a quiz."
-            );
-
-        }
-
-
-        // ---------------------------------------------
-        // Call Supabase Edge Function
-        // ---------------------------------------------
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.functions.invoke(
-                "generate-quiz",
-                {
-
-                    body: {
-
-                        text: text,
-
-                        difficulty: "Mixed"
-
-                    }
-
-                }
-            );
-
-
-        if (error) {
-
-            console.error(
-                "Edge Function error:",
-                error
-            );
-
-            throw new Error(
-                error.message ||
-                "The AI quiz generator failed."
-            );
-
-        }
-
-
-        if (
-            !data ||
-            !Array.isArray(
-                data.questions
-            )
-        ) {
-
-            console.error(
-                "Invalid AI response:",
-                data
-            );
-
-            throw new Error(
-                "The AI returned an invalid quiz."
-            );
-
-        }
-
-
-        if (
-            data.questions.length !== 20
-        ) {
-
-            throw new Error(
-                `AI returned ${data.questions.length} questions instead of 20.`
-            );
-
-        }
-
-
-        // ---------------------------------------------
-        // Validate questions
-        // ---------------------------------------------
-
-        data.questions.forEach(
-            (question, index) => {
-
-                if (
-                    !question.question ||
-                    !Array.isArray(
-                        question.options
-                    ) ||
-                    question.options.length !== 4
-                ) {
-
-                    throw new Error(
-                        `Question ${index + 1} has invalid data.`
-                    );
-
-                }
-
-            }
-        );
-
-
-        // ---------------------------------------------
-        // Save globally
-        // ---------------------------------------------
-
-        window.generatedQuiz =
-            data.questions;
-
-
-        status.textContent =
-            "✅ 20 MCQs generated successfully!";
-
-
-        // ---------------------------------------------
-        // Display quiz
-        // ---------------------------------------------
-
-        displayGeneratedQuiz(
-            window.generatedQuiz
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "AI quiz error:",
-            error
-        );
-
-
-        status.textContent =
-            "❌ Quiz generation failed.";
-
-
-        alert(
-            "Quiz generation failed:\n\n" +
-            error.message
-        );
-
-
-    } finally {
-
-        generateButton.disabled =
-            false;
-
-
-        generateButton.textContent =
-            "🧠 Generate 20 MCQs with AI";
-
-    }
-
-}
-
-
-// =====================================================
-// DISPLAY AI QUIZ
-// =====================================================
-
-function displayGeneratedQuiz(
-    questions
-) {
-
-    const quizContainer =
-        document.getElementById(
-            "generatedQuizContainer"
-        );
-
-
-    if (!quizContainer) {
-
-        return;
-
-    }
-
-
-    quizContainer.innerHTML = `
-
-        <div class="ai-quiz-header">
-
-            <h3>
-                🧠 AI Generated Quiz
-            </h3>
-
-            <p>
-                20 questions generated from
-                your uploaded study material.
-            </p>
-
-        </div>
-
-
-        <div
-            id="generatedQuizQuestions"
-            class="generated-quiz-questions"
-        ></div>
-
-
-        <button
-            type="button"
-            onclick="submitGeneratedQuiz()"
-        >
-
-            ✅ Submit Quiz
-
-        </button>
-
-
-        <div
-            id="generatedQuizResult"
-        ></div>
-
-    `;
-
-
-    const questionsContainer =
-        document.getElementById(
-            "generatedQuizQuestions"
-        );
-
-
-    questions.forEach(
-        (question, index) => {
-
-            const questionBox =
-                document.createElement(
-                    "div"
-                );
-
-
-            questionBox.className =
-                "generated-question";
-
-
-            questionBox.innerHTML = `
-
-                <h4>
-
-                    ${index + 1}.
-                    ${escapeHTML(
-                        question.question
-                    )}
-
-                </h4>
-
-                <div
-                    class="generated-options"
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+            <div class="button-row">
+
+                <button onclick="signUp()">
+                    Create Account
+                </button>
+
+                <button onclick="logIn()">
+                    Log In
+                </button>
+
+                <button
+                    onclick="logOut()"
+                    class="secondary"
                 >
+                    Log Out
+                </button>
 
-                    ${question.options
-                        .map(
-                            (
-                                option,
-                                optionIndex
-                            ) => `
+            </div>
 
-                                <label>
+            <div id="authStatus" class="status"></div>
 
-                                    <input
-                                        type="radio"
-                                        name="generated-question-${index}"
-                                        value="${optionIndex}"
-                                    >
+        </div>
 
-                                    <span>
-                                        ${escapeHTML(
-                                            option
-                                        )}
-                                    </span>
+    </section>
 
-                                </label>
 
-                            `
-                        )
-                        .join("")}
+    <!-- ========================= MATERIALS ========================= -->
+
+    <section id="materials">
+
+        <h2>📂 Study Materials</h2>
+
+        <div class="materials-box">
+
+            <div id="loginMessage" class="ai-info">
+                Please log in to upload and manage your study materials.
+            </div>
+
+
+            <!-- FILE PICKER -->
+
+            <div id="uploadArea" class="hidden">
+
+                <h3>Upload Study Material</h3>
+
+                <div class="file-picker">
+
+                    <!-- REAL FILE INPUT -->
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf,application/pdf"
+                    >
+
+                    <!-- CLICKING THIS OPENS FILE PICKER -->
+                    <label
+                        for="fileInput"
+                        class="choose-file-btn"
+                    >
+                        📁 Choose PDF
+                    </label>
+
+                    <p id="selectedFileName">
+                        No file selected
+                    </p>
+
+                    <div class="button-row" style="justify-content:center;">
+
+                        <button
+                            id="uploadButton"
+                            onclick="uploadSelectedFile()"
+                        >
+                            ⬆️ Upload PDF
+                        </button>
+
+                    </div>
 
                 </div>
 
-            `;
+
+                <div id="uploadStatus" class="status"></div>
 
 
-            questionsContainer.appendChild(
-                questionBox
-            );
+                <!-- USER FILES -->
 
-        }
-    );
+                <h3 style="margin-top:30px;">
+                    📚 My Materials
+                </h3>
 
+                <input
+                    type="text"
+                    id="materialSearch"
+                    placeholder="🔎 Search your materials..."
+                    oninput="filterMaterials()"
+                >
 
-    // Go to quiz section
-
-    document
-        .getElementById("quiz")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-// =====================================================
-// SUBMIT AI QUIZ
-// =====================================================
-
-function submitGeneratedQuiz() {
-
-    if (
-        !window.generatedQuiz ||
-        window.generatedQuiz.length === 0
-    ) {
-
-        return;
-
-    }
+                <div id="fileList">
+                    Loading materials...
+                </div>
 
 
-    let score =
-        0;
+                <!-- ================= AI GENERATOR ================= -->
+
+                <div class="generator-box">
+
+                    <h3>🧠 AI Study Generator</h3>
+
+                    <div class="ai-info">
+
+                        <strong>How it works:</strong>
+
+                        <p>
+                            Select a PDF, extract its text, then EduSphere
+                            will use AI to create 20 MCQs based only on
+                            that material.
+                        </p>
+
+                    </div>
 
 
-    let answered =
-        0;
+                    <div class="button-row">
+
+                        <button onclick="extractSelectedPDF()">
+                            📖 Extract PDF Text
+                        </button>
+
+                        <button
+                            onclick="generateQuizFromPDF()"
+                            class="success"
+                            id="generateQuizButton"
+                        >
+                            🧠 Generate 20 MCQs with AI
+                        </button>
+
+                    </div>
 
 
-    window.generatedQuiz.forEach(
-        (question, index) => {
-
-            const selected =
-                document.querySelector(
-                    `input[name="generated-question-${index}"]:checked`
-                );
+                    <div
+                        id="pdfExtractionStatus"
+                        class="status"
+                    ></div>
 
 
-            if (selected) {
-
-                answered++;
-
-
-                if (
-                    Number(
-                        selected.value
-                    ) ===
-                    Number(
-                        question.answer
-                    )
-                ) {
-
-                    score++;
-
-                }
-
-            }
-
-        }
-    );
+                    <div
+                        id="pdfInfo"
+                        class="ai-info hidden"
+                    ></div>
 
 
-    const total =
-        window.generatedQuiz.length;
+                    <textarea
+                        id="pdfExtractedText"
+                        placeholder="Extracted PDF text will appear here..."
+                    ></textarea>
 
+                </div>
 
-    const percentage =
-        Math.round(
-            (score / total) * 100
-        );
-
-
-    const result =
-        document.getElementById(
-            "generatedQuizResult"
-        );
-
-
-    if (!result) {
-
-        return;
-
-    }
-
-
-    let message;
-
-
-    if (percentage >= 90) {
-
-        message =
-            "🔥 Outstanding! Excellent understanding.";
-
-    } else if (percentage >= 80) {
-
-        message =
-            "👏 Excellent work! Keep it up.";
-
-    } else if (percentage >= 70) {
-
-        message =
-            "👍 Great job! A little more practice will help.";
-
-    } else if (percentage >= 50) {
-
-        message =
-            "📚 Good attempt. Review the material and try again.";
-
-    } else {
-
-        message =
-            "💪 Keep practicing. You can improve this score.";
-
-    }
-
-
-    result.innerHTML = `
-
-        <div class="quiz-result-box">
-
-            <h3>
-                🎉 Quiz Result
-            </h3>
-
-            <p>
-                Score:
-                <strong>
-                    ${score}/${total}
-                </strong>
-            </p>
-
-            <p>
-                Percentage:
-                <strong>
-                    ${percentage}%
-                </strong>
-            </p>
-
-            <p>
-                Answered:
-                <strong>
-                    ${answered}/${total}
-                </strong>
-            </p>
-
-            <p>
-                ${message}
-            </p>
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="quiz-explanations">
 
-            <h3>
-                📖 Review & Explanations
-            </h3>
+    <!-- ========================= QUIZ ========================= -->
 
-            ${window.generatedQuiz
-                .map(
-                    (
-                        question,
-                        index
-                    ) => {
+    <section id="quiz">
 
-                        const selected =
-                            document.querySelector(
-                                `input[name="generated-question-${index}"]:checked`
-                            );
+        <h2>🧠 AI Quiz</h2>
 
+        <div class="quiz-box">
 
-                        const selectedAnswer =
-                            selected
-                                ? Number(
-                                    selected.value
-                                )
-                                : null;
-
-
-                        const correct =
-                            Number(
-                                question.answer
-                            );
-
-
-                        const isCorrect =
-                            selectedAnswer ===
-                            correct;
-
-
-                        return `
-
-                            <div
-                                class="
-                                    explanation-item
-                                    ${
-                                        isCorrect
-                                            ? "correct-answer"
-                                            : "wrong-answer"
-                                    }
-                                "
-                            >
-
-                                <strong>
-                                    ${index + 1}.
-                                    ${escapeHTML(
-                                        question.question
-                                    )}
-                                </strong>
-
-
-                                <p>
-
-                                    ${
-                                        selectedAnswer ===
-                                        null
-
-                                            ? "⚪ Not answered."
-
-                                            : isCorrect
-
-                                                ? "✅ Correct!"
-
-                                                : "❌ Incorrect."
-                                    }
-
-                                </p>
-
-
-                                <p>
-
-                                    <strong>
-                                        Correct answer:
-                                    </strong>
-
-                                    ${escapeHTML(
-                                        question.options[
-                                            correct
-                                        ]
-                                    )}
-
-                                </p>
-
-
-                                <p>
-
-                                    <strong>
-                                        Explanation:
-                                    </strong>
-
-                                    ${escapeHTML(
-                                        question.explanation ||
-                                        "No explanation provided."
-                                    )}
-
-                                </p>
-
-                            </div>
-
-                        `;
-
-                    }
-                )
-                .join("")}
-
-        </div>
-
-    `;
-
-
-    result.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-}
-
-
-// =====================================================
-// UPLOAD FILES
-// =====================================================
-
-async function uploadFile() {
-
-    const fileInput =
-        document.getElementById(
-            "fileInput"
-        );
-
-
-    const files =
-        fileInput.files;
-
-
-    if (
-        !files ||
-        files.length === 0
-    ) {
-
-        alert(
-            "Please choose at least one file first."
-        );
-
-        return;
-
-    }
-
-
-    const {
-        data: { user }
-    } =
-        await supabaseClient.auth.getUser();
-
-
-    if (!user) {
-
-        alert(
-            "Please log in first."
-        );
-
-        return;
-
-    }
-
-
-    for (
-        const file of files
-    ) {
-
-        const safeName =
-            file.name.replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
-            );
-
-
-        const fileName =
-            user.id +
-            "/" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2, 8) +
-            "-" +
-            safeName;
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .storage
-                .from(
-                    "study-materials"
-                )
-                .upload(
-                    fileName,
-                    file
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Upload error:",
-                error
-            );
-
-
-            alert(
-                "Upload failed:\n" +
-                error.message
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    alert(
-        "All files uploaded successfully! 📚"
-    );
-
-
-    fileInput.value =
-        "";
-
-
-    document
-        .getElementById(
-            "fileList"
-        )
-        .innerHTML =
-        "<p>No files selected yet.</p>";
-
-
-    await loadMaterials();
-
-}
-
-
-// =====================================================
-// LOAD MATERIALS
-// =====================================================
-
-async function loadMaterials() {
-
-    const materialsList =
-        document.getElementById(
-            "materialsList"
-        );
-
-
-    if (!materialsList) {
-
-        return;
-
-    }
-
-
-    const {
-        data: { user },
-        error: userError
-    } =
-        await supabaseClient.auth.getUser();
-
-
-    if (userError || !user) {
-
-        materialsList.innerHTML =
-            "<p>🔒 Please log in to view your study materials.</p>";
-
-        return;
-
-    }
-
-
-    materialsList.innerHTML =
-        "<p>Loading your materials...</p>";
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .storage
-            .from(
-                "study-materials"
-            )
-            .list(
-                user.id,
-                {
-
-                    limit: 100,
-
-                    sortBy: {
-
-                        column:
-                            "created_at",
-
-                        order:
-                            "desc"
-
-                    }
-
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Library error:",
-            error
-        );
-
-
-        materialsList.innerHTML = `
-
-            <div class="error-message">
+            <div class="ai-info">
+                <strong>EduSphere AI Quiz</strong>
 
                 <p>
-                    ❌ Could not load materials.
+                    Generate a 20-question MCQ quiz from your selected
+                    PDF in the Materials section.
                 </p>
+            </div>
+
+            <div id="generatedQuizContainer">
 
                 <p>
-                    ${escapeHTML(
-                        error.message
-                    )}
+                    No AI quiz generated yet.
                 </p>
 
             </div>
 
-        `;
+        </div>
 
-        return;
-
-    }
+    </section>
 
 
-    if (
-        !data ||
-        data.length === 0
-    ) {
+    <!-- ========================= FLASHCARDS ========================= -->
 
-        materialsList.innerHTML =
-            "<p>No study materials uploaded yet.</p>";
+    <section id="flashcards">
 
-        return;
+        <h2>🃏 Flashcards</h2>
 
-    }
+        <div class="flashcard-box">
 
-
-    materialsList.innerHTML =
-        "";
-
-
-    for (
-        const file of data
-    ) {
-
-        if (!file.name) {
-
-            continue;
-
-        }
-
-
-        const filePath =
-            user.id +
-            "/" +
-            file.name;
-
-
-        const {
-            data: signedData,
-            error: signedError
-        } =
-            await supabaseClient
-                .storage
-                .from(
-                    "study-materials"
-                )
-                .createSignedUrl(
-                    filePath,
-                    60 * 60
-                );
-
-
-        if (signedError) {
-
-            console.error(
-                "Signed URL error:",
-                signedError
-            );
-
-            continue;
-
-        }
-
-
-        const fileDiv =
-            document.createElement(
-                "div"
-            );
-
-
-        fileDiv.className =
-            "material-item";
-
-
-        fileDiv.innerHTML = `
-
-            <div class="material-name">
-
-                📄
-
-                <span>
-                    ${escapeHTML(
-                        file.name
-                    )}
-                </span>
-
+            <div
+                id="flashcard"
+                class="flashcard"
+            >
+                Photosynthesis
             </div>
 
-
-            <a
-                href="${signedData.signedUrl}"
-                target="_blank"
-                rel="noopener noreferrer"
+            <div
+                class="button-row"
+                style="justify-content:center;"
             >
 
-                📥 Open
+                <button onclick="previousFlashcard()">
+                    ◀ Previous
+                </button>
 
-            </a>
+                <button onclick="flipFlashcard()">
+                    🔄 Flip
+                </button>
 
-        `;
+                <button onclick="nextFlashcard()">
+                    Next ▶
+                </button>
 
+            </div>
 
-        materialsList.appendChild(
-            fileDiv
-        );
+        </div>
 
-    }
-
-
-    searchMaterials();
-
-}
-
-
-// =====================================================
-// MATERIAL SEARCH
-// =====================================================
-
-function searchMaterials() {
-
-    const searchInput =
-        document.getElementById(
-            "materialSearch"
-        );
+    </section>
 
 
-    const materialsList =
-        document.getElementById(
-            "materialsList"
-        );
+    <!-- ========================= TIMER ========================= -->
+
+    <section id="timer">
+
+        <h2>⏱️ Focus Timer</h2>
+
+        <div class="timer-box">
+
+            <div
+                id="timerDisplay"
+                class="timer-display"
+            >
+                25:00
+            </div>
+
+            <div
+                class="button-row"
+                style="justify-content:center;"
+            >
+
+                <button onclick="startTimer()">
+                    Start
+                </button>
+
+                <button
+                    onclick="pauseTimer()"
+                    class="secondary"
+                >
+                    Pause
+                </button>
+
+                <button
+                    onclick="resetTimer()"
+                    class="danger"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-    if (
-        !searchInput ||
-        !materialsList
-    ) {
+    <!-- ========================= GOAL ========================= -->
 
-        return;
+    <section id="goal">
 
-    }
+        <h2>🎯 Today's Goal</h2>
 
+        <div class="goal-box">
 
-    const searchText =
-        searchInput.value
-            .toLowerCase()
-            .trim();
+            <p>
+                Focus on your studies and complete your daily target.
+            </p>
 
+            <div class="goal-progress">
+                <div
+                    id="goalProgressBar"
+                    class="goal-progress-bar"
+                ></div>
+            </div>
 
-    const materials =
-        materialsList.querySelectorAll(
-            ".material-item"
-        );
+            <p
+                id="goalText"
+                style="margin-top:10px;"
+            >
+                0% completed
+            </p>
 
+        </div>
 
-    let visibleCount =
-        0;
-
-
-    materials.forEach(
-        material => {
-
-            const fileName =
-                material.textContent
-                    .toLowerCase();
+    </section>
 
 
-            if (
-                fileName.includes(
-                    searchText
-                )
-            ) {
-
-                material.style.display =
-                    "flex";
+    <footer>
+        © 2026 EduSphere 📚 — Learn. Explore. Grow.
+    </footer>
 
 
-                visibleCount++;
+    <!-- ========================= JAVASCRIPT ========================= -->
+
+    <script>
+
+        // =========================================================
+        // SUPABASE
+        // =========================================================
+
+        const SUPABASE_URL =
+            "https://pjytoktykbaokkuhaera.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_jizTuUuoywy3im2S30OzXA_PfO4mWUY";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+        const BUCKET_NAME = "study-materials";
+
+
+        // =========================================================
+        // PDF.JS
+        // =========================================================
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+
+
+        // =========================================================
+        // GLOBAL VARIABLES
+        // =========================================================
+
+        let currentUser = null;
+        let selectedPDFFile = null;
+        let extractedPDFText = "";
+
+        let generatedQuiz = [];
+
+        let timerSeconds = 25 * 60;
+        let timerInterval = null;
+
+        let flashcardIndex = 0;
+        let flashcardFlipped = false;
+
+
+        // =========================================================
+        // DOM
+        // =========================================================
+
+        const fileInput =
+            document.getElementById("fileInput");
+
+        const selectedFileName =
+            document.getElementById("selectedFileName");
+
+
+        // =========================================================
+        // FILE SELECTION
+        // =========================================================
+
+        fileInput.addEventListener("change", function () {
+
+            console.log("File input changed");
+
+            if (!this.files || this.files.length === 0) {
+
+                selectedPDFFile = null;
+
+                selectedFileName.textContent =
+                    "No file selected";
+
+                return;
+            }
+
+            const file = this.files[0];
+
+            selectedPDFFile = file;
+
+            selectedFileName.textContent =
+                "Selected: " + file.name;
+
+            showStatus(
+                "uploadStatus",
+                "PDF selected successfully.",
+                false
+            );
+
+            console.log("Selected PDF:", file);
+
+        });
+
+
+        // =========================================================
+        // AUTH STATUS
+        // =========================================================
+
+        async function checkSession() {
+
+            const {
+                data: { session }
+            } = await supabaseClient.auth.getSession();
+
+            currentUser =
+                session ? session.user : null;
+
+            updateAuthUI();
+        }
+
+
+        function updateAuthUI() {
+
+            const uploadArea =
+                document.getElementById("uploadArea");
+
+            const loginMessage =
+                document.getElementById("loginMessage");
+
+            if (currentUser) {
+
+                uploadArea.classList.remove("hidden");
+
+                loginMessage.classList.add("hidden");
+
+                loadMaterials();
 
             } else {
 
-                material.style.display =
-                    "none";
+                uploadArea.classList.add("hidden");
+
+                loginMessage.classList.remove("hidden");
 
             }
-
         }
-    );
 
 
-    let noResults =
-        document.getElementById(
-            "noSearchResults"
-        );
+        // =========================================================
+        // SIGN UP
+        // =========================================================
 
+        async function signUp() {
 
-    if (
-        searchText !== "" &&
-        visibleCount === 0
-    ) {
+            const email =
+                document.getElementById("email").value.trim();
 
-        if (!noResults) {
+            const password =
+                document.getElementById("password").value;
 
-            noResults =
-                document.createElement(
-                    "p"
+            if (!email || !password) {
+
+                showStatus(
+                    "authStatus",
+                    "Please enter your email and password.",
+                    true
                 );
 
+                return;
+            }
 
-            noResults.id =
-                "noSearchResults";
+            const {
+                data,
+                error
+            } = await supabaseClient.auth.signUp({
 
+                email: email,
 
-            materialsList.appendChild(
-                noResults
+                password: password,
+
+                options: {
+                    emailRedirectTo:
+                        "https://eduspherebd.github.io/EduSphere/"
+                }
+
+            });
+
+            if (error) {
+
+                showStatus(
+                    "authStatus",
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            showStatus(
+                "authStatus",
+                "Account created. Check your email to confirm your account.",
+                false
             );
+        }
+
+
+        // =========================================================
+        // LOGIN
+        // =========================================================
+
+        async function logIn() {
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            if (!email || !password) {
+
+                showStatus(
+                    "authStatus",
+                    "Please enter your email and password.",
+                    true
+                );
+
+                return;
+            }
+
+            const {
+                data,
+                error
+            } = await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+            if (error) {
+
+                showStatus(
+                    "authStatus",
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            currentUser = data.user;
+
+            showStatus(
+                "authStatus",
+                "Logged in successfully!",
+                false
+            );
+
+            updateAuthUI();
+        }
+
+
+        // =========================================================
+        // LOGOUT
+        // =========================================================
+
+        async function logOut() {
+
+            const {
+                error
+            } = await supabaseClient.auth.signOut();
+
+            if (error) {
+
+                showStatus(
+                    "authStatus",
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            currentUser = null;
+
+            showStatus(
+                "authStatus",
+                "Logged out successfully.",
+                false
+            );
+
+            updateAuthUI();
+        }
+
+
+        // =========================================================
+        // UPLOAD PDF
+        // =========================================================
+
+        async function uploadSelectedFile() {
+
+            if (!currentUser) {
+
+                showStatus(
+                    "uploadStatus",
+                    "Please log in first.",
+                    true
+                );
+
+                return;
+            }
+
+            if (!selectedPDFFile) {
+
+                showStatus(
+                    "uploadStatus",
+                    "Please choose a PDF first.",
+                    true
+                );
+
+                return;
+            }
+
+            if (
+                selectedPDFFile.type !== "application/pdf" &&
+                !selectedPDFFile.name.toLowerCase().endsWith(".pdf")
+            ) {
+
+                showStatus(
+                    "uploadStatus",
+                    "Only PDF files are allowed.",
+                    true
+                );
+
+                return;
+            }
+
+            if (selectedPDFFile.size > 25 * 1024 * 1024) {
+
+                showStatus(
+                    "uploadStatus",
+                    "PDF must be smaller than 25 MB.",
+                    true
+                );
+
+                return;
+            }
+
+            const safeName =
+                selectedPDFFile.name
+                    .replace(/[^a-zA-Z0-9._-]/g, "_");
+
+            const uniqueName =
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2, 9) +
+                "_" +
+                safeName;
+
+            const filePath =
+                currentUser.id +
+                "/" +
+                uniqueName;
+
+            showStatus(
+                "uploadStatus",
+                "Uploading PDF...",
+                false
+            );
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .storage
+                .from(BUCKET_NAME)
+                .upload(
+                    filePath,
+                    selectedPDFFile,
+                    {
+                        contentType: "application/pdf",
+                        upsert: false
+                    }
+                );
+
+            if (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "uploadStatus",
+                    "Upload failed: " + error.message,
+                    true
+                );
+
+                return;
+            }
+
+            showStatus(
+                "uploadStatus",
+                "PDF uploaded successfully!",
+                false
+            );
+
+            selectedPDFFile = null;
+
+            fileInput.value = "";
+
+            selectedFileName.textContent =
+                "No file selected";
+
+            await loadMaterials();
+        }
+
+
+        // =========================================================
+        // LOAD MATERIALS
+        // =========================================================
+
+        async function loadMaterials() {
+
+            if (!currentUser) return;
+
+            const fileList =
+                document.getElementById("fileList");
+
+            fileList.innerHTML =
+                "Loading materials...";
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .storage
+                .from(BUCKET_NAME)
+                .list(
+                    currentUser.id,
+                    {
+                        limit: 100,
+                        offset: 0,
+                        sortBy: {
+                            column: "created_at",
+                            order: "desc"
+                        }
+                    }
+                );
+
+            if (error) {
+
+                console.error(error);
+
+                fileList.innerHTML =
+                    `<p style="color:#dc2626;">
+                        Failed to load materials:
+                        ${escapeHTML(error.message)}
+                    </p>`;
+
+                return;
+            }
+
+            const files =
+                (data || [])
+                    .filter(item => item.id !== null);
+
+            if (files.length === 0) {
+
+                fileList.innerHTML =
+                    "<p>No uploaded materials yet.</p>";
+
+                return;
+            }
+
+            fileList.innerHTML = "";
+
+            files.forEach(file => {
+
+                const fullPath =
+                    currentUser.id +
+                    "/" +
+                    file.name;
+
+                const item =
+                    document.createElement("div");
+
+                item.className =
+                    "file-item";
+
+                item.dataset.filename =
+                    file.name.toLowerCase();
+
+                const fileInfo =
+                    document.createElement("div");
+
+                fileInfo.className =
+                    "file-info";
+
+                fileInfo.innerHTML = `
+                    <div class="file-name">
+                        📄 ${escapeHTML(file.name)}
+                    </div>
+
+                    <small>
+                        ${formatBytes(file.metadata?.size || 0)}
+                    </small>
+                `;
+
+                const actions =
+                    document.createElement("div");
+
+                actions.className =
+                    "file-actions";
+
+
+                // OPEN
+                const openButton =
+                    document.createElement("button");
+
+                openButton.textContent =
+                    "Open";
+
+                openButton.onclick =
+                    () => openFile(fullPath);
+
+                actions.appendChild(openButton);
+
+
+                // DOWNLOAD
+                const downloadButton =
+                    document.createElement("button");
+
+                downloadButton.textContent =
+                    "Download";
+
+                downloadButton.className =
+                    "secondary";
+
+                downloadButton.onclick =
+                    () => downloadFile(fullPath, file.name);
+
+                actions.appendChild(downloadButton);
+
+
+                // DELETE
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.textContent =
+                    "Delete";
+
+                deleteButton.className =
+                    "danger";
+
+                deleteButton.onclick =
+                    () => deleteFile(fullPath);
+
+                actions.appendChild(deleteButton);
+
+
+                item.appendChild(fileInfo);
+
+                item.appendChild(actions);
+
+                fileList.appendChild(item);
+
+            });
 
         }
 
 
-        noResults.textContent =
-            `🔎 No materials found for "${searchInput.value}"`;
-
-    } else {
-
-        if (noResults) {
-
-            noResults.remove();
-
-        }
-
-    }
-
-}
-
-
-// =====================================================
-// ESCAPE HTML
-// =====================================================
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.textContent =
-        text ?? "";
-
-
-    return div.innerHTML;
-
-}
-
-
-// =====================================================
-// OLD CLASSIC QUIZ
-// =====================================================
-
-const quizQuestions = [
-
-    {
-
-        question:
-            "What is 25% of 200?",
-
-        options: [
-
-            "25",
-            "40",
-            "50",
-            "75"
-
-        ],
-
-        answer:
-            "50"
-
-    },
-
-
-    {
-
-        question:
-            "Which gas do humans need for respiration?",
-
-        options: [
-
-            "Carbon dioxide",
-            "Oxygen",
-            "Nitrogen",
-            "Hydrogen"
-
-        ],
-
-        answer:
-            "Oxygen"
-
-    },
-
-
-    {
-
-        question:
-            "What is the opposite of 'early'?",
-
-        options: [
-
-            "Fast",
-            "Late",
-            "Quick",
-            "Soon"
-
-        ],
-
-        answer:
-            "Late"
-
-    }
-
-];
-
-
-let currentQuiz =
-    0;
-
-
-let quizScore =
-    0;
-
-
-function startQuiz() {
-
-    currentQuiz =
-        0;
-
-
-    quizScore =
-        0;
-
-
-    showQuizQuestion();
-
-}
-
-
-function showQuizQuestion() {
-
-    const question =
-        quizQuestions[
-            currentQuiz
-        ];
-
-
-    if (!question) {
-
-        document
-            .getElementById(
-                "quizQuestion"
-            )
-            ?.textContent =
-            "Quiz finished! 🎉";
-
-
-        return;
-
-    }
-
-}
-
-
-// =====================================================
-// FLASHCARDS
-// =====================================================
-
-const flashcards = [
-
-    {
-
-        question:
-            "What is photosynthesis?",
-
-        answer:
-            "The process by which green plants make food using sunlight, carbon dioxide and water."
-
-    },
-
-
-    {
-
-        question:
-            "What is an irrational number?",
-
-        answer:
-            "A number that cannot be expressed as a ratio of two integers."
-
-    },
-
-
-    {
-
-        question:
-            "What is an NGO?",
-
-        answer:
-            "A non-governmental organization that works independently of direct government control."
-
-    }
-
-];
-
-
-let currentCard =
-    0;
-
-
-let cardFlipped =
-    false;
-
-
-function displayFlashcard() {
-
-    const text =
-        document.getElementById(
-            "flashcardText"
-        );
-
-
-    if (!text) {
-
-        return;
-
-    }
-
-
-    if (
-        !flashcards.length
-    ) {
-
-        text.textContent =
-            "No flashcards available.";
-
-        return;
-
-    }
-
-
-    if (cardFlipped) {
-
-        text.textContent =
-            flashcards[
-                currentCard
-            ].answer;
-
-    } else {
-
-        text.textContent =
-            flashcards[
-                currentCard
-            ].question;
-
-    }
-
-}
-
-
-function flipFlashcard() {
-
-    cardFlipped =
-        !cardFlipped;
-
-
-    displayFlashcard();
-
-}
-
-
-function nextCard() {
-
-    currentCard++;
-
-
-    if (
-        currentCard >=
-        flashcards.length
-    ) {
-
-        currentCard =
-            0;
-
-    }
-
-
-    cardFlipped =
-        false;
-
-
-    displayFlashcard();
-
-}
-
-
-function previousCard() {
-
-    currentCard--;
-
-
-    if (
-        currentCard < 0
-    ) {
-
-        currentCard =
-            flashcards.length - 1;
-
-    }
-
-
-    cardFlipped =
-        false;
-
-
-    displayFlashcard();
-
-}
-
-
-// =====================================================
-// TIMER
-// =====================================================
-
-let timerSeconds =
-    25 * 60;
-
-
-let timerInterval =
-    null;
-
-
-function updateTimerDisplay() {
-
-    const display =
-        document.getElementById(
-            "timerDisplay"
-        );
-
-
-    if (!display) {
-
-        return;
-
-    }
-
-
-    const minutes =
-        Math.floor(
-            timerSeconds / 60
-        );
-
-
-    const seconds =
-        timerSeconds % 60;
-
-
-    display.textContent =
-        String(minutes)
-            .padStart(
-                2,
-                "0"
-            )
-        +
-        ":"
-        +
-        String(seconds)
-            .padStart(
-                2,
-                "0"
+        // =========================================================
+        // OPEN FILE
+        // =========================================================
+
+        async function openFile(path) {
+
+            showStatus(
+                "uploadStatus",
+                "Opening file...",
+                false
             );
 
-}
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .storage
+                .from(BUCKET_NAME)
+                .createSignedUrl(
+                    path,
+                    60 * 60
+                );
+
+            if (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "uploadStatus",
+                    "Could not open file: " +
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            window.open(
+                data.signedUrl,
+                "_blank"
+            );
+        }
 
 
-function startTimer() {
+        // =========================================================
+        // DOWNLOAD FILE
+        // =========================================================
 
-    if (timerInterval) {
+        async function downloadFile(path, filename) {
 
-        return;
+            showStatus(
+                "uploadStatus",
+                "Preparing download...",
+                false
+            );
 
-    }
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .storage
+                .from(BUCKET_NAME)
+                .download(path);
+
+            if (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "uploadStatus",
+                    "Download failed: " +
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            const url =
+                URL.createObjectURL(data);
+
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+
+            link.download = filename;
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+            URL.revokeObjectURL(url);
+
+            showStatus(
+                "uploadStatus",
+                "Download started.",
+                false
+            );
+        }
 
 
-    timerInterval =
-        setInterval(
-            function () {
+        // =========================================================
+        // DELETE FILE
+        // =========================================================
 
-                if (
-                    timerSeconds <= 0
+        async function deleteFile(path) {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this file?"
+                );
+
+            if (!confirmed) return;
+
+            const {
+                error
+            } = await supabaseClient
+                .storage
+                .from(BUCKET_NAME)
+                .remove([path]);
+
+            if (error) {
+
+                console.error(error);
+
+                showStatus(
+                    "uploadStatus",
+                    "Delete failed: " +
+                    error.message,
+                    true
+                );
+
+                return;
+            }
+
+            showStatus(
+                "uploadStatus",
+                "File deleted successfully.",
+                false
+            );
+
+            await loadMaterials();
+        }
+
+
+        // =========================================================
+        // SEARCH MATERIALS
+        // =========================================================
+
+        function filterMaterials() {
+
+            const search =
+                document
+                    .getElementById("materialSearch")
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+            const items =
+                document.querySelectorAll(".file-item");
+
+            items.forEach(item => {
+
+                const name =
+                    item.dataset.filename || "";
+
+                item.style.display =
+                    name.includes(search)
+                        ? "flex"
+                        : "none";
+
+            });
+        }
+
+
+        // =========================================================
+        // PDF TEXT EXTRACTION
+        // =========================================================
+
+        async function extractSelectedPDF() {
+
+            if (!selectedPDFFile) {
+
+                showStatus(
+                    "pdfExtractionStatus",
+                    "Please choose a PDF first.",
+                    true
+                );
+
+                return;
+            }
+
+            if (
+                selectedPDFFile.type !== "application/pdf" &&
+                !selectedPDFFile.name.toLowerCase().endsWith(".pdf")
+            ) {
+
+                showStatus(
+                    "pdfExtractionStatus",
+                    "Please select a PDF file.",
+                    true
+                );
+
+                return;
+            }
+
+            if (selectedPDFFile.size > 25 * 1024 * 1024) {
+
+                showStatus(
+                    "pdfExtractionStatus",
+                    "PDF must be smaller than 25 MB.",
+                    true
+                );
+
+                return;
+            }
+
+            const status =
+                document.getElementById(
+                    "pdfExtractionStatus"
+                );
+
+            const info =
+                document.getElementById("pdfInfo");
+
+            const textarea =
+                document.getElementById(
+                    "pdfExtractedText"
+                );
+
+            status.style.display = "block";
+
+            status.textContent =
+                "Extracting PDF text...";
+
+            info.classList.add("hidden");
+
+            textarea.value = "";
+
+            try {
+
+                const arrayBuffer =
+                    await selectedPDFFile.arrayBuffer();
+
+                const loadingTask =
+                    pdfjsLib.getDocument({
+                        data: arrayBuffer
+                    });
+
+                const pdf =
+                    await loadingTask.promise;
+
+                let allText = "";
+
+                for (
+                    let pageNumber = 1;
+                    pageNumber <= pdf.numPages;
+                    pageNumber++
                 ) {
 
-                    clearInterval(
-                        timerInterval
-                    );
+                    const page =
+                        await pdf.getPage(pageNumber);
 
+                    const content =
+                        await page.getTextContent();
 
-                    timerInterval =
-                        null;
+                    const pageText =
+                        content.items
+                            .map(item => item.str)
+                            .join(" ");
 
+                    allText +=
+                        `\n\n--- Page ${pageNumber} ---\n\n` +
+                        pageText;
+                }
 
-                    alert(
-                        "Study session complete! 🎉"
-                    );
+                allText =
+                    allText
+                        .replace(/\s+/g, " ")
+                        .trim();
 
+                extractedPDFText =
+                    allText;
 
-                    return;
+                textarea.value =
+                    allText;
+
+                const words =
+                    allText
+                        ? allText.split(/\s+/).length
+                        : 0;
+
+                info.classList.remove("hidden");
+
+                info.innerHTML = `
+                    <strong>PDF extracted successfully!</strong>
+
+                    <p>
+                        📄 File:
+                        ${escapeHTML(selectedPDFFile.name)}
+                    </p>
+
+                    <p>
+                        📑 Pages:
+                        ${pdf.numPages}
+                    </p>
+
+                    <p>
+                        📝 Words:
+                        ${words.toLocaleString()}
+                    </p>
+
+                    <p>
+                        🔤 Characters:
+                        ${allText.length.toLocaleString()}
+                    </p>
+                `;
+
+                status.textContent =
+                    "PDF text extracted successfully.";
+
+                if (!allText) {
+
+                    status.textContent =
+                        "The PDF appears to contain scanned images or no selectable text.";
 
                 }
 
+            } catch (error) {
 
-                timerSeconds--;
+                console.error(error);
+
+                status.textContent =
+                    "PDF extraction failed: " +
+                    error.message;
+
+                status.style.background =
+                    "#fef2f2";
+
+                status.style.color =
+                    "#dc2626";
+            }
+        }
 
 
-                updateTimerDisplay();
+        // =========================================================
+        // AI QUIZ GENERATION
+        // =========================================================
 
+        async function generateQuizFromPDF() {
+
+            if (!currentUser) {
+
+                alert("Please log in first.");
+
+                return;
+            }
+
+            if (!extractedPDFText) {
+
+                alert(
+                    "Please select a PDF and extract its text first."
+                );
+
+                return;
+            }
+
+            if (extractedPDFText.length < 100) {
+
+                alert(
+                    "Not enough text was extracted from this PDF."
+                );
+
+                return;
+            }
+
+            const button =
+                document.getElementById(
+                    "generateQuizButton"
+                );
+
+            button.disabled = true;
+
+            button.textContent =
+                "🧠 Generating...";
+
+            const container =
+                document.getElementById(
+                    "generatedQuizContainer"
+                );
+
+            container.innerHTML = `
+                <div class="ai-info">
+                    🧠 AI is reading your material and creating
+                    20 original MCQs. Please wait...
+                </div>
+            `;
+
+            try {
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient.functions.invoke(
+                    "generate-quiz",
+                    {
+                        body: {
+                            text: extractedPDFText,
+                            difficulty: "Mixed"
+                        }
+                    }
+                );
+
+                if (error) {
+
+                    console.error(error);
+
+                    throw new Error(
+                        error.message ||
+                        "AI function failed."
+                    );
+                }
+
+                if (
+                    !data ||
+                    !data.success ||
+                    !Array.isArray(data.questions)
+                ) {
+
+                    throw new Error(
+                        "The AI returned an invalid quiz."
+                    );
+                }
+
+                if (data.questions.length !== 20) {
+
+                    throw new Error(
+                        "AI returned " +
+                        data.questions.length +
+                        " questions instead of 20."
+                    );
+                }
+
+                generatedQuiz =
+                    data.questions;
+
+                displayGeneratedQuiz();
+
+                document
+                    .getElementById("quiz")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            } catch (error) {
+
+                console.error(error);
+
+                container.innerHTML = `
+                    <div
+                        class="ai-info"
+                        style="
+                            background:#fef2f2;
+                            border-color:#fecaca;
+                            color:#991b1b;
+                        "
+                    >
+                        <strong>
+                            ❌ Quiz generation failed
+                        </strong>
+
+                        <p>
+                            ${escapeHTML(error.message)}
+                        </p>
+                    </div>
+                `;
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "🧠 Generate 20 MCQs with AI";
+            }
+        }
+
+
+        // =========================================================
+        // DISPLAY AI QUIZ
+        // =========================================================
+
+        function displayGeneratedQuiz() {
+
+            const container =
+                document.getElementById(
+                    "generatedQuizContainer"
+                );
+
+            if (!generatedQuiz.length) {
+
+                container.innerHTML =
+                    "<p>No questions available.</p>";
+
+                return;
+            }
+
+            let html = `
+                <div class="ai-info">
+                    <strong>
+                        🧠 Your AI-generated 20-question quiz
+                    </strong>
+
+                    <p>
+                        Answer all questions, then press
+                        <strong>Submit Quiz</strong>.
+                    </p>
+                </div>
+            `;
+
+            generatedQuiz.forEach(
+                (question, index) => {
+
+                    const questionText =
+                        question.question ||
+                        `Question ${index + 1}`;
+
+                    const options =
+                        Array.isArray(question.options)
+                            ? question.options
+                            : [];
+
+                    html += `
+                        <div
+                            class="quiz-question"
+                            id="question-${index}"
+                        >
+
+                            <h3>
+                                ${index + 1}.
+                                ${escapeHTML(questionText)}
+                            </h3>
+                    `;
+
+                    options.forEach(
+                        (option, optionIndex) => {
+
+                            html += `
+                                <label class="quiz-option">
+
+                                    <input
+                                        type="radio"
+                                        name="question-${index}"
+                                        value="${optionIndex}"
+                                    >
+
+                                    ${escapeHTML(option)}
+
+                                </label>
+                            `;
+                        }
+                    );
+
+                    html += `
+                            <div
+                                id="explanation-${index}"
+                                style="margin-top:12px;"
+                            ></div>
+
+                        </div>
+                    `;
+                }
+            );
+
+            html += `
+                <div
+                    class="button-row"
+                    style="justify-content:center;"
+                >
+
+                    <button
+                        onclick="submitGeneratedQuiz()"
+                        class="success"
+                    >
+                        ✅ Submit Quiz
+                    </button>
+
+                    <button
+                        onclick="generateQuizFromPDF()"
+                        class="secondary"
+                    >
+                        🔄 Generate Again
+                    </button>
+
+                </div>
+
+                <div
+                    id="quizFinalResult"
+                    class="ai-info"
+                    style="margin-top:20px;"
+                ></div>
+            `;
+
+            container.innerHTML =
+                html;
+        }
+
+
+        // =========================================================
+        // SUBMIT AI QUIZ
+        // =========================================================
+
+        function submitGeneratedQuiz() {
+
+            if (!generatedQuiz.length) {
+
+                alert("No quiz available.");
+
+                return;
+            }
+
+            let score = 0;
+
+            generatedQuiz.forEach(
+                (question, index) => {
+
+                    const selected =
+                        document.querySelector(
+                            `input[name="question-${index}"]:checked`
+                        );
+
+                    const explanation =
+                        document.getElementById(
+                            `explanation-${index}`
+                        );
+
+                    const correctAnswer =
+                        Number(question.answer);
+
+                    if (
+                        selected &&
+                        Number(selected.value) ===
+                        correctAnswer
+                    ) {
+
+                        score++;
+
+                        explanation.innerHTML = `
+                            <div class="correct-answer">
+                                ✅ Correct
+                            </div>
+                        `;
+
+                    } else {
+
+                        const correctText =
+                            question.options &&
+                            question.options[correctAnswer]
+                                ? question.options[correctAnswer]
+                                : "Unknown";
+
+                        explanation.innerHTML = `
+                            <div class="wrong-answer">
+                                ❌ Incorrect
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Correct answer:
+                                </strong>
+
+                                ${escapeHTML(correctText)}
+                            </div>
+                        `;
+                    }
+
+                    if (question.explanation) {
+
+                        explanation.innerHTML += `
+                            <div style="margin-top:6px;">
+                                💡
+                                ${escapeHTML(
+                                    question.explanation
+                                )}
+                            </div>
+                        `;
+                    }
+
+                }
+            );
+
+            const percentage =
+                Math.round(
+                    (score / generatedQuiz.length) *
+                    100
+                );
+
+            const result =
+                document.getElementById(
+                    "quizFinalResult"
+                );
+
+            result.innerHTML = `
+                <h3>🏆 Quiz Result</h3>
+
+                <p>
+                    You scored
+                    <strong>
+                        ${score}/20
+                    </strong>
+                </p>
+
+                <p>
+                    Percentage:
+                    <strong>
+                        ${percentage}%
+                    </strong>
+                </p>
+            `;
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+
+
+        // =========================================================
+        // STATIC FLASHCARDS
+        // =========================================================
+
+        const flashcards = [
+
+            {
+                front: "Photosynthesis",
+                back:
+                    "The process by which green plants make food using sunlight, carbon dioxide and water."
             },
-            1000
+
+            {
+                front: "Irrational Number",
+                back:
+                    "A number that cannot be expressed as a ratio of two integers."
+            },
+
+            {
+                front: "NGO",
+                back:
+                    "Non-Governmental Organization."
+            }
+
+        ];
+
+
+        function updateFlashcard() {
+
+            const card =
+                flashcards[flashcardIndex];
+
+            const element =
+                document.getElementById(
+                    "flashcard"
+                );
+
+            element.textContent =
+                flashcardFlipped
+                    ? card.back
+                    : card.front;
+        }
+
+
+        function flipFlashcard() {
+
+            flashcardFlipped =
+                !flashcardFlipped;
+
+            updateFlashcard();
+        }
+
+
+        function nextFlashcard() {
+
+            flashcardIndex =
+                (flashcardIndex + 1) %
+                flashcards.length;
+
+            flashcardFlipped = false;
+
+            updateFlashcard();
+        }
+
+
+        function previousFlashcard() {
+
+            flashcardIndex =
+                (
+                    flashcardIndex -
+                    1 +
+                    flashcards.length
+                ) %
+                flashcards.length;
+
+            flashcardFlipped = false;
+
+            updateFlashcard();
+        }
+
+
+        // =========================================================
+        // TIMER
+        // =========================================================
+
+        function updateTimerDisplay() {
+
+            const minutes =
+                Math.floor(
+                    timerSeconds / 60
+                )
+                .toString()
+                .padStart(2, "0");
+
+            const seconds =
+                (
+                    timerSeconds % 60
+                )
+                .toString()
+                .padStart(2, "0");
+
+            document.getElementById(
+                "timerDisplay"
+            ).textContent =
+                `${minutes}:${seconds}`;
+        }
+
+
+        function startTimer() {
+
+            if (timerInterval) return;
+
+            timerInterval =
+                setInterval(() => {
+
+                    if (timerSeconds <= 0) {
+
+                        clearInterval(
+                            timerInterval
+                        );
+
+                        timerInterval = null;
+
+                        alert(
+                            "🎉 Focus session complete!"
+                        );
+
+                        return;
+                    }
+
+                    timerSeconds--;
+
+                    updateTimerDisplay();
+
+                }, 1000);
+        }
+
+
+        function pauseTimer() {
+
+            clearInterval(
+                timerInterval
+            );
+
+            timerInterval = null;
+        }
+
+
+        function resetTimer() {
+
+            pauseTimer();
+
+            timerSeconds =
+                25 * 60;
+
+            updateTimerDisplay();
+        }
+
+
+        // =========================================================
+        // UTILITY FUNCTIONS
+        // =========================================================
+
+        function showStatus(
+            elementId,
+            message,
+            isError
+        ) {
+
+            const element =
+                document.getElementById(
+                    elementId
+                );
+
+            if (!element) return;
+
+            element.style.display =
+                "block";
+
+            element.textContent =
+                message;
+
+            if (isError) {
+
+                element.style.background =
+                    "#fef2f2";
+
+                element.style.color =
+                    "#dc2626";
+
+            } else {
+
+                element.style.background =
+                    "#eff6ff";
+
+                element.style.color =
+                    "#1d4ed8";
+            }
+        }
+
+
+        function formatBytes(bytes) {
+
+            if (!bytes) return "0 Bytes";
+
+            const units = [
+                "Bytes",
+                "KB",
+                "MB",
+                "GB"
+            ];
+
+            const index =
+                Math.floor(
+                    Math.log(bytes) /
+                    Math.log(1024)
+                );
+
+            return (
+                parseFloat(
+                    (
+                        bytes /
+                        Math.pow(1024, index)
+                    ).toFixed(2)
+                ) +
+                " " +
+                units[index]
+            );
+        }
+
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        // =========================================================
+        // SUPABASE AUTH LISTENER
+        // =========================================================
+
+        supabaseClient.auth.onAuthStateChange(
+            (_event, session) => {
+
+                currentUser =
+                    session
+                        ? session.user
+                        : null;
+
+                updateAuthUI();
+
+            }
         );
 
-}
 
+        // =========================================================
+        // INITIALIZE
+        // =========================================================
 
-function pauseTimer() {
-
-    clearInterval(
-        timerInterval
-    );
-
-
-    timerInterval =
-        null;
-
-}
-
-
-function resetTimer() {
-
-    clearInterval(
-        timerInterval
-    );
-
-
-    timerInterval =
-        null;
-
-
-    timerSeconds =
-        25 * 60;
-
-
-    updateTimerDisplay();
-
-}
-
-
-// =====================================================
-// TODAY'S GOAL
-// =====================================================
-
-function saveGoal() {
-
-    const input =
-        document.getElementById(
-            "goalInput"
-        );
-
-
-    const display =
-        document.getElementById(
-            "goalDisplay"
-        );
-
-
-    const goal =
-        input.value.trim();
-
-
-    if (!goal) {
-
-        alert(
-            "Please enter a goal."
-        );
-
-        return;
-
-    }
-
-
-    localStorage.setItem(
-        "edusphereGoal",
-        goal
-    );
-
-
-    display.innerHTML = `
-
-        <div class="saved-goal">
-
-            🎯
-
-            <strong>
-                Today's Goal
-            </strong>
-
-            <p>
-                ${escapeHTML(
-                    goal
-                )}
-            </p>
-
-        </div>
-
-    `;
-
-
-    input.value =
-        "";
-
-}
-
-
-function loadGoal() {
-
-    const goal =
-        localStorage.getItem(
-            "edusphereGoal"
-        );
-
-
-    if (!goal) {
-
-        return;
-
-    }
-
-
-    const display =
-        document.getElementById(
-            "goalDisplay"
-        );
-
-
-    if (!display) {
-
-        return;
-
-    }
-
-
-    display.innerHTML = `
-
-        <div class="saved-goal">
-
-            🎯
-
-            <strong>
-                Today's Goal
-            </strong>
-
-            <p>
-                ${escapeHTML(
-                    goal
-                )}
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-// =====================================================
-// STARTUP
-// =====================================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
-
-        loadGoal();
-
-        displayFlashcard();
+        checkSession();
 
         updateTimerDisplay();
 
-        await updateAuthUI();
+        updateFlashcard();
 
-    }
-);
-
-
-</script>
-
+    </script>
 
 </body>
 
