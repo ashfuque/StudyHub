@@ -1222,7 +1222,7 @@ footer strong {
 
         <ul>
             <li><a href="#home">Home</a></li>
-          <li><a href="#accounts">Accounts</a></li>
+       
             <li><a href="#materials">Materials</a></li>
             <li><a href="#quiz">Quiz</a></li>
             <li><a href="#flashcards">Flashcards</a></li>
@@ -1249,53 +1249,7 @@ footer strong {
   
 
 
-    <!-- ========================= ACCOUNT ========================= -->
-
- <section id="accounts">
-        <h2>👤 Account</h2>
-
-        <div class="auth-box">
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Email address"
-                autocomplete="email"
-            >
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                autocomplete="current-password"
-            >
-
-            <div class="button-row">
-
-                <button onclick="signUp()">
-                    Create Account
-                </button>
-
-                <button onclick="logIn()">
-                    Log In
-                </button>
-
-                <button
-                    onclick="logOut()"
-                    class="secondary"
-                >
-                    Log Out
-                </button>
-
-            </div>
-
-            <div id="authStatus" class="status"></div>
-
-        </div>
-
-    </section>
-
-
+   
     <!-- ========================= MATERIALS ========================= -->
 
     <section id="materials">
@@ -1304,14 +1258,12 @@ footer strong {
 
         <div class="materials-box">
 
-            <div id="loginMessage" class="ai-info">
-                Please log in to upload and manage your study materials.
-            </div>
+           
 
 
             <!-- FILE PICKER -->
 
-            <div id="uploadArea" class="hidden">
+            <div id="uploadArea">
 
                 <h3>Upload Study Material</h3>
 
@@ -1336,16 +1288,7 @@ footer strong {
                         No file selected
                     </p>
 
-                    <div class="button-row" style="justify-content:center;">
-
-                        <button
-                            id="uploadButton"
-                            onclick="uploadSelectedFile()"
-                        >
-                            ⬆️ Upload PDF
-                        </button>
-
-                    </div>
+                    
 
                 </div>
 
@@ -1353,24 +1296,7 @@ footer strong {
                 <div id="uploadStatus" class="status"></div>
 
 
-                <!-- USER FILES -->
-
-                <h3 style="margin-top:30px;">
-                    📚 My Materials
-                </h3>
-
-                <input
-                    type="text"
-                    id="materialSearch"
-                    placeholder="🔎 Search your materials..."
-                    oninput="filterMaterials()"
-                >
-
-                <div id="fileList">
-                    Loading materials...
-                </div>
-
-
+               
                 <!-- ================= AI GENERATOR ================= -->
 
                 <div class="generator-box">
@@ -1603,7 +1529,7 @@ footer strong {
                 SUPABASE_KEY
             );
 
-        const BUCKET_NAME = "study-materials";
+    
 
 
         // =========================================================
@@ -1618,7 +1544,7 @@ footer strong {
         // GLOBAL VARIABLES
         // =========================================================
 
-        let currentUser = null;
+       
         let selectedPDFFile = null;
         let extractedPDFText = "";
 
@@ -1682,647 +1608,16 @@ footer strong {
         // AUTH STATUS
         // =========================================================
 
-        async function checkSession() {
+       
 
-            const {
-                data: { session }
-            } = await supabaseClient.auth.getSession();
 
-            currentUser =
-                session ? session.user : null;
+    
 
-            updateAuthUI();
-        }
+   
 
+      
 
-        function updateAuthUI() {
-
-            const uploadArea =
-                document.getElementById("uploadArea");
-
-            const loginMessage =
-                document.getElementById("loginMessage");
-
-            if (currentUser) {
-
-                uploadArea.classList.remove("hidden");
-
-                loginMessage.classList.add("hidden");
-
-                loadMaterials();
-
-            } else {
-
-                uploadArea.classList.add("hidden");
-
-                loginMessage.classList.remove("hidden");
-
-            }
-        }
-
-
-        // =========================================================
-        // SIGN UP
-        // =========================================================
-
-        async function signUp() {
-
-            const email =
-                document.getElementById("email").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            if (!email || !password) {
-
-                showStatus(
-                    "authStatus",
-                    "Please enter your email and password.",
-                    true
-                );
-
-                return;
-            }
-
-            const {
-                data,
-                error
-            } = await supabaseClient.auth.signUp({
-
-                email: email,
-
-                password: password,
-
-                options: {
-                    emailRedirectTo:
-                        "https://eduspherebd.github.io/EduSphere/"
-                }
-
-            });
-
-            if (error) {
-
-                showStatus(
-                    "authStatus",
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            showStatus(
-                "authStatus",
-                "Account created. Check your email to confirm your account.",
-                false
-            );
-        }
-
-
-        // =========================================================
-        // LOGIN
-        // =========================================================
-
-        async function logIn() {
-
-            const email =
-                document.getElementById("email").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            if (!email || !password) {
-
-                showStatus(
-                    "authStatus",
-                    "Please enter your email and password.",
-                    true
-                );
-
-                return;
-            }
-
-            const {
-                data,
-                error
-            } = await supabaseClient.auth.signInWithPassword({
-
-                email: email,
-
-                password: password
-
-            });
-
-            if (error) {
-
-                showStatus(
-                    "authStatus",
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            currentUser = data.user;
-
-            showStatus(
-                "authStatus",
-                "Logged in successfully!",
-                false
-            );
-
-            updateAuthUI();
-        }
-
-
-        // =========================================================
-        // LOGOUT
-        // =========================================================
-
-        async function logOut() {
-
-            const {
-                error
-            } = await supabaseClient.auth.signOut();
-
-            if (error) {
-
-                showStatus(
-                    "authStatus",
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            currentUser = null;
-
-            showStatus(
-                "authStatus",
-                "Logged out successfully.",
-                false
-            );
-
-            updateAuthUI();
-        }
-
-
-        // =========================================================
-        // UPLOAD PDF
-        // =========================================================
-
-        async function uploadSelectedFile() {
-
-            if (!currentUser) {
-
-                showStatus(
-                    "uploadStatus",
-                    "Please log in first.",
-                    true
-                );
-
-                return;
-            }
-
-            if (!selectedPDFFile) {
-
-                showStatus(
-                    "uploadStatus",
-                    "Please choose a PDF first.",
-                    true
-                );
-
-                return;
-            }
-
-            if (
-                selectedPDFFile.type !== "application/pdf" &&
-                !selectedPDFFile.name.toLowerCase().endsWith(".pdf")
-            ) {
-
-                showStatus(
-                    "uploadStatus",
-                    "Only PDF files are allowed.",
-                    true
-                );
-
-                return;
-            }
-
-            if (selectedPDFFile.size > 25 * 1024 * 1024) {
-
-                showStatus(
-                    "uploadStatus",
-                    "PDF must be smaller than 25 MB.",
-                    true
-                );
-
-                return;
-            }
-
-            const safeName =
-                selectedPDFFile.name
-                    .replace(/[^a-zA-Z0-9._-]/g, "_");
-
-            const uniqueName =
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(2, 9) +
-                "_" +
-                safeName;
-
-            const filePath =
-                currentUser.id +
-                "/" +
-                uniqueName;
-
-            showStatus(
-                "uploadStatus",
-                "Uploading PDF...",
-                false
-            );
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .storage
-                .from(BUCKET_NAME)
-                .upload(
-                    filePath,
-                    selectedPDFFile,
-                    {
-                        contentType: "application/pdf",
-                        upsert: false
-                    }
-                );
-
-            if (error) {
-
-                console.error(error);
-
-                showStatus(
-                    "uploadStatus",
-                    "Upload failed: " + error.message,
-                    true
-                );
-
-                return;
-            }
-
-            showStatus(
-                "uploadStatus",
-                "PDF uploaded successfully!",
-                false
-            );
-
-            selectedPDFFile = null;
-
-            fileInput.value = "";
-
-            selectedFileName.textContent =
-                "No file selected";
-
-            await loadMaterials();
-        }
-
-
-        // =========================================================
-        // LOAD MATERIALS
-        // =========================================================
-
-        async function loadMaterials() {
-
-            if (!currentUser) return;
-
-            const fileList =
-                document.getElementById("fileList");
-
-            fileList.innerHTML =
-                "Loading materials...";
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .storage
-                .from(BUCKET_NAME)
-                .list(
-                    currentUser.id,
-                    {
-                        limit: 100,
-                        offset: 0,
-                        sortBy: {
-                            column: "created_at",
-                            order: "desc"
-                        }
-                    }
-                );
-
-            if (error) {
-
-                console.error(error);
-
-                fileList.innerHTML =
-                    `<p style="color:#dc2626;">
-                        Failed to load materials:
-                        ${escapeHTML(error.message)}
-                    </p>`;
-
-                return;
-            }
-
-            const files =
-                (data || [])
-                    .filter(item => item.id !== null);
-
-            if (files.length === 0) {
-
-                fileList.innerHTML =
-                    "<p>No uploaded materials yet.</p>";
-
-                return;
-            }
-
-            fileList.innerHTML = "";
-
-            files.forEach(file => {
-
-                const fullPath =
-                    currentUser.id +
-                    "/" +
-                    file.name;
-
-                const item =
-                    document.createElement("div");
-
-                item.className =
-                    "file-item";
-
-                item.dataset.filename =
-                    file.name.toLowerCase();
-
-                const fileInfo =
-                    document.createElement("div");
-
-                fileInfo.className =
-                    "file-info";
-
-                fileInfo.innerHTML = `
-                    <div class="file-name">
-                        📄 ${escapeHTML(file.name)}
-                    </div>
-
-                    <small>
-                        ${formatBytes(file.metadata?.size || 0)}
-                    </small>
-                `;
-
-                const actions =
-                    document.createElement("div");
-
-                actions.className =
-                    "file-actions";
-
-
-                // OPEN
-                const openButton =
-                    document.createElement("button");
-
-                openButton.textContent =
-                    "Open";
-
-                openButton.onclick =
-                    () => openFile(fullPath);
-
-                actions.appendChild(openButton);
-
-
-                // DOWNLOAD
-                const downloadButton =
-                    document.createElement("button");
-
-                downloadButton.textContent =
-                    "Download";
-
-                downloadButton.className =
-                    "secondary";
-
-                downloadButton.onclick =
-                    () => downloadFile(fullPath, file.name);
-
-                actions.appendChild(downloadButton);
-
-
-                // DELETE
-                const deleteButton =
-                    document.createElement("button");
-
-                deleteButton.textContent =
-                    "Delete";
-
-                deleteButton.className =
-                    "danger";
-
-                deleteButton.onclick =
-                    () => deleteFile(fullPath);
-
-                actions.appendChild(deleteButton);
-
-
-                item.appendChild(fileInfo);
-
-                item.appendChild(actions);
-
-                fileList.appendChild(item);
-
-            });
-
-        }
-
-
-        // =========================================================
-        // OPEN FILE
-        // =========================================================
-
-        async function openFile(path) {
-
-            showStatus(
-                "uploadStatus",
-                "Opening file...",
-                false
-            );
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .storage
-                .from(BUCKET_NAME)
-                .createSignedUrl(
-                    path,
-                    60 * 60
-                );
-
-            if (error) {
-
-                console.error(error);
-
-                showStatus(
-                    "uploadStatus",
-                    "Could not open file: " +
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            window.open(
-                data.signedUrl,
-                "_blank"
-            );
-        }
-
-
-        // =========================================================
-        // DOWNLOAD FILE
-        // =========================================================
-
-        async function downloadFile(path, filename) {
-
-            showStatus(
-                "uploadStatus",
-                "Preparing download...",
-                false
-            );
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .storage
-                .from(BUCKET_NAME)
-                .download(path);
-
-            if (error) {
-
-                console.error(error);
-
-                showStatus(
-                    "uploadStatus",
-                    "Download failed: " +
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            const url =
-                URL.createObjectURL(data);
-
-            const link =
-                document.createElement("a");
-
-            link.href = url;
-
-            link.download = filename;
-
-            document.body.appendChild(link);
-
-            link.click();
-
-            link.remove();
-
-            URL.revokeObjectURL(url);
-
-            showStatus(
-                "uploadStatus",
-                "Download started.",
-                false
-            );
-        }
-
-
-        // =========================================================
-        // DELETE FILE
-        // =========================================================
-
-        async function deleteFile(path) {
-
-            const confirmed =
-                confirm(
-                    "Are you sure you want to delete this file?"
-                );
-
-            if (!confirmed) return;
-
-            const {
-                error
-            } = await supabaseClient
-                .storage
-                .from(BUCKET_NAME)
-                .remove([path]);
-
-            if (error) {
-
-                console.error(error);
-
-                showStatus(
-                    "uploadStatus",
-                    "Delete failed: " +
-                    error.message,
-                    true
-                );
-
-                return;
-            }
-
-            showStatus(
-                "uploadStatus",
-                "File deleted successfully.",
-                false
-            );
-
-            await loadMaterials();
-        }
-
-
-        // =========================================================
-        // SEARCH MATERIALS
-        // =========================================================
-
-        function filterMaterials() {
-
-            const search =
-                document
-                    .getElementById("materialSearch")
-                    .value
-                    .toLowerCase()
-                    .trim();
-
-            const items =
-                document.querySelectorAll(".file-item");
-
-            items.forEach(item => {
-
-                const name =
-                    item.dataset.filename || "";
-
-                item.style.display =
-                    name.includes(search)
-                        ? "flex"
-                        : "none";
-
-            });
-        }
-
-
+    
         // =========================================================
         // PDF TEXT EXTRACTION
         // =========================================================
@@ -2498,13 +1793,7 @@ footer strong {
         // =========================================================
 async function generateQuizFromPDF() {
 
-    if (!currentUser) {
-
-        alert("Please log in first.");
-
-        return;
-    }
-
+   
     if (!extractedPDFText) {
 
         alert(
@@ -3194,26 +2483,13 @@ async function generateQuizFromPDF() {
         // SUPABASE AUTH LISTENER
         // =========================================================
 
-        supabaseClient.auth.onAuthStateChange(
-            (_event, session) => {
-
-                currentUser =
-                    session
-                        ? session.user
-                        : null;
-
-                updateAuthUI();
-
-            }
-        );
-
+       
 
         // =========================================================
         // INITIALIZE
         // =========================================================
 
-        checkSession();
-
+      
         updateTimerDisplay();
 
         updateFlashcard();
