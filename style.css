@@ -1,6 +1,10 @@
+
 /* =========================================================
-   EDUSPHERE — CLEAN RESPONSIVE DESIGN
+   EDUSPHERE — MODERN RESPONSIVE DESIGN
+   Learn. Explore. Grow.
    ========================================================= */
+
+/* ===================== RESET ===================== */
 
 * {
     margin: 0;
@@ -10,21 +14,56 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
+    scroll-padding-top: 110px;
 }
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #f5f7fb;
+    background: #f6f8fc;
     color: #1f2937;
-    line-height: 1.6;
+    line-height: 1.65;
     overflow-x: hidden;
 }
 
+img {
+    max-width: 100%;
+}
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+section {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 75px 7%;
+    scroll-margin-top: 100px;
+}
+
+section h2 {
+    margin-bottom: 15px;
+    color: #111827;
+    font-size: 2rem;
+    line-height: 1.3;
+}
+
+section > p {
+    color: #6b7280;
+}
+
+/* ===================== NAVIGATION ===================== */
 
 nav {
     position: sticky;
@@ -32,201 +71,139 @@ nav {
     z-index: 1000;
 
     width: 100%;
+    padding: 10px 5%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 
-    padding: 10px 6%;
-
-    background: rgba(255, 255, 255, 0.97);
-
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid #e5e7eb;
-
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #e8ebf2;
+    box-shadow: 0 3px 18px rgba(15, 23, 42, 0.04);
 }
 
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
 nav .logo {
-    margin: 0;
-    padding: 0;
-
     display: flex;
     align-items: center;
-
     flex-shrink: 0;
-
+    margin: 0;
+    padding: 0;
     line-height: 0;
 }
 
 nav .logo img {
     display: block;
-
     width: 135px;
     height: 48px;
-
     object-fit: contain;
 }
 
-
-/* =========================================================
-   NAVIGATION LINKS
-   ========================================================= */
-
 nav .nav-links {
     display: flex;
-
     align-items: center;
     justify-content: flex-end;
-
+    flex-wrap: wrap;
     gap: 4px;
 }
 
 nav a {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
-    padding: 8px 10px;
-
-    color: #4b5563;
-
-    text-decoration: none;
-
-    font-size: 0.9rem;
-    font-weight: 600;
-
-    white-space: nowrap;
-
+    padding: 8px 11px;
     border-radius: 9px;
 
-    transition: 0.2s ease;
+    color: #4b5563;
+    text-decoration: none;
+    white-space: nowrap;
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    transition: background 0.2s ease,
+                color 0.2s ease;
 }
 
 nav a:hover {
     color: #4f46e5;
-
     background: #eef2ff;
 }
 
-
-/* =========================================================
-   GENERAL SECTIONS
-   ========================================================= */
-
-section {
-    width: 100%;
-    max-width: 1250px;
-
-    margin: auto;
-
-    padding: 75px 7%;
-}
-
-section h2 {
-    margin-bottom: 12px;
-
-    color: #111827;
-
-    font-size: 2rem;
-}
-
-
-/* =========================================================
-   HOME
-   ========================================================= */
+/* ===================== HOME / HERO ===================== */
 
 #home {
     max-width: none;
-
+    min-height: 610px;
     min-height: 75vh;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
     text-align: center;
+    overflow: hidden;
 
     padding: 80px 7%;
-
-    overflow: hidden;
 
     background:
         radial-gradient(
             circle at 15% 20%,
-            rgba(99, 102, 241, 0.18),
+            rgba(99, 102, 241, 0.16),
             transparent 30%
         ),
         radial-gradient(
-            circle at 85% 30%,
-            rgba(139, 92, 246, 0.16),
+            circle at 85% 25%,
+            rgba(139, 92, 246, 0.14),
             transparent 30%
         ),
         linear-gradient(
             135deg,
             #eef2ff,
-            #f8fafc 55%,
+            #f9fafc 55%,
             #f5f3ff
         );
 }
 
 #home h1 {
     max-width: 900px;
-
     margin-bottom: 20px;
 
     color: #111827;
-
-    font-size: clamp(2.7rem, 7vw, 5rem);
-
+    font-size: clamp(2.6rem, 7vw, 5rem);
     font-weight: 900;
-
-    line-height: 1.05;
-
+    line-height: 1.08;
     letter-spacing: -2px;
 }
 
 #home p {
     max-width: 650px;
-
     margin: 0 auto 28px;
 
-    color: #6b7280;
-
-    font-size: 1.15rem;
+    color: #667085;
+    font-size: 1.12rem;
 }
 
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
+/* ===================== BUTTONS ===================== */
 
 button,
 .upload-button {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
+    gap: 8px;
 
-    min-width: 120px;
-
+    min-height: 44px;
+    min-width: 110px;
     margin: 5px;
+    padding: 11px 20px;
 
-    padding: 12px 20px;
-
-    border: none;
-
+    border: 1px solid transparent;
     border-radius: 12px;
 
     background: linear-gradient(
@@ -235,64 +212,58 @@ button,
         #6366f1
     );
 
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 0.95rem;
-
+    color: #fff;
     font-weight: 700;
+    font-size: 0.94rem;
 
-    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.16);
 
-    box-shadow:
-        0 8px 20px rgba(79, 70, 229, 0.2);
-
-    transition: 0.25s ease;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
 }
 
 button:hover,
 .upload-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px rgba(79, 70, 229, 0.28);
+    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.23);
 }
 
+button:active,
+.upload-button:active {
+    transform: translateY(0);
+}
 
-/* =========================================================
-   FLOATING CARDS
-   ========================================================= */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(99, 102, 241, 0.35);
+    outline-offset: 3px;
+}
+
+/* ===================== FLOATING HERO CARDS ===================== */
 
 .floating-cards {
     position: relative;
-
     width: 100%;
-
     max-width: 650px;
-
     height: 130px;
-
     margin: 42px auto 0;
 }
 
 .study-card {
     position: absolute;
-
     padding: 14px 22px;
 
-    background: rgba(255, 255, 255, 0.9);
-
-    border: 1px solid rgba(99, 102, 241, 0.15);
-
-    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #e0e7ff;
+    border-radius: 15px;
 
     color: #374151;
-
     font-weight: 700;
 
-    box-shadow:
-        0 12px 30px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 
     animation: floatCard 4s ease-in-out infinite;
 }
@@ -305,149 +276,84 @@ button:hover,
 .card-2 {
     left: 42%;
     top: 0;
+    animation-delay: 0.6s;
 }
 
 .card-3 {
     right: 5%;
     top: 25px;
+    animation-delay: 1.2s;
 }
 
 @keyframes floatCard {
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-8px);
     }
 }
 
-
-/* =========================================================
-   SUBJECTS
-   ========================================================= */
-
-#subjects {
-    background: white;
-}
-
-#subjects > h2 {
-    text-align: center;
-}
-
-.subjects-container,
-.subject-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 22px;
-
-    margin-top: 35px;
-}
-
-.subject-card {
-    position: relative;
-
-    padding: 28px 22px;
-
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 25px rgba(15, 23, 42, 0.06);
-
-    transition: 0.3s ease;
-
-    overflow: hidden;
-}
-
-.subject-card::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 4px;
-
-    background: linear-gradient(
-        90deg,
-        #4f46e5,
-        #8b5cf6
-    );
-}
-
-.subject-card:hover {
-    transform: translateY(-7px);
-
-    border-color: #c7d2fe;
-}
-
-
-/* =========================================================
-   ACCOUNT
-   ========================================================= */
+/* ===================== ACCOUNT ===================== */
 
 #account {
-    background: white;
-
+    background: #fff;
     text-align: center;
 }
 
+.auth-box,
 #authBox,
 #userBox {
+    width: 100%;
     max-width: 600px;
-
-    margin: 30px auto;
-
+    margin: 28px auto;
     padding: 28px;
 
-    background: #f8fafc;
-
+    background: #f9fafc;
     border: 1px solid #e5e7eb;
-
     border-radius: 20px;
 
-    box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.045);
 }
 
-#authBox input {
+.auth-box input,
+#authBox input,
+#userBox input {
+    display: block;
     width: 100%;
+    min-width: 0;
 
-    margin: 8px 0;
-
+    margin: 10px 0;
     padding: 13px 15px;
 
-    border: 1px solid #dbe0e8;
+    color: #1f2937;
+    background: #fff;
 
+    border: 1px solid #dbe1ea;
     border-radius: 11px;
-
     outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
-#authBox input:focus {
-    border-color: #6366f1;
-
-    box-shadow:
-        0 0 0 4px rgba(99, 102, 241, 0.1);
+.auth-box input:focus,
+#authBox input:focus,
+#userBox input:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
+.auth-box input::placeholder,
+#authBox input::placeholder {
+    color: #9ca3af;
+}
 
-/* =========================================================
-   MATERIALS
-   ========================================================= */
+/* ===================== STUDY MATERIALS ===================== */
 
 #materials {
     max-width: none;
-
     background: linear-gradient(
         180deg,
         #f8fafc,
@@ -457,110 +363,122 @@ button:hover,
 
 #materials > * {
     max-width: 1100px;
-
     margin-left: auto;
     margin-right: auto;
 }
 
-.upload-box {
+.upload-box,
+.materials-library {
+    width: 100%;
     margin-top: 25px;
-
     padding: 28px;
 
-    background: white;
-
+    background: #fff;
     border: 1px solid #e5e7eb;
-
     border-radius: 20px;
 
-    box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.07);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
 }
 
-.materials-library {
-    margin-top: 30px;
+.upload-box input,
+.upload-box select,
+.upload-box textarea {
+    max-width: 100%;
+}
 
-    padding: 28px;
+.upload-box input[type="file"] {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    padding: 12px;
 
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
 }
 
 #materialSearch {
+    display: block;
     width: 100%;
+    min-height: 48px;
 
-    margin-bottom: 20px;
-
-    padding: 14px 17px;
+    margin-bottom: 22px;
+    padding: 13px 16px;
 
     background: #f8fafc;
+    color: #1f2937;
 
-    border: 1px solid #dbe0e8;
-
+    border: 1px solid #dbe1ea;
     border-radius: 12px;
-
     outline: none;
+}
+
+#materialSearch:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.09);
 }
 
 .material-item {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 15px;
-
-    padding: 16px;
+    flex-wrap: wrap;
+    gap: 14px;
 
     margin-bottom: 12px;
+    padding: 16px;
 
     background: #f8fafc;
-
     border: 1px solid #e5e7eb;
-
     border-radius: 14px;
+
+    overflow-wrap: anywhere;
+}
+
+.material-item:last-child {
+    margin-bottom: 0;
 }
 
 .material-item a {
     color: #4f46e5;
-
     font-weight: 700;
-
     text-decoration: none;
 }
 
+.material-item a:hover {
+    text-decoration: underline;
+}
 
-/* =========================================================
-   QUIZ
-   ========================================================= */
+/* ===================== QUIZ ===================== */
 
 #quiz {
-    background: white;
+    background: #fff;
 }
 
 .quiz-container,
 .quiz-box {
+    width: 100%;
     max-width: 800px;
-
-    margin: 30px auto;
-
+    margin: 28px auto;
     padding: 30px;
 
     background: #f8fafc;
-
     border: 1px solid #e5e7eb;
-
     border-radius: 20px;
 }
 
+.quiz-container input,
+.quiz-box input {
+    max-width: 100%;
+}
 
-/* =========================================================
-   FLASHCARDS
-   ========================================================= */
+.quiz-container label,
+.quiz-box label {
+    display: block;
+    margin: 10px 0;
+}
+
+/* ===================== FLASHCARDS ===================== */
 
 #flashcards {
     background: #f8fafc;
@@ -568,56 +486,47 @@ button:hover,
 
 .flashcard,
 .flashcard-container {
-    max-width: 650px;
-
-    min-height: 220px;
-
-    margin: 30px auto;
-
-    padding: 35px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
 
+    width: 100%;
+    max-width: 650px;
+    min-height: 220px;
+
+    margin: 28px auto;
+    padding: 35px;
+
     text-align: center;
+    overflow-wrap: anywhere;
 
     background: linear-gradient(
         135deg,
-        white,
+        #fff,
         #eef2ff
     );
 
     border: 1px solid #dbe3ff;
-
     border-radius: 22px;
 
     font-size: 1.25rem;
-
     font-weight: 700;
 
-    box-shadow:
-        0 15px 40px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 12px 35px rgba(79, 70, 229, 0.08);
 }
 
-
-/* =========================================================
-   TIMER
-   ========================================================= */
+/* ===================== FOCUS TIMER ===================== */
 
 #timer {
-    background: white;
-
+    background: #fff;
     text-align: center;
 }
 
 .timer-container,
 .timer-box {
+    width: 100%;
     max-width: 600px;
-
-    margin: 30px auto;
-
+    margin: 28px auto;
     padding: 35px;
 
     background: linear-gradient(
@@ -627,24 +536,19 @@ button:hover,
     );
 
     border: 1px solid #ddd6fe;
-
     border-radius: 24px;
 }
 
 #timerDisplay {
     margin: 20px 0;
-
     color: #4f46e5;
-
     font-size: clamp(3rem, 10vw, 5rem);
-
     font-weight: 900;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
 }
 
-
-/* =========================================================
-   GOAL
-   ========================================================= */
+/* ===================== TODAY'S GOAL ===================== */
 
 #goal {
     background: #f8fafc;
@@ -652,74 +556,79 @@ button:hover,
 
 .goal-container,
 .goal-box {
+    width: 100%;
     max-width: 700px;
-
-    margin: 30px auto;
-
+    margin: 28px auto;
     padding: 28px;
 
-    background: white;
-
+    background: #fff;
     border: 1px solid #e5e7eb;
-
     border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
 }
 
 .goal-container input,
-.goal-box input {
+.goal-box input,
+.goal-container textarea,
+.goal-box textarea {
+    display: block;
     width: 100%;
-
-    padding: 13px 15px;
+    max-width: 100%;
 
     margin: 10px 0;
+    padding: 13px 15px;
 
-    border: 1px solid #dbe0e8;
-
+    background: #fff;
+    border: 1px solid #dbe1ea;
     border-radius: 11px;
-
     outline: none;
 }
 
+.goal-container input:focus,
+.goal-box input:focus,
+.goal-container textarea:focus,
+.goal-box textarea:focus {
+    border-color: #818cf8;
+}
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* ===================== FOOTER ===================== */
 
 footer {
-    padding: 35px 7%;
-
+    padding: 38px 7%;
     background: #111827;
-
     color: #9ca3af;
-
     text-align: center;
 }
 
 footer h3 {
-    color: white;
-
     margin-bottom: 8px;
+    color: #fff;
+}
+
+footer p {
+    overflow-wrap: anywhere;
 }
 
 footer a {
     color: #c7d2fe;
-
     text-decoration: none;
 }
 
+footer a:hover {
+    text-decoration: underline;
+}
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+/* ===================== TABLETS ===================== */
 
 @media (max-width: 900px) {
-
     nav {
-        padding: 9px 4%;
+        padding: 10px 3%;
+        gap: 10px;
     }
 
     nav .logo img {
-        width: 115px;
+        width: 112px;
         height: 43px;
     }
 
@@ -728,196 +637,127 @@ footer a {
     }
 
     nav a {
-        padding: 7px 7px;
-
-        font-size: 0.78rem;
+        padding: 7px 8px;
+        font-size: 0.79rem;
     }
 
     section {
         padding: 60px 5%;
     }
 
-    .subjects-container,
-    .subject-grid {
-        grid-template-columns: repeat(2, 1fr);
+    #home {
+        min-height: 570px;
     }
 }
 
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
+/* ===================== MOBILE ===================== */
 
 @media (max-width: 600px) {
+    html {
+        scroll-padding-top: 115px;
+    }
 
-    /* -----------------------------------------------------
-       NAVIGATION
-       ----------------------------------------------------- */
+    /* Navigation */
 
     nav {
         position: sticky;
-
         top: 0;
 
-        display: flex;
-
         flex-direction: column;
-
+        align-items: center;
         justify-content: center;
+        gap: 3px;
 
-        gap: 2px;
-
-        padding: 6px 8px 7px;
+        padding: 5px 7px 7px;
     }
 
     nav .logo {
         width: 100%;
-
-        height: 48px;
-
+        height: 43px;
         justify-content: center;
     }
 
     nav .logo img {
-        width: 125px;
-
-        height: 43px;
+        width: 120px;
+        height: 41px;
     }
-
-    /*
-       IMPORTANT:
-       Navigation now WRAPS instead of scrolling.
-    */
 
     nav .nav-links {
         width: 100%;
-
         max-width: 100%;
 
         display: flex;
-
         flex-wrap: wrap;
-
-        justify-content: center;
-
         align-items: center;
-
+        justify-content: center;
         gap: 2px 3px;
-
-        overflow: visible;
-
-        padding: 2px 0;
     }
 
     nav a {
-        flex: 0 0 auto;
-
         padding: 6px 8px;
-
-        font-size: 0.76rem;
-
+        font-size: 0.75rem;
         border-radius: 7px;
     }
 
-
-    /* -----------------------------------------------------
-       HOME
-       ----------------------------------------------------- */
+    /* Home */
 
     #home {
         min-height: auto;
-
-        padding: 65px 16px 45px;
+        padding: 65px 18px 45px;
     }
 
     #home h1 {
-        font-size: 2.55rem;
-
-        line-height: 1.07;
-
-        letter-spacing: -1.5px;
-
-        margin-bottom: 15px;
+        font-size: clamp(2.25rem, 10vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -1.2px;
+        margin-bottom: 16px;
     }
 
     #home p {
         font-size: 1rem;
-
         margin-bottom: 22px;
     }
 
-    #home button {
-        padding: 11px 18px;
-    }
-
-
-    /* -----------------------------------------------------
-       FLOATING CARDS
-       ----------------------------------------------------- */
+    /* Floating cards */
 
     .floating-cards {
-        height: 135px;
-
-        margin-top: 30px;
+        height: 125px;
+        margin-top: 28px;
     }
 
     .study-card {
-        padding: 9px 12px;
-
-        font-size: 0.8rem;
+        padding: 9px 11px;
+        font-size: 0.76rem;
+        border-radius: 11px;
     }
 
     .card-1 {
         left: 0;
-
-        top: 28px;
+        top: 27px;
     }
 
     .card-2 {
         left: 50%;
-
         top: 0;
-
         transform: translateX(-50%);
     }
 
     .card-3 {
         right: 0;
-
-        top: 62px;
+        top: 59px;
     }
 
-
-    /* -----------------------------------------------------
-       SECTIONS
-       ----------------------------------------------------- */
+    /* General sections */
 
     section {
-        padding: 50px 17px;
+        padding: 48px 17px;
     }
 
     section h2 {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
     }
 
-
-    /* -----------------------------------------------------
-       SUBJECTS
-       ----------------------------------------------------- */
-
-    .subjects-container,
-    .subject-grid {
-        grid-template-columns: 1fr;
-
-        gap: 15px;
-
-        margin-top: 25px;
-    }
-
-
-    /* -----------------------------------------------------
-       CONTENT BOXES
-       ----------------------------------------------------- */
+    /* Content panels */
 
     .upload-box,
     .materials-library,
@@ -927,98 +767,120 @@ footer a {
     .goal-box,
     .timer-container,
     .timer-box,
+    .auth-box,
     #authBox,
     #userBox {
         padding: 20px;
-
-        border-radius: 17px;
+        border-radius: 16px;
     }
 
-
-    /* -----------------------------------------------------
-       MATERIALS
-       ----------------------------------------------------- */
+    /* Materials */
 
     .material-item {
         flex-direction: column;
-
         align-items: flex-start;
+        gap: 10px;
+        padding: 14px;
     }
 
+    .material-item button {
+        max-width: 100%;
+    }
 
-    /* -----------------------------------------------------
-       FLASHCARDS
-       ----------------------------------------------------- */
+    /* Flashcards */
 
     .flashcard,
     .flashcard-container {
-        min-height: 190px;
-
+        min-height: 185px;
         padding: 24px;
-
         font-size: 1.05rem;
     }
 
-
-    /* -----------------------------------------------------
-       TIMER
-       ----------------------------------------------------- */
+    /* Timer */
 
     #timerDisplay {
-        font-size: 3.4rem;
+        font-size: clamp(2.8rem, 14vw, 3.6rem);
     }
 
-
-    /* -----------------------------------------------------
-       BUTTONS
-       ----------------------------------------------------- */
+    /* Buttons */
 
     button,
     .upload-button {
-        min-width: 105px;
+        min-height: 42px;
+        min-width: 95px;
+        padding: 10px 14px;
+        font-size: 0.88rem;
+    }
 
-        padding: 10px 15px;
+    /* Footer */
+
+    footer {
+        padding: 30px 18px;
     }
 }
 
-
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
+/* ===================== SMALL PHONES ===================== */
 
 @media (max-width: 380px) {
-
     nav .logo {
-        height: 45px;
+        height: 39px;
     }
 
     nav .logo img {
-        width: 115px;
-
-        height: 40px;
-    }
-
-    nav .nav-links {
-        gap: 1px 2px;
+        width: 110px;
+        height: 38px;
     }
 
     nav a {
         padding: 5px 6px;
-
-        font-size: 0.7rem;
+        font-size: 0.69rem;
     }
 
     #home {
-        padding-top: 55px;
+        padding: 52px 14px 38px;
     }
 
     #home h1 {
-        font-size: 2.3rem;
+        font-size: 2.2rem;
+        letter-spacing: -1px;
     }
 
     .study-card {
-        padding: 8px 10px;
+        padding: 8px 9px;
+        font-size: 0.7rem;
+    }
 
-        font-size: 0.73rem;
+    section {
+        padding: 42px 14px;
+    }
+
+    .upload-box,
+    .materials-library,
+    .quiz-container,
+    .quiz-box,
+    .goal-container,
+    .goal-box,
+    .timer-container,
+    .timer-box,
+    .auth-box,
+    #authBox,
+    #userBox {
+        padding: 16px;
+    }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
