@@ -2417,18 +2417,22 @@ async function generateFlashcardsFromPDF() {
 
         // Convert the backend's question/answer format
         // into the front/back format used by the website.
+      
+        console.log("Flashcard API response:", data);
+
         flashcards = data.flashcards
             .filter(card =>
                 card &&
-                typeof card.question === "string" &&
-                typeof card.answer === "string" &&
-                card.question.trim() &&
-                card.answer.trim()
+                typeof (card.question ?? card.front) === "string" &&
+                typeof (card.answer ?? card.back) === "string" &&
+                (card.question ?? card.front).trim() &&
+                (card.answer ?? card.back).trim()
             )
             .map(card => ({
-                front: card.question.trim(),
-                back: card.answer.trim()
+                front: (card.question ?? card.front).trim(),
+                back: (card.answer ?? card.back).trim()
             }));
+
 
         if (flashcards.length === 0) {
             throw new Error(
