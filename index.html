@@ -2309,82 +2309,61 @@ async function generateQuizFromPDF() {
         // STATIC FLASHCARDS
         // =========================================================
 
-        const flashcards = [
+     
+        // =========================================================
+        // AI FLASHCARDS
+        // =========================================================
 
-            {
-                front: "Photosynthesis",
-                back:
-                    "The process by which green plants make food using sunlight, carbon dioxide and water."
-            },
-
-            {
-                front: "Irrational Number",
-                back:
-                    "A number that cannot be expressed as a ratio of two integers."
-            },
-
-            {
-                front: "NGO",
-                back:
-                    "Non-Governmental Organization."
-            }
-
-        ];
-
+        let flashcards = [];
 
         function updateFlashcard() {
+            const element = document.getElementById("flashcard");
+            const counter = document.getElementById("flashcardCounter");
+            const hint = document.getElementById("flashcardHint");
 
-            const card =
-                flashcards[flashcardIndex];
+            if (!flashcards.length) return;
 
-            const element =
-                document.getElementById(
-                    "flashcard"
-                );
+            const card = flashcards[flashcardIndex];
 
-            element.textContent =
-                flashcardFlipped
-                    ? card.back
-                    : card.front;
+            element.textContent = flashcardFlipped
+                ? card.back
+                : card.front;
+
+            counter.textContent =
+                `Card ${flashcardIndex + 1} of ${flashcards.length}`;
+
+            hint.textContent = flashcardFlipped
+                ? "Tap to see the question."
+                : "Tap the card to reveal the answer.";
         }
-
 
         function flipFlashcard() {
+            if (!flashcards.length) return;
 
-            flashcardFlipped =
-                !flashcardFlipped;
-
+            flashcardFlipped = !flashcardFlipped;
             updateFlashcard();
         }
-
 
         function nextFlashcard() {
+            if (!flashcards.length) return;
 
             flashcardIndex =
-                (flashcardIndex + 1) %
-                flashcards.length;
+                (flashcardIndex + 1) % flashcards.length;
 
             flashcardFlipped = false;
-
             updateFlashcard();
         }
-
 
         function previousFlashcard() {
+            if (!flashcards.length) return;
 
             flashcardIndex =
-                (
-                    flashcardIndex -
-                    1 +
-                    flashcards.length
-                ) %
+                (flashcardIndex - 1 + flashcards.length) %
                 flashcards.length;
 
             flashcardFlipped = false;
-
             updateFlashcard();
         }
-
 
         // =========================================================
         // TIMER
