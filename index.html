@@ -1693,57 +1693,75 @@ footer strong {
         // OCR HELPER FOR SCANNED PDF PAGES
         // =========================================================
 
-        async function recognizePDFPage(page, pageNumber, totalPages) {
+       
+let sharedOCRWorker = null;
+let currentOCRPage = 0;
+let currentOCRTotal = 0;
 
-            if (!window.Tesseract) {
-                throw new Error(
-                    "OCR library did not load. Please refresh the page and try again."
-                );
-            }
+async function recognizePDFPage(page, pageNumber, totalPages) {
+    if (!window.Tesseract) {
+        throw new Error(
+            "OCR library did not load. Please refresh the page and try again."
+        );
+    }
 
-            const scale = 1.5;
+    currentOCRPage = pageNumber;
+    currentOCRTotal = totalPages;
 
-            const viewport = page.getViewport({ scale });
+    const scale = 1.5;
+    const viewport = page.getViewport({ scale });
 
-            const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d");
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
 
-            canvas.width = Math.ceil(viewport.width);
-            canvas.height = Math.ceil(viewport.height);
+    canvas.width = Math.ceil(viewport.width);
+    canvas.height = Math.ceil(viewport.height);
 
-            await page.render({
-                canvasContext: context,
-                viewport: viewport
-            }).promise;
+    try {
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
 
-            try {
-                const result = await Tesseract.recognize(
-                    canvas,
-                    "eng+ben",
-                    {
-                        logger: message => {
-                            if (message.status === "recognizing text") {
-                                const percent = Math.round(
-                                    (message.progress || 0) * 100
-                                );
+        // Initialize the OCR worker only once.
+        if (!sharedOCRWorker) {
+            showStatus(
+                "pdfExtractionStatus",
+                "Loading English and Bengali OCR engine...",
+                false
+            );
 
-                                showStatus(
-                                    "pdfExtractionStatus",
-                                    `Reading scanned page ${pageNumber}/${totalPages} with OCR: ${percent}%`,
-                                    false
-                                );
-                            }
+            sharedOCRWorker = await Tesseract.createWorker(
+                "eng+ben",
+                1,
+                {
+                    logger: message => {
+                        if (message.status === "recognizing text") {
+                            const percent = Math.round(
+                                (message.progress || 0) * 100
+                            );
+
+                            showStatus(
+                                "pdfExtractionStatus",
+                                `Reading scanned page ${currentOCRPage}/${currentOCRTotal}: ${percent}%`,
+                                false
+                            );
                         }
                     }
-                );
-
-                return result.data.text || "";
-
-            } finally {
-                canvas.width = 0;
-                canvas.height = 0;
-            }
+                }
+            );
         }
+
+        const result = await sharedOCRWorker.recognize(canvas);
+
+        return result.data.text || "";
+
+    } finally {
+        canvas.width = 0;
+        canvas.height = 0;
+    }
+}
+
 
         // =========================================================
         // PDF TEXT EXTRACTION
