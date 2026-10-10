@@ -1694,73 +1694,93 @@ footer strong {
         // =========================================================
 
        
-let sharedOCRWorker = null;
-let currentOCRPage = 0;
-let currentOCRTotal = 0;
 
-async function recognizePDFPage(page, pageNumber, totalPages) {
-    if (!window.Tesseract) {
-        throw new Error(
-            "OCR library did not load. Please refresh the page and try again."
-        );
-    }
+        // =========================================================
+        // OCR HELPER - TWO REUSABLE WORKERS
+        // =========================================================
 
-    currentOCRPage = pageNumber;
-    currentOCRTotal = totalPages;
+        let sharedOCRWorkers = null;
+        let sharedOCRWorkersPromise = null;
 
-    const scale = 1.0;
-    const viewport = page.getViewport({ scale });
+        async function getSharedOCRWorkers() {
+            if (sharedOCRWorkers) {
+                return sharedOCRWorkers;
+            }
 
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
+            if (!sharedOCRWorkersPromise) {
+                showStatus(
+                    "pdfExtractionStatus",
+                    "Loading two English + Bengali OCR workers...",
+                    false
+                );
 
-    canvas.width = Math.ceil(viewport.width);
-    canvas.height = Math.ceil(viewport.height);
+                sharedOCRWorkersPromise = Promise.all(
+                    [0, 1].map(workerIndex =>
+                        Tesseract.createWorker(
+                            "eng+ben",
+                            1,
+                            {
+                                logger: message => {
+                                    if (
+                                        message.status === "recognizing text"
+                                    ) {
+                                        const percent = Math.round(
+                                            (message.progress || 0) * 100
+                                        );
 
-    try {
-        await page.render({
-            canvasContext: context,
-            viewport: viewport
-        }).promise;
+                                        showStatus(
+                                            "pdfExtractionStatus",
+                                            `OCR worker ${workerIndex + 1}/2: ${percent}%`,
+                                            false
+                                        );
+                                    }
+                                }
+                            }
+                        )
+                    )
+                ).then(workers => {
+                    sharedOCRWorkers = workers;
+                    return workers;
+                }).catch(error => {
+                    sharedOCRWorkersPromise = null;
+                    throw error;
+                });
+            }
 
-        // Initialize the OCR worker only once.
-        if (!sharedOCRWorker) {
-            showStatus(
-                "pdfExtractionStatus",
-                "Loading English and Bengali OCR engine...",
-                false
-            );
-
-            sharedOCRWorker = await Tesseract.createWorker(
-                "eng+ben",
-                1,
-                {
-                    logger: message => {
-                        if (message.status === "recognizing text") {
-                            const percent = Math.round(
-                                (message.progress || 0) * 100
-                            );
-
-                            showStatus(
-                                "pdfExtractionStatus",
-                                `Reading scanned page ${currentOCRPage}/${currentOCRTotal}: ${percent}%`,
-                                false
-                            );
-                        }
-                    }
-                }
-            );
+            return sharedOCRWorkersPromise;
         }
 
-        const result = await sharedOCRWorker.recognize(canvas);
+        async function recognizePDFPage(
+            page,
+            pageNumber,
+            totalPages,
+            worker
+        ) {
+            const scale = 1.0;
+            const viewport = page.getViewport({ scale });
 
-        return result.data.text || "";
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
 
-    } finally {
-        canvas.width = 0;
-        canvas.height = 0;
-    }
-}
+            canvas.width = Math.ceil(viewport.width);
+            canvas.height = Math.ceil(viewport.height);
+
+            try {
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+
+                const result = await worker.recognize(canvas);
+
+                return result.data.text || "";
+
+            } finally {
+                canvas.width = 0;
+                canvas.height = 0;
+            }
+        }
+
 
 
         // =========================================================
@@ -1768,6 +1788,7 @@ async function recognizePDFPage(page, pageNumber, totalPages) {
         // =========================================================
 
        
+
 async function extractSelectedPDF() {
     if (!selectedPDFFile) {
         showStatus("pdfExtractionStatus", "Please select a PDF first.", true);
@@ -1795,12 +1816,13 @@ async function extractSelectedPDF() {
             data: arrayBuffer
         }).promise;
 
-        const extractedPages = [];
+        // First collect page text and identify pages needing OCR.
+        const pages = [];
 
         for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
             showStatus(
                 "pdfExtractionStatus",
-                `Reading page ${pageNumber}/${pdf.numPages}...`,
+                `Checking page ${pageNumber}/${pdf.numPages}...`,
                 false
             );
 
@@ -1813,38 +1835,77 @@ async function extractSelectedPDF() {
                 .replace(/\s+/g, " ")
                 .trim();
 
-            // Use OCR if the page has little or no selectable text.
-            if (pageText.replace(/\s/g, "").length < 30) {
-                showStatus(
-                    "pdfExtractionStatus",
-                    `Scanned page detected: running OCR on page ${pageNumber}/${pdf.numPages}...`,
-                    false
-                );
+            const needsOCR =
+                pageText.replace(/\s/g, "").length < 30;
 
-                const ocrText = await recognizePDFPage(
-                    page,
-                    pageNumber,
-                    pdf.numPages
-                );
+            pages.push({
+                pageNumber,
+                pageText,
+                needsOCR
+            });
+        }
 
-                if (ocrText.trim()) {
-                    pageText = ocrText.replace(/\s+/g, " ").trim();
+        // Only initialize OCR workers if scanned pages exist.
+        const scannedPages = pages.filter(page => page.needsOCR);
+
+        if (scannedPages.length > 0) {
+            const workers = await getSharedOCRWorkers();
+            let nextIndex = 0;
+            let completed = 0;
+
+            // Two workers process separate pages concurrently.
+            async function processWorker(worker) {
+                while (nextIndex < scannedPages.length) {
+                    const index = nextIndex++;
+                    const item = scannedPages[index];
+
+                    showStatus(
+                        "pdfExtractionStatus",
+                        `OCR processing scanned pages: ${completed}/${scannedPages.length} completed...`,
+                        false
+                    );
+
+                    const page = await pdf.getPage(item.pageNumber);
+
+                    const ocrText = await recognizePDFPage(
+                        page,
+                        item.pageNumber,
+                        pdf.numPages,
+                        worker
+                    );
+
+                    if (ocrText.trim()) {
+                        item.pageText = ocrText
+                            .replace(/\s+/g, " ")
+                            .trim();
+                    }
+
+                    completed++;
+
+                    showStatus(
+                        "pdfExtractionStatus",
+                        `OCR progress: ${completed}/${scannedPages.length} scanned pages completed.`,
+                        false
+                    );
                 }
             }
 
-            extractedPages.push(
-                `--- Page ${pageNumber} ---\n\n${pageText}`
-            );
+            await Promise.all([
+                processWorker(workers[0]),
+                processWorker(workers[1])
+            ]);
         }
 
-        extractedPDFText = extractedPages
-            .filter(page => page.trim())
+        extractedPDFText = pages
+            .map(item =>
+                `--- Page ${item.pageNumber} ---\n\n${item.pageText}`
+            )
             .join("\n\n");
 
         if (!extractedPDFText.trim()) {
             showStatus(
                 "pdfExtractionStatus",
-                "No readable text was found. The PDF may be unclear or contain unsupported content.",
+                "No readable text was found. The PDF may contain unclear or unsupported content.",
                 true
             );
             return;
@@ -1873,7 +1934,7 @@ async function extractSelectedPDF() {
 
         showStatus(
             "pdfExtractionStatus",
-            `PDF reading complete! ${pdf.numPages} page(s), ${wordCount} words extracted. Scanned pages were processed with OCR when needed.`,
+            `PDF reading complete! ${pdf.numPages} page(s), ${wordCount} words extracted.`,
             false
         );
 
@@ -1882,12 +1943,11 @@ async function extractSelectedPDF() {
 
         showStatus(
             "pdfExtractionStatus",
-            `Could not read the PDF: ${error.message || "Unknown error"}. Please try another PDF or refresh the page.`,
+            `Could not read the PDF: ${error.message || "Unknown error"}. Please refresh the page and try again.`,
             true
         );
     }
 }
-
 
         // =========================================================
         // AI QUIZ GENERATION
