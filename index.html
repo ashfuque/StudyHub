@@ -2363,6 +2363,7 @@ async function generateQuizFromPDF() {
         }
 
 
+  
 async function generateFlashcardsFromPDF() {
     const status = document.getElementById("flashcardStatus");
     const button = document.getElementById("generateFlashcardsButton");
@@ -2414,18 +2415,24 @@ async function generateFlashcardsFromPDF() {
             );
         }
 
+        // Convert the backend's question/answer format
+        // into the front/back format used by the website.
         flashcards = data.flashcards
             .filter(card =>
                 card &&
-                typeof card.front === "string" &&
-                typeof card.back === "string" &&
-                card.front.trim() &&
-                card.back.trim()
-            );
+                typeof card.question === "string" &&
+                typeof card.answer === "string" &&
+                card.question.trim() &&
+                card.answer.trim()
+            )
+            .map(card => ({
+                front: card.question.trim(),
+                back: card.answer.trim()
+            }));
 
         if (flashcards.length === 0) {
             throw new Error(
-                "The AI response did not contain valid flashcards."
+                "The AI returned flashcards in an unexpected format."
             );
         }
 
@@ -2453,7 +2460,6 @@ async function generateFlashcardsFromPDF() {
     }
 }
 
-        
         // =========================================================
         // TIMER
         // =========================================================
