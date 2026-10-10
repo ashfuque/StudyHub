@@ -1389,32 +1389,97 @@ footer strong {
     </section>
 
 
-    <!-- ========================= FLASHCARDS ========================= -->
+   
+<!-- ========================= FLASHCARDS ========================= -->
 
-    <section id="flashcards">
+<section id="flashcards">
 
-        <h2>🃏 Flashcards</h2>
+    <h2>🃏 AI Flashcards</h2>
 
-        <div class="flashcard-box">
+    <div class="flashcard-box">
+
+        <div class="ai-info">
+            <strong>📚 Learn from your PDF</strong>
+            <p>
+                Select a PDF in the AI Quiz section and
+                extract its text first. Then generate
+                flashcards directly from your study material.
+            </p>
+        </div>
+
+        <label for="flashcardCount">
+            Number of flashcards
+        </label>
+
+        <select id="flashcardCount">
+            <option value="5">5 flashcards</option>
+            <option value="10" selected>10 flashcards</option>
+            <option value="15">15 flashcards</option>
+            <option value="20">20 flashcards</option>
+        </select>
+
+        <div class="button-row">
+
+            <button
+                id="generateFlashcardsButton"
+                onclick="generateFlashcardsFromPDF()"
+                class="success"
+            >
+                ✨ Generate with AI
+            </button>
+
+        </div>
+
+        <div
+            id="flashcardStatus"
+            class="status"
+            style="display:none;"
+        ></div>
+
+        <div
+            id="flashcardStudyArea"
+            style="display:none; margin-top:25px;"
+        >
+
+            <p
+                id="flashcardCounter"
+                style="text-align:center; margin-bottom:12px;"
+            >
+                Card 1 of 10
+            </p>
 
             <div
                 id="flashcard"
                 class="flashcard"
+                role="button"
+                tabindex="0"
+                onclick="flipFlashcard()"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipFlashcard();}"
             >
-                Photosynthesis
+                Your question will appear here.
             </div>
+
+            <p
+                id="flashcardHint"
+                style="text-align:center; margin-top:12px;"
+            >
+                Tap the card to reveal the answer.
+            </p>
 
             <div
                 class="button-row"
                 style="justify-content:center;"
             >
 
-                <button onclick="previousFlashcard()">
+                <button
+                    onclick="previousFlashcard()"
+                    class="secondary"
+                >
                     ◀ Previous
                 </button>
 
                 <button onclick="flipFlashcard()">
-                    🔄 Flip
+                    🔄 Flip Card
                 </button>
 
                 <button onclick="nextFlashcard()">
@@ -1425,7 +1490,10 @@ footer strong {
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
 
 
     <!-- ========================= TIMER ========================= -->
