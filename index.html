@@ -12,6 +12,9 @@
 
     <!-- PDF.js -->
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    
+ <!-- OCR for scanned PDFs -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
     <style>
      /* =========================================================
@@ -1687,173 +1690,185 @@ footer strong {
 
     
         // =========================================================
+        // OCR HELPER FOR SCANNED PDF PAGES
+        // =========================================================
+
+        async function recognizePDFPage(page, pageNumber, totalPages) {
+
+            if (!window.Tesseract) {
+                throw new Error(
+                    "OCR library did not load. Please refresh the page and try again."
+                );
+            }
+
+            const scale = 1.5;
+
+            const viewport = page.getViewport({ scale });
+
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = Math.ceil(viewport.width);
+            canvas.height = Math.ceil(viewport.height);
+
+            await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise;
+
+            try {
+                const result = await Tesseract.recognize(
+                    canvas,
+                    "eng+ben",
+                    {
+                        logger: message => {
+                            if (message.status === "recognizing text") {
+                                const percent = Math.round(
+                                    (message.progress || 0) * 100
+                                );
+
+                                showStatus(
+                                    "pdfExtractionStatus",
+                                    `Reading scanned page ${pageNumber}/${totalPages} with OCR: ${percent}%`,
+                                    false
+                                );
+                            }
+                        }
+                    }
+                );
+
+                return result.data.text || "";
+
+            } finally {
+                canvas.width = 0;
+                canvas.height = 0;
+            }
+        }
+
+        // =========================================================
         // PDF TEXT EXTRACTION
         // =========================================================
 
-        async function extractSelectedPDF() {
+       
+async function extractSelectedPDF() {
+    if (!selectedPDFFile) {
+        showStatus("pdfExtractionStatus", "Please select a PDF first.", true);
+        return;
+    }
 
-            if (!selectedPDFFile) {
+    if (
+        selectedPDFFile.type !== "application/pdf" &&
+        !selectedPDFFile.name.toLowerCase().endsWith(".pdf")
+    ) {
+        showStatus("pdfExtractionStatus", "Please select a PDF file.", true);
+        return;
+    }
 
+    if (selectedPDFFile.size > 25 * 1024 * 1024) {
+        showStatus("pdfExtractionStatus", "The PDF must be smaller than 25 MB.", true);
+        return;
+    }
+
+    try {
+        showStatus("pdfExtractionStatus", "Opening PDF...", false);
+
+        const arrayBuffer = await selectedPDFFile.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({
+            data: arrayBuffer
+        }).promise;
+
+        const extractedPages = [];
+
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+            showStatus(
+                "pdfExtractionStatus",
+                `Reading page ${pageNumber}/${pdf.numPages}...`,
+                false
+            );
+
+            const page = await pdf.getPage(pageNumber);
+            const content = await page.getTextContent();
+
+            let pageText = content.items
+                .map(item => item.str || "")
+                .join(" ")
+                .replace(/\s+/g, " ")
+                .trim();
+
+            // Use OCR if the page has little or no selectable text.
+            if (pageText.replace(/\s/g, "").length < 30) {
                 showStatus(
                     "pdfExtractionStatus",
-                    "Please choose a PDF first.",
-                    true
+                    `Scanned page detected: running OCR on page ${pageNumber}/${pdf.numPages}...`,
+                    false
                 );
 
-                return;
-            }
-
-            if (
-                selectedPDFFile.type !== "application/pdf" &&
-                !selectedPDFFile.name.toLowerCase().endsWith(".pdf")
-            ) {
-
-                showStatus(
-                    "pdfExtractionStatus",
-                    "Please select a PDF file.",
-                    true
+                const ocrText = await recognizePDFPage(
+                    page,
+                    pageNumber,
+                    pdf.numPages
                 );
 
-                return;
-            }
-
-            if (selectedPDFFile.size > 25 * 1024 * 1024) {
-
-                showStatus(
-                    "pdfExtractionStatus",
-                    "PDF must be smaller than 25 MB.",
-                    true
-                );
-
-                return;
-            }
-
-            const status =
-                document.getElementById(
-                    "pdfExtractionStatus"
-                );
-
-            const info =
-                document.getElementById("pdfInfo");
-
-            const textarea =
-                document.getElementById(
-                    "pdfExtractedText"
-                );
-
-            status.style.display = "block";
-
-            status.textContent =
-                "Extracting PDF text...";
-
-            info.classList.add("hidden");
-
-            textarea.value = "";
-
-            try {
-
-                const arrayBuffer =
-                    await selectedPDFFile.arrayBuffer();
-
-                const loadingTask =
-                    pdfjsLib.getDocument({
-                        data: arrayBuffer
-                    });
-
-                const pdf =
-                    await loadingTask.promise;
-
-                let allText = "";
-
-                for (
-                    let pageNumber = 1;
-                    pageNumber <= pdf.numPages;
-                    pageNumber++
-                ) {
-
-                    const page =
-                        await pdf.getPage(pageNumber);
-
-                    const content =
-                        await page.getTextContent();
-
-                    const pageText =
-                        content.items
-                            .map(item => item.str)
-                            .join(" ");
-
-                    allText +=
-                        `\n\n--- Page ${pageNumber} ---\n\n` +
-                        pageText;
+                if (ocrText.trim()) {
+                    pageText = ocrText.replace(/\s+/g, " ").trim();
                 }
-
-                allText =
-                    allText
-                        .replace(/\s+/g, " ")
-                        .trim();
-
-                extractedPDFText =
-                    allText;
-
-                textarea.value =
-                    allText;
-
-                const words =
-                    allText
-                        ? allText.split(/\s+/).length
-                        : 0;
-
-                info.classList.remove("hidden");
-
-                info.innerHTML = `
-                    <strong>PDF extracted successfully!</strong>
-
-                    <p>
-                        📄 File:
-                        ${escapeHTML(selectedPDFFile.name)}
-                    </p>
-
-                    <p>
-                        📑 Pages:
-                        ${pdf.numPages}
-                    </p>
-
-                    <p>
-                        📝 Words:
-                        ${words.toLocaleString()}
-                    </p>
-
-                    <p>
-                        🔤 Characters:
-                        ${allText.length.toLocaleString()}
-                    </p>
-                `;
-
-                status.textContent =
-                    "PDF text extracted successfully.";
-
-                if (!allText) {
-
-                    status.textContent =
-                        "The PDF appears to contain scanned images or no selectable text.";
-
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-                status.textContent =
-                    "PDF extraction failed: " +
-                    error.message;
-
-                status.style.background =
-                    "#fef2f2";
-
-                status.style.color =
-                    "#dc2626";
             }
+
+            extractedPages.push(
+                `--- Page ${pageNumber} ---\n\n${pageText}`
+            );
         }
+
+        extractedPDFText = extractedPages
+            .filter(page => page.trim())
+            .join("\n\n");
+
+        if (!extractedPDFText.trim()) {
+            showStatus(
+                "pdfExtractionStatus",
+                "No readable text was found. The PDF may be unclear or contain unsupported content.",
+                true
+            );
+            return;
+        }
+
+        const textArea = document.getElementById("extractedPDFText");
+        if (textArea) {
+            textArea.value = extractedPDFText;
+        }
+
+        const wordCount = extractedPDFText
+            .split(/\s+/)
+            .filter(Boolean).length;
+
+        const charCount = extractedPDFText.length;
+
+        const wordCountElement = document.getElementById("pdfWordCount");
+        if (wordCountElement) {
+            wordCountElement.textContent = wordCount;
+        }
+
+        const charCountElement = document.getElementById("pdfCharCount");
+        if (charCountElement) {
+            charCountElement.textContent = charCount;
+        }
+
+        showStatus(
+            "pdfExtractionStatus",
+            `PDF reading complete! ${pdf.numPages} page(s), ${wordCount} words extracted. Scanned pages were processed with OCR when needed.`,
+            false
+        );
+
+    } catch (error) {
+        console.error("PDF extraction error:", error);
+
+        showStatus(
+            "pdfExtractionStatus",
+            `Could not read the PDF: ${error.message || "Unknown error"}. Please try another PDF or refresh the page.`,
+            true
+        );
+    }
+}
 
 
         // =========================================================
