@@ -1708,7 +1708,7 @@ async function recognizePDFPage(page, pageNumber, totalPages) {
     currentOCRPage = pageNumber;
     currentOCRTotal = totalPages;
 
-    const scale = 1.5;
+    const scale = 1.2;
     const viewport = page.getViewport({ scale });
 
     const canvas = document.createElement("canvas");
